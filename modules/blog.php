@@ -7,6 +7,8 @@
     $urlId = '';
     $categoryName = '';
     $breadCrumb = '<a href = "/">Главная</a> / ';
+    $emptyCategory = 'В этой категории нет записей';
+    $postCount = 0;
 
     $categoryUrl = $url[2];
     $categoryUrlAdd = $url[2];
@@ -30,6 +32,16 @@
         if($module == 'blog'){ // Для блога удаляем префикс
             $prefix = '';
         }
+
+        // Получить название категории
+        if ($query = mysqli_query($connect, "SELECT * FROM blog_category WHERE link = '$categoryUrl'") and mysqli_fetch_assoc($query) !=''){
+            mysqli_data_seek($query, 0);
+            while($row = mysqli_fetch_assoc($query)){
+                $pageName = $row['name'];
+            }
+        }
+
+
         if($query = mysqli_query($connect, "SELECT * FROM blog_posts") and mysqli_fetch_assoc($query) !=''){
             mysqli_data_seek($query, 0);
                 while($row = mysqli_fetch_assoc($query)){
@@ -42,12 +54,12 @@
                 if($module == 'main' || ($categoryUrlAdd == str_replace('/', '', $categoryUrl)) || ($module == 'blog' && $categoryUrlAdd == null)){ // Фильтруем по категориям в блоге, на главной выводим всё
                     if($categoryUrlAdd == null){
                         $pageName = $blog;
-                    }else{
-                        $pageName = $categoryName;
                     }
                     if($postUrl !== null){ // Если нет
                         $categoryUrl = '';
+
                     }
+
                     $blogPreview .= '
                         <article>
                             <div class="title">
@@ -63,6 +75,10 @@
                         </article>
                     ';
                 }
+            }
+
+            if($blogPreview == ''){
+                $out = $emptyCategory;
             }
 
             if($module == 'blog'){ // Для блога подключаем шаблон
