@@ -15,11 +15,14 @@
     // Вывод категорий
     if($query = mysqli_query($connect, "SELECT * FROM blog_category") and mysqli_fetch_assoc($query) !=''){
         mysqli_data_seek($query, 0);
+        $blogCategory = '<div class="categoryList">
+                            <div class="title">Категории</div>';
         while($row = mysqli_fetch_assoc($query)){
             $blogCategory .= '
-                <li><a href="/'.$prefix.$row['link'].'/">'.$row['name'].'</a></li>
+                <div class="item"><a href="/'.$prefix.$row['link'].'/">'.$row['name'].'</a></div>
             ';
         }
+        $blogCategory .= '</div>';
     }
 
     // Вывод записей
@@ -29,7 +32,6 @@
         }
         if($query = mysqli_query($connect, "SELECT * FROM blog_posts") and mysqli_fetch_assoc($query) !=''){
             mysqli_data_seek($query, 0);
-
                 while($row = mysqli_fetch_assoc($query)){
                     $urlId = $row['category_id'];
                     if($queryUrl = mysqli_query($connect, "SELECT * FROM blog_category WHERE id = '$urlId'") and $rowUrl = mysqli_fetch_assoc($queryUrl) and $rowUrl != ''){
@@ -80,7 +82,12 @@
                 $linkPost = $rowUrl['link'];
             }
             $pageName = $row['h1'];
-            $out = $row['text'];
+            $date = $row['date'];
+            $out = '<div class="details">
+                        <div class="date">Дата: '.$date.'</div>
+                        <div class="category">Рубрика: <a href="/blog/'.$linkPost.'/">'.$categoryName.'</a></div>
+                    </div>'
+                .$row['text'];
             $blogPreview = '';
             $breadCrumb .= '<a href="/blog/">'.$blog.'</a> / <a href="/blog/'.$linkPost.'/">'.$categoryName.'</a> / '.$pageName;
             require_once($_SERVER['DOCUMENT_ROOT']."/templates/page.html");

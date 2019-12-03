@@ -118,10 +118,6 @@ pre{
       align-items: center;
       flex-flow: row wrap;
       padding: 0 20px;
-
-      .details{
-        display: flex;
-      }
     }
 
 
@@ -365,21 +361,79 @@ pre{
       }
     }
 
-    .content{
-      a{
-        color: @light-color;
-        border-bottom: 1px solid @light-color;
+    .center-column{
+      display: flex;
+      flex-flow: row wrap;
+      margin-left: -50px;
+
+      .content{
+        flex-basis: 900px;
+        flex-grow: 1;
+        margin-left: 50px;
+
+        a{
+          color: @light-color;
+          border-bottom: 1px solid @light-color;
+        }
+        a:hover{
+          border-bottom: none;
+        }
+        blockquote{
+          padding: 20px;
+          margin: 20px 0;
+          background-color: @background-text;
+        }
+
+        .details{
+          display: flex;
+          flex-flow: row wrap;
+          justify-content: space-between;
+          color: #888;
+          margin-bottom: 30px;
+          padding: 20px 30px;
+          background-color: #fffee1;
+          border: 1px solid #fcfacd;
+          box-shadow: 0 5px 5px #e1e1e1;
+          font-size: smaller;
+        }
       }
-      a:hover{
-        border-bottom: none;
+
+      .categoryList{
+        display: flex;
+        flex-flow: column nowrap;
+        margin: 50px 0 0 50px;
+        flex-basis: 250px;
+        align-self: flex-start;
+        flex-grow: 1;
+
+        .item{
+          display: block;
+          padding: 10px 20px;
+          background-color: @background-text;
+
+          a{
+            width: 100%;
+            display: inline-block;
+          }
+        }
+
+        .item:hover{
+          background-color: @light-blue-color;
+        }
+
+        .title{
+          background-image: none;
+          font-size: 18px;
+          background-color: @blue-table-border;
+        }
       }
-      blockquote{
-        padding: 20px;
-        margin: 20px 0;
-        background-color: @background-text;
-      }
+
+
     }
+
   }
+
+
 
   footer {
     margin-top: 40px;
@@ -391,10 +445,6 @@ pre{
     padding: 10px 10px 30px 10px;
   }
 
-
-}
-
-p, h1, h2, h3, h4 {
 
 }
 
