@@ -36,9 +36,11 @@ $(function(){
     // События при изменении ширины окна
     $(window).resize(function(){
         contentCenter();
+        preWidth();
     });
 
     contentCenter();
+    preWidth();
 
     // Размещаем логотип по центру при изменении ширины окна
     function contentCenter(){
@@ -56,6 +58,12 @@ $(function(){
                 "padding-top" : "15px"
             });
         }
+    }
+
+    // Установка ширины блоков с кодом
+    function preWidth() {
+        $("pre").css("max-width", window.innerWidth-100); // 100 дополнительный отступ
+        $(".syntaxhighlighter").css("max-width", window.innerWidth-80);
     }
 
     //confirm("Внимание! Сайт находится в разработке. Внешний вид и функционал может отличаться от запланированного.");
