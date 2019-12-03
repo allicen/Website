@@ -202,6 +202,76 @@ pre{
     }
   }
 
+  .articles {
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+    align-content: stretch;
+    flex-flow: row wrap;
+    margin-left: -60px;
+
+    article {
+      flex: 1 1 300px;
+      padding: 0 0 30px 60px;
+      a {
+      }
+
+      .desc{
+        padding: 10px 0 5px 0;
+      }
+
+      .title {
+        background: @white-color;
+        text-align: left !important;
+        text-transform: none;
+        padding: 20px 0 10px 0;
+      }
+
+      .title a {
+        font-size: 20px !important;
+        color: @dark-color !important;
+        border-bottom: none !important;
+      }
+
+      .title a:hover {
+        color: @light-color !important;
+      }
+
+      .photo{
+        a{
+          border-bottom: none !important;
+        }
+      }
+
+      a{
+        color: #A668D5;
+        border-bottom: 1px solid #A668D5;
+      }
+      a:hover{
+        border-bottom: none;
+      }
+    }
+
+    .button {
+      width: 100%;
+      text-align: center;
+      margin-top: 50px;
+
+      a {
+        background: @dark-color;
+        color: @white-color;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: 0.3s;
+      }
+
+      a:hover {
+        background: @main-color;
+      }
+
+    }
+  }
+
   main {
     flex-basis: @max-width;
     order: 2;
@@ -275,64 +345,6 @@ pre{
 
 
     .share {
-      .articles {
-        display: flex;
-        justify-content: stretch;
-        align-items: stretch;
-        align-content: stretch;
-        flex-flow: row wrap;
-        margin-left: -60px;
-
-        article {
-          flex: 1 1 300px;
-          padding: 0 0 30px 60px;
-          a {
-          }
-
-          .desc{
-            padding: 10px 0 5px 0;
-          }
-
-          .title {
-            background: @white-color;
-            text-align: left !important;
-            text-transform: none;
-            padding: 20px 0 10px 0;
-          }
-
-          .title a {
-            font-size: 20px !important;
-          }
-
-          .title a:hover {
-            color: @light-color;
-          }
-
-          .photo{
-          }
-
-        }
-
-        .button {
-          width: 100%;
-          text-align: center;
-          margin-top: 50px;
-
-          a {
-            background: @dark-color;
-            color: @white-color;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: 0.3s;
-          }
-
-          a:hover {
-            background: @main-color;
-          }
-
-        }
-      }
-
       .submenu {
         ul {
           margin-left: 0;

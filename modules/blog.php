@@ -46,6 +46,7 @@
 
         if($query = mysqli_query($connect, "SELECT * FROM blog_posts") and mysqli_fetch_assoc($query) !=''){
             mysqli_data_seek($query, 0);
+                $blogPreview = '<div class="articles">';
                 while($row = mysqli_fetch_assoc($query)){
                     $urlId = $row['category_id'];
                     if($queryUrl = mysqli_query($connect, "SELECT * FROM blog_category WHERE id = '$urlId'") and $rowUrl = mysqli_fetch_assoc($queryUrl) and $rowUrl != ''){
@@ -78,6 +79,7 @@
                     $postCount++;
                 }
             }
+            $blogPreview .= '</div>';
 
             if($blogPreview == ''){ // Счетчик записей в блоге
                 $out = $emptyCategory;
@@ -114,8 +116,8 @@
                 $relevantPosts .= '</ul>';
             }
 
-            if($relevantPosts != ''){
-                $relevantPostsBlock = '<div class="relevant-post"><div class="title">Еще записи из этой категории:</div><div class="list">'.$relevantPosts.'</div></div>';
+            if($relevantPosts != ''){ // Релевантные записи
+                $relevantPostsBlock = '<div class="relevant-post"><div class="header">Еще записи из этой категории:</div><div class="list">'.$relevantPosts.'</div></div>';
             }
 
 
