@@ -10,6 +10,11 @@
     $postCount = 0;
     $emptyCategory = 'В этой категории нет записей.';
     $relevantPostsBlock = '';
+    $shareBlock = '<div class="share-social"><div class="header">Поделиться: </div><div class="icons">
+            <script src="https://yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+            <script src="https://yastatic.net/share2/share.js"></script>
+            <div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,moimir,twitter,blogger,linkedin,lj,viber,whatsapp,skype,telegram"></div>
+            </div></div>';
 
     $categoryUrl = $url[2];
     $categoryUrlAdd = $url[2];
@@ -128,6 +133,7 @@
                         <div class="category">Рубрика: <a href="/blog/'.$linkPost.'/">'.$categoryName.'</a></div>
                     </div>'
                 .$row['text']
+                .$shareBlock
                 .$relevantPostsBlock;
             $blogPreview = '';
             $breadCrumb .= '<a href="/blog/">'.$blog.'</a> / <a href="/blog/'.$linkPost.'/">'.$categoryName.'</a> / '.$pageName;
