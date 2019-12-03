@@ -1,0 +1,361 @@
+@main-color: #660BAB;
+@dark-color: #41046F;
+@light-color: #A668D5;
+@very-light-color: #A668D5;
+@contrast-color: #FFF700;
+@rose-light-color: #fff2ff;
+@white-color: #fff;
+@light-blue-color: #dbe0fd;
+@dark-blue-color: #2E3983;
+@max-width: 1200px;
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html {
+
+}
+
+body {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;;
+  font-weight: 300;
+  color: #4a525d;
+  font-size: medium;
+}
+
+h1{
+  padding: 30px 0 20px 0;
+}
+
+ul {
+  margin: 0 0 30px 50px;
+
+  li {
+    line-height: 1.7;
+  }
+}
+
+p {
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: #41046F;
+}
+
+a:hover {
+}
+
+table {
+  th {
+
+  }
+
+  tr {
+
+  }
+
+  td {
+
+  }
+}
+
+.center {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: stretch;
+  align-content: stretch;
+  flex-flow: row wrap;
+
+  header {
+    background: @dark-color;
+    flex-basis: 100%;
+    display: flex;
+    justify-content: space-around;
+
+    .content {
+      flex-basis: 1200px;
+      order: 1;
+      color: @contrast-color;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-flow: row wrap;
+      padding: 0 20px;
+    }
+
+
+    a {
+      color: @very-light-color + @light-color;
+    }
+
+    a:hover {
+      color: #FFF700;
+    }
+
+    .change-color {
+      color: @contrast-color;
+      background: #000;
+    }
+
+    ul {
+      margin: 0;
+      list-style: none;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: stretch;
+
+      li {
+        padding: 20px 0;
+        transition: 0.3s;
+      }
+
+      li:hover {
+        color: @contrast-color;
+        background: #000;
+      }
+    }
+
+    .logo {
+      padding: 15px 0;
+
+      a {
+        font-size: 24px;
+        font-family: 'Berkshire Swash', cursive;
+        color: @contrast-color;
+        transition: 0.3s;
+      }
+
+      a:hover {
+        color: @white-color;
+      }
+
+      .desc {
+        font-size: 12px;
+        padding: 0 20px;
+        text-align: center;
+        color: @white-color;
+      }
+    }
+    menu{
+      a{
+        padding: 20px;
+      }
+    }
+
+  }
+
+  .contacts {
+    flex-basis: @max-width;
+    order: 2;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 20px;
+
+    a {
+      padding: 15px 0 0 20px;
+
+      span {
+        border-bottom: 1px dotted @light-color;
+      }
+
+      span:hover {
+        color: @light-color;
+        border-bottom: none;
+      }
+    }
+  }
+
+  main {
+    flex-basis: @max-width;
+    order: 2;
+    padding: 0 20px;
+
+    .title {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+      color: @dark-blue-color;
+      font-weight: 600;
+      background-image: linear-gradient(to bottom, @light-blue-color 33%, transparent 33%, transparent 66%, @light-blue-color 66%, @light-blue-color);
+      background-position: 0 1.4em;
+      background-repeat: repeat-x;
+      background-size: 2px 6px;
+      font-size: 24px;
+
+      span {
+        background: @white-color;
+        padding: 0 30px;
+      }
+    }
+
+    .hello {
+      display: flex;
+      flex-flow: row wrap;
+
+      .hi {
+        flex-basis: 100%;
+        flex-grow: 1;
+        flex-shrink: 1;
+        color: #660BAB;
+        font-size: 30px;
+        font-weight: 600;
+        padding: 20px 0 5px 0;
+      }
+
+      .text {
+        flex-basis: 25%;
+        flex-grow: 1;
+        flex-shrink: 1;
+        line-height: 1.5;
+        padding: 20px 0;
+        font-size: 20px;
+        span{
+          font-size: medium;
+        }
+      }
+
+      .cats {
+        flex-basis: 500px;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-items: center;
+        margin-left: 30px;
+
+        .border {
+          height: 90px;
+          overflow: hidden;
+          margin-bottom: 15px;
+        }
+
+        img {
+          max-width: 150px;
+          height: auto;
+        }
+
+      }
+    }
+
+
+    .share {
+      .articles {
+        display: flex;
+        justify-content: stretch;
+        align-items: stretch;
+        align-content: stretch;
+        flex-flow: row wrap;
+        margin-left: -60px;
+
+        article {
+          flex: 1 1 300px;
+          padding: 0 0 30px 60px;
+          a {
+          }
+
+          .desc{
+            padding: 10px 0 5px 0;
+          }
+
+          .title {
+            background: @white-color;
+            text-align: left !important;
+            text-transform: none;
+            padding: 20px 0 10px 0;
+          }
+
+          .title a {
+            font-size: 20px !important;
+          }
+
+          .title a:hover {
+            color: @light-color;
+          }
+
+          .photo{
+          }
+
+        }
+
+        .button {
+          width: 100%;
+          text-align: center;
+          margin-top: 50px;
+
+          a {
+            background: @dark-color;
+            color: @white-color;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: 0.3s;
+          }
+
+          a:hover {
+            background: @main-color;
+          }
+
+        }
+      }
+
+      .submenu {
+        ul {
+          margin-left: 0;
+          list-style: none;
+          display: flex;
+          flex-flow: row wrap;
+          justify-content: flex-start;
+
+          li {
+            padding: 10px 20px;
+
+            a {
+              border-bottom: 1px dotted @light-color;
+              transition: 0.3s;
+            }
+
+            a:hover {
+              border-bottom: none;
+            }
+          }
+
+          li:first-child {
+            padding-left: 0;
+          }
+        }
+      }
+    }
+
+  }
+
+  footer {
+    margin-top: 40px;
+    flex-basis: @max-width;
+    order: 3;
+    border-top: 1px solid @light-color;
+    color: @light-color;
+    text-align: center;
+    padding: 10px 10px 30px 10px;
+  }
+
+
+}
+
+p, h1, h2, h3, h4 {
+
+}
+
+.logo a {
+  color: @main-color;
+}
+
+
+
