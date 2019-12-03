@@ -7,8 +7,8 @@
     $urlId = '';
     $categoryName = '';
     $breadCrumb = '<a href = "/">Главная</a> / ';
-    $emptyCategory = 'В этой категории нет записей';
     $postCount = 0;
+    $emptyCategory = 'В этой категории нет записей.';
 
     $categoryUrl = $url[2];
     $categoryUrlAdd = $url[2];
@@ -57,7 +57,6 @@
                     }
                     if($postUrl !== null){ // Если нет
                         $categoryUrl = '';
-
                     }
 
                     $blogPreview .= '
@@ -74,11 +73,14 @@
                             <a href="'.$prefix.$categoryUrl.$row['link'].'/">читать далее</a>
                         </article>
                     ';
+                    $postCount++;
                 }
             }
 
-            if($blogPreview == ''){
+            if($blogPreview == ''){ // Счетчик записей в блоге
                 $out = $emptyCategory;
+            }else{
+                $out = 'В категории "'.$pageName.'" '.$postCount.' записи(ей).';
             }
 
             if($module == 'blog'){ // Для блога подключаем шаблон
