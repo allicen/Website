@@ -15,6 +15,7 @@
             <script src="https://yastatic.net/share2/share.js"></script>
             <div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,moimir,twitter,blogger,linkedin,lj,viber,whatsapp,skype,telegram"></div>
             </div></div>';
+    $categoryDescription = '';
 
     $categoryUrl = $url[2];
     $categoryUrlAdd = $url[2];
@@ -40,11 +41,14 @@
             $prefix = '';
         }
 
-        // Получить название категории
+        // Получить параметры категории
         if ($query = mysqli_query($connect, "SELECT * FROM blog_category WHERE link = '$categoryUrl'") and mysqli_fetch_assoc($query) !=''){
             mysqli_data_seek($query, 0);
             while($row = mysqli_fetch_assoc($query)){
                 $pageName = $row['name'];
+                $categoryDescription = $row['about'];
+                $title = $row['title'];
+                $description = $row['description'];
             }
         }
 
@@ -86,7 +90,7 @@
             }
             $blogPreview .= '</div>';
 
-            if($blogPreview == ''){ // Счетчик записей в блоге
+            if($postCount == 0){ // Счетчик записей в блоге
                 $out = $emptyCategory;
             }else{
                 $out = 'В категории "'.$pageName.'" '.$postCount.' записи(ей).';
@@ -121,6 +125,7 @@
                 $relevantPosts .= '</ul>';
             }
 
+           // echo ($relevantPosts);
             if($relevantPosts != ''){ // Релевантные записи
                 $relevantPostsBlock = '<div class="relevant-post"><div class="header">Еще записи из этой категории:</div><div class="list">'.$relevantPosts.'</div></div>';
             }
