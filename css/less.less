@@ -213,8 +213,6 @@ pre{
     article {
       flex: 1 1 300px;
       padding: 0 0 30px 60px;
-      a {
-      }
 
       .desc{
         padding: 10px 0 5px 0;
@@ -277,22 +275,32 @@ pre{
     order: 2;
     padding: 0 20px;
 
+    a{
+      color: #A668D5;
+      border-bottom: 1px solid #A668D5;
+    }
+    a:hover{
+      border-bottom: none;
+    }
+
     .title {
-      display: flex;
-      justify-content: center;
-      padding: 20px;
-      color: @dark-blue-color;
-      font-weight: 600;
-      background-image: linear-gradient(to bottom, @light-blue-color 33%, transparent 33%, transparent 66%, @light-blue-color 66%, @light-blue-color);
+      background-image: linear-gradient(to bottom, #dbe0fd 33%, transparent 33%, transparent 66%, #dbe0fd 66%, #dbe0fd);
       background-position: 0 1.4em;
-      background-repeat: repeat-x;
       background-size: 2px 6px;
       font-size: 24px;
+      height: 31px;
+      margin-bottom: 25px;
+      margin-top: 40px;
+    }
 
-      span {
-        background: @white-color;
-        padding: 0 30px;
-      }
+    .header-block{
+      display: flex;
+      justify-content: center;
+      color: #2E3983;
+      font-weight: 600;
+      background-size: 2px 6px;
+      font-size: 24px;
+      margin-bottom: 20px;
     }
 
     .hello {
@@ -316,37 +324,49 @@ pre{
         line-height: 1.5;
         padding: 20px 0;
         font-size: 20px;
+        margin-bottom: 30px;
+
         span{
           font-size: medium;
         }
       }
 
       .cats {
-        flex-basis: 500px;
+        flex-basis: 400px;
         display: flex;
         flex-flow: row wrap;
         justify-content: space-between;
         align-items: center;
         margin-left: 30px;
+        margin-top: -30px;
 
         .border {
-          height: 90px;
-          overflow: hidden;
           margin-bottom: 15px;
         }
 
         img {
-          max-width: 150px;
-          height: auto;
         }
 
+      }
+    }
+
+    .i{
+      .text {
+        display: flex;
+        flex-flow: row wrap;
+        margin-left: -50px;
+        justify-content: space-between;
+
+        div{
+          margin-left: 50px;
+        }
       }
     }
 
 
     .share {
       .submenu {
-        margin: 20px 0 40px 0;
+        margin: 20px 0 0 0;
 
         .categoryList{
           display: flex;
@@ -354,17 +374,19 @@ pre{
           justify-content: flex-start;
           background-color: @background-text;
 
-          .title{
+          .header-blog{
             background-image: none;
             font-size: 18px;
             padding: 20px;
             background-color: @blue-table-border;
+            font-weight: 600;
           }
 
           .item{
               padding: 22px 0;
             a{
               padding: 22px 20px;
+              border-bottom: none;
             }
             a:hover{
               background-color: @light-blue-color;
@@ -472,6 +494,7 @@ pre{
             width: 100%;
             padding: 10px 20px;
             display: inline-block;
+            border-bottom: none;
           }
         }
 
@@ -479,10 +502,13 @@ pre{
           background-color: @light-blue-color;
         }
 
-        .title{
+        .header-blog{
           background-image: none;
           font-size: 18px;
           background-color: @blue-table-border;
+          font-weight: 600;
+          text-align: center;
+          padding: 10px 20px;
         }
       }
 

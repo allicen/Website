@@ -26,7 +26,7 @@
     if($query = mysqli_query($connect, "SELECT * FROM blog_category") and mysqli_fetch_assoc($query) !=''){
         mysqli_data_seek($query, 0);
         $blogCategory = '<div class="categoryList">
-                            <div class="title">Категории</div>';
+                            <div class="header-blog">Категории</div>';
         while($row = mysqli_fetch_assoc($query)){
             $blogCategory .= '
                 <div class="item"><a href="/'.$prefix.$row['link'].'/">'.$row['name'].'</a></div>

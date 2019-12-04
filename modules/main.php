@@ -5,9 +5,10 @@
         while($row = mysqli_fetch_assoc($query)){
             $out .= '
                 <div class="'.$row['link'].'">
-                    <div class="title">
+                    <div class="title"></div>
+                        <div class="header-block">
                         <a name="'.$row['link'].'"></a>
-                        <span>'.$row['title'].'</span>
+                        '.$row['title'].'
                     </div>
                     <div class="text">'.$row['text'].'</div>
                 </div>

@@ -21,7 +21,8 @@
     $module = ($link == '' || $link == 'index.php' || $link == 'index.html') ? 'main' :
         (($link == 'admin') ? 'admin' :
             (($link == 'contacts' || $link == 'search') ? 'page' :
-                (($link == 'blog') ? 'blog' : '404')));
+                (($link == 'blog') ? 'blog' :
+                    (($link == 'portfolio') ? 'portfolio' : '404'))));
 
     if($module !== 'admin'){
         require_once($_SERVER['DOCUMENT_ROOT']."/modules/404.php");

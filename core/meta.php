@@ -12,6 +12,11 @@
         $title = 'Блог';
     }
 
+    if($module == 'portfolio' && $blogCategory == null){
+        $title = 'Портфолио';
+    }
+
+
     if($query = mysqli_query($connect, "SELECT * FROM blog_category WHERE link = '$blogCategory'") and $row = mysqli_fetch_assoc($query) and $row != ''){
         $title = $row['title'];
         $description = $row['description'];
@@ -37,4 +42,12 @@
         $description = $row['description'];
         $pageName = $row['name'];
         $out = $row['text'];
+    }
+
+    if($query = mysqli_query($connect, "SELECT * FROM portfolio WHERE link = '$blogCategory'") and $row = mysqli_fetch_assoc($query) and $row != '') {
+        $title = $row['title'];
+        $description = $row['description'];
+        if ($title == ''){
+            $title = $row['name'];
+        }
     }
