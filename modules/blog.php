@@ -47,8 +47,6 @@
             while($row = mysqli_fetch_assoc($query)){
                 $pageName = $row['name'];
                 $categoryDescription = $row['about'];
-                $title = $row['title'];
-                $description = $row['description'];
             }
         }
 

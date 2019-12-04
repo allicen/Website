@@ -8,14 +8,24 @@
         }
     }
 
-    if($query = mysqli_query($connect, "SELECT * FROM blog_posts WHERE link = '$blogPost'") and $row = mysqli_fetch_assoc($query) and $row != ''){
-        $title = $row['title'];
-        $description = $row['description'];
+    if($module == 'blog' && $blogCategory == null){
+        $title = 'Блог';
     }
 
     if($query = mysqli_query($connect, "SELECT * FROM blog_category WHERE link = '$blogCategory'") and $row = mysqli_fetch_assoc($query) and $row != ''){
         $title = $row['title'];
         $description = $row['description'];
+        if ($title == ''){
+            $title = $row['name'];
+        }
+    }
+
+    if($query = mysqli_query($connect, "SELECT * FROM blog_posts WHERE link = '$blogPost'") and $row = mysqli_fetch_assoc($query) and $row != ''){
+        $title = $row['title'];
+        $description = $row['description'];
+        if ($title == ''){
+            $title = $row['h1'];
+        }
     }
 
     if ($module == '404'){
