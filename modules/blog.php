@@ -1,5 +1,5 @@
 <?php
-    $blogPreview = '';
+    $preview = '';
     $blogCategory = '';
     $prefix = 'blog/';
     $categoryUrl = '';
@@ -53,7 +53,7 @@
 
         if($query = mysqli_query($connect, "SELECT * FROM blog_posts") and mysqli_fetch_assoc($query) !=''){
             mysqli_data_seek($query, 0);
-                $blogPreview = '<div class="articles">';
+                $preview = '<div class="articles">';
                 while($row = mysqli_fetch_assoc($query)){
                     $urlId = $row['category_id'];
                     if($queryUrl = mysqli_query($connect, "SELECT * FROM blog_category WHERE id = '$urlId'") and $rowUrl = mysqli_fetch_assoc($queryUrl) and $rowUrl != ''){
@@ -69,7 +69,7 @@
                         $categoryUrl = '';
                     }
 
-                    $blogPreview .= '
+                    $preview .= '
                         <article>
                             <div class="title">
                                 <a href="'.$prefix.$categoryUrl.$row['link'].'/">'.$row['h1'].'</a>
@@ -86,7 +86,7 @@
                     $postCount++;
                 }
             }
-            $blogPreview .= '</div>';
+            $preview .= '</div>';
 
             if($postCount == 0){ // Счетчик записей в блоге
                 $out = $emptyCategory;
@@ -138,7 +138,7 @@
                 .$row['text']
                 .$shareBlock
                 .$relevantPostsBlock;
-            $blogPreview = '';
+            $preview = '';
             $breadCrumb .= '<a href="/blog/">'.$blog.'</a> / <a href="/blog/'.$linkPost.'/">'.$categoryName.'</a> / '.$pageName;
             require_once($_SERVER['DOCUMENT_ROOT']."/templates/page.html");
         }

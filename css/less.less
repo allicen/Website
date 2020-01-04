@@ -274,6 +274,8 @@ pre{
     flex-basis: @max-width;
     order: 2;
     padding: 0 20px;
+    display: flex;
+    flex-direction: column;
 
     a{
       color: #A668D5;
@@ -306,6 +308,7 @@ pre{
     .hello {
       display: flex;
       flex-flow: row wrap;
+      order: 1;
 
       .hi {
         flex-basis: 100%;
@@ -351,6 +354,8 @@ pre{
     }
 
     .i{
+      order: 2;
+
       .text {
         display: flex;
         flex-flow: row wrap;
@@ -363,8 +368,18 @@ pre{
       }
     }
 
+    .projects{
+      order: 3;
+    }
+
+    .plan{
+      order: 5;
+    }
+
 
     .share {
+      order: 6;
+
       .submenu {
         margin: 20px 0 0 0;
 
@@ -418,6 +433,7 @@ pre{
       display: flex;
       flex-flow: row wrap;
       margin-left: -50px;
+      order: 4;
 
       .content{
         flex-basis: 900px;

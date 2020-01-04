@@ -48,12 +48,14 @@
         require_once($_SERVER['DOCUMENT_ROOT']."/core/header.php");
 
         if($module == 'main'){
+            require_once($_SERVER['DOCUMENT_ROOT']."/modules/portfolio.php");
             require_once($_SERVER['DOCUMENT_ROOT']."/modules/blog.php");
         }
 
         // Проверка существования модуля
         if(file_exists($_SERVER['DOCUMENT_ROOT']."/modules/$module.php")){
             require_once($_SERVER['DOCUMENT_ROOT']."/modules/$module.php");
+
         }else{
             echo "Страница не найдена, т.к. отсутствует модуль.";
         }

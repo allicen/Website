@@ -1,21 +1,39 @@
 <?php
-$blogCategory = '';
 $pageName = '';
+$previewPortfolio = '';
 $prefix = 'portfolio/';
 $urlItem = $url[2];
 $breadCrumb = '<a href = "/">Главная</a> / ';
 
 if($urlItem == null){
-    $pageName = 'Портфолио';
-    $breadCrumb .= $pageName;
+    if($module == 'portfolio'){
+        $pageName = 'Портфолио';
+        $breadCrumb .= $pageName;
+    }else{
+        $breadCrumb = '';
+    }
     // Вывод всех работ
     if($query = mysqli_query($connect, "SELECT * FROM portfolio") and mysqli_fetch_assoc($query) !=''){
         mysqli_data_seek($query, 0);
+        $previewPortfolio = '<div class="articles">';
         while($row = mysqli_fetch_assoc($query)){
-            $out .= '
-                <div class="item"><a href="/'.$prefix.$row['link'].'/">'.$row['name'].'</a></div>
+            $previewPortfolio .= '
+                <article>
+                    <div class="title">
+                        <a href="/'.$prefix.$row['link'].'/">'.$row['name'].'</a>
+                    </div>
+                    <div class="details">'.$row['technologies'].'</div>
+                    <div class="photo">
+                        <a href="/'.$prefix.$row['link'].'/"><img src="'.$row['picture'].'" alt=""></a>
+                    </div>
+                    <div class="desc">
+                        '.$row['anons'].'
+                    </div>
+                    <a href="/'.$prefix.$row['link'].'/">подробнее</a>
+                </article>
             ';
         }
+        $previewPortfolio .= '</div>';
     }
 }else{
     if($query = mysqli_query($connect, "SELECT * FROM portfolio WHERE link = '$urlItem'") and $row = mysqli_fetch_assoc($query) and $row != '') {
