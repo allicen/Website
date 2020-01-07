@@ -100,6 +100,9 @@
                 }else{
                     $breadCrumb .= '<a href="/blog/">'.$blog.'</a> / '.$pageName;
                 }
+                if($pageName != ''){
+                    $pageName = '<h1>'.$pageName.'</h1>';
+                }
                 require_once($_SERVER['DOCUMENT_ROOT']."/templates/page.html");
             }
         }
@@ -140,6 +143,9 @@
                 .$relevantPostsBlock;
             $preview = '';
             $breadCrumb .= '<a href="/blog/">'.$blog.'</a> / <a href="/blog/'.$linkPost.'/">'.$categoryName.'</a> / '.$pageName;
+            if($pageName != ''){
+                $pageName = '<h1>'.$pageName.'</h1>';
+            }
             require_once($_SERVER['DOCUMENT_ROOT']."/templates/page.html");
         }
     }

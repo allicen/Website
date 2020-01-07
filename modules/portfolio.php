@@ -4,6 +4,7 @@ $previewPortfolio = '';
 $prefix = 'portfolio/';
 $urlItem = $url[2];
 $breadCrumb = '<a href = "/">Главная</a> / ';
+$blogCategory = '';
 
 if($urlItem == null){
     if($module == 'portfolio'){
@@ -53,5 +54,11 @@ if($urlItem == null){
 
     }
 }
+
+if($pageName != ''){
+    $pageName = '<h1>'.$pageName.'</h1>';
+}
+
+
 
 require_once($_SERVER['DOCUMENT_ROOT']."/templates/page.html");
