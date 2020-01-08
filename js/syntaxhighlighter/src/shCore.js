@@ -1933,10 +1933,10 @@ XRegExp.escape = function (str) {
  * strings, optional regex flags (may include non-native s, x, and y flags),
  * and an options object which allows setting an escape character and changing
  * the return format from an array of matches to a two-dimensional array of
- * string parts with extended position data. returns an array of matches
- * (optionally with extended data), allowing nested instances of left and right
+ * string parts with extended position pages. returns an array of matches
+ * (optionally with extended pages), allowing nested instances of left and right
  * delimiters. use the g flag to return all matches, otherwise only the first
- * is returned. if delimiters are unbalanced within the subject data, an error
+ * is returned. if delimiters are unbalanced within the subject pages, an error
  * is thrown.
  * 
  * This function admittedly pushes the boundaries of what can be accomplished
@@ -2059,7 +2059,7 @@ XRegExp.matchRecursive = function (str, left, right, flags, options) {
         } else {
             // reset lastIndex in case delimiters were provided as regexes
             left.lastIndex = right.lastIndex = 0;
-            throw Error("subject data contains unbalanced delimiters");
+            throw Error("subject pages contains unbalanced delimiters");
         }
 
         // if the delimiter matched an empty string, advance delimEnd to avoid an infinite loop

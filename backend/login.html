@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Админ-панель</title>
+    <link type="text/css" href="/backend/css/css.css" rel="stylesheet">
+</head>
+<body>
+    <div class="form">
+        <div class="header">Пожалуйста, авторизуйтесь</div>
+        <div class="note"><?=$note;?></div>
+        <form method="post" name="user">
+            <div class="fields">
+                <div class="field">
+                    <div class="name">Логин</div>
+                    <label>
+                        <input type="text" name="login"/>
+                    </label>
+                </div>
+                <div class="field">
+                    <div class="name">Пароль</div>
+                    <label>
+                        <input type="password" name="password"/>
+                    </label>
+                </div>
+                <label>
+                    <input type="submit" name="submit" value="Войти">
+                </label>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -18,7 +18,7 @@
     $out = '';
     $breadCrumb = '';
 
-    $module = ($link == '' || $link == 'index.php' || $link == 'index.html') ? 'main' :
+    $module = ($link == '' || $link == 'index.php' || $link == 'login.html') ? 'main' :
         (($link == 'admin') ? 'admin' :
             (($link == 'contacts' || $link == 'search') ? 'page' :
                 (($link == 'blog') ? 'blog' :
@@ -66,7 +66,7 @@
         // Вывод подвала
         require_once($_SERVER['DOCUMENT_ROOT']."/core/footer.php");
     }else{
-        echo 'Заготовка для админки';
+        require_once($_SERVER['DOCUMENT_ROOT']."/backend/admin.php");
     }
 
 
