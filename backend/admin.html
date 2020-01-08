@@ -4,31 +4,34 @@
     <meta charset="UTF-8">
     <title>Админ-панель</title>
     <link type="text/css" href="/backend/css/css.css" rel="stylesheet">
+    <script src="/backend/js/js.js" defer></script>
 </head>
 <body>
-<div class="auth">
-    <div>Пользователь: <?=$userName;?></div>
-    <div><a href="/admin?do=logout">выйти из аккаунта</a></div>
-</div>
-    <h1>Админ-панель сайта</h1>
-    <p>Вы успешно авторизовались!</p>
-
-<div class="tabs">
-    <div class="tabs-header">
-        <div class="tab-header" data-id="options"><a href="/admin/options/">Опции</a></div>
-        <div class="tab-header" data-id="pages"><a href="/admin/pages/">Страницы</a></div>
-        <div class="tab-header" data-id="blog"><a href="/admin/blog/">Блог</a></div>
-        <div class="tab-header" data-id="portfolio"><a href="/admin/portfolio/">Портфолио</a></div>
-        <div class="tab-header" data-id="files"><a href="/admin/files/">Файлы</a></div>
+<div class="content">
+    <div class="top">
+        <div class="header">Админ-панель сайта</div>
+        <div class="auth">
+            <div>Пользователь: <?=$userName;?></div>
+            <div><a href="/admin?do=logout">выйти из аккаунта</a></div>
+        </div>
     </div>
+    <div class="note"><?=$note;?></div>
 
-    <div class="tabs-content">
-        <div class="tab-content" data-id="options"><?=$options;?></div>
-        <div class="tab-content" data-id="pages"><?=$pages;?></div>
-        <div class="tab-content" data-id="blog"><?=$blog;?></div>
-        <div class="tab-content" data-id="portfolio"><?=$portfolio;?></div>
-        <div class="tab-content" data-id="files"><?=$files;?></div>
+    <div class="tabs">
+        <div class="tabs-header">
+            <div class="tab-header"><a href="/admin/options/" data-id="options">Опции</a></div>
+            <div class="tab-header"><a href="/admin/pages/" data-id="pages">Страницы</a></div>
+            <div class="tab-header"><a href="/admin/blog/" data-id="blog">Блог</a></div>
+            <div class="tab-header"><a href="/admin/portfolio/" data-id="portfolio">Портфолио</a></div>
+            <div class="tab-header"><a href="/admin/files/" data-id="files">Файлы</a></div>
+        </div>
+
+        <div class="tabs-content">
+            <div class="tab-content" data-id=""><?=$out;?></div>
+        </div>
     </div>
 </div>
+
+
 </body>
 </html>

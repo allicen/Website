@@ -1,0 +1,151 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;;
+    font-weight: 300;
+    color: #4a525d;
+    font-size: medium;
+    height: 100%;
+}
+
+a{
+    text-decoration: none;
+    color: #A668D5;
+    border-bottom: 1px solid #A668D5;
+}
+
+a:hover{
+    border-bottom: 1px solid #fff;
+}
+
+.center{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: stretch;
+    height: 100vh;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.form .header{
+    font-size: larger;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.form .note{
+    color: #f00;
+}
+
+.form .fields .field{
+    display: flex;
+    justify-content:  flex-end;
+    margin: 20px 0;
+}
+
+.form .fields .field .name{
+    font-weight: 600;
+}
+
+.form .fields input[type=submit]{
+    background-color: #660BAB;
+    color: #fff;
+    padding: 10px 30px;
+    outline: none;
+    border: 0;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.form .fields input[type=submit]:hover{
+    background-color: #FFF700;
+    color: #660BAB;
+}
+
+.form .fields input[type=text], input[type=password]{
+    padding: 10px;
+    width: 300px;
+    margin-left: 20px;
+}
+
+.form .fields label{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    flex-basis: 1200px;
+    padding: 20px;
+}
+
+.content .top{
+    display: flex;
+    justify-content: space-between;
+}
+
+.content .top .header{
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-size: x-large;
+}
+
+.content .auth{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.content .auth div{
+    margin-left: 20px;
+}
+
+.content .tabs .tabs-header{
+    display: flex;
+}
+
+.content .tabs .tabs-header .tab-header{
+    z-index: 3;
+}
+
+.content .tabs .tabs-header .tab-header a{
+    margin-right: 10px;
+    padding: 20px 30px;
+    border-bottom: none;
+    background-color: #A668D5;
+    color: #fff;
+}
+
+
+
+.content .tabs .tabs-header .tab-header a:hover{
+    background-color: #FFF700;
+    color: #41046F;
+}
+
+.content .tabs .tabs-header .tab-header .active-tab{
+    background-color: #FFF700;
+    color: #41046F;
+}
+
+.content .tabs .tabs-content{
+    padding-top: 20px;
+    background-color: #fff;
+    border-top: 10px solid #FFF700;
+    margin-top: 19.8px;
+}
+
+
+
+

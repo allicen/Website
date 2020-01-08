@@ -1,6 +1,8 @@
 <?php
 $protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https://' : 'http://';
-if(!isset($_SESSION)) {session_start();}
+if(!isset($_SESSION)) {
+    session_start();
+}
 
 if(!$_SESSION['admin']){
     header("Location: ".$protocol.$_SERVER['HTTP_HOST']."/backend/login.php");
