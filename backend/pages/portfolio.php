@@ -13,6 +13,7 @@ $description = '';
 $anons = '';
 $github = '';
 $technologies = '';
+$technologiesCheck = '';
 $status = '';
 $text = '';
 $date = (string) date("Y-m-d");
@@ -25,22 +26,58 @@ function getDataFields(){
     $description = (string) $_POST['description'];
     $anons = (string) $_POST['anons'];
     $github = (string) $_POST['github'];
-    $technologies = (string) $_POST['technologies'];
     $status = (string) $_POST['status'];
     $text = (string) $_POST['text'];
+
+    $technologies = $_POST['technologies'];
+    $technologiesCheck = '';
+    if(!empty($technologies)){
+        $count = count($technologies);
+        for($i = 0; $i < $count; $i++){
+            $technologiesCheck .= $technologies[$i];
+            $technologiesCheck .= ',';
+        }
+    }
+
+    $technologies = (string) $technologiesCheck;
+    $technologies = substr($technologies, 0, -1);
+
     return array($name, $link, $picture, $title, $description, $anons, $github, $technologies, $status, $text);
+}
+
+
+// Вывод технологий
+function getTechnologies($connect, $technologiesCheck, $useTech){
+    if($query = mysqli_query($connect, "SELECT * FROM technologies") and mysqli_fetch_assoc($query) !=''){
+        mysqli_data_seek($query, 0);
+        while($row = mysqli_fetch_assoc($query)) {
+            $useTechArr = explode(',', (string) $useTech);
+            $checked = '';
+            for($i = 0; $i < count($useTechArr); $i++){
+                if($useTechArr[$i] == $row['id']) {
+                    $checked = 'checked';
+                    break;
+                }
+            }
+            $technologiesCheck .= '
+                    <div class="checkbox">
+                      <input type="checkbox" id="'.$row['id'].'" name="technologies[]" value="'.$row['id'].'" '.$checked.'>
+                      <label for="'.$row['id'].'">'.$row['name'].'</label>
+                    </div>';
+        }
+    }
+    return $technologiesCheck;
 }
 
 // Добавление записи
 if($url[3] == '' && count($actionType) == 1){
     if(isset($_POST['submit']) && $_POST['submit'] != ''){
         list($name, $link, $picture, $title, $description, $anons, $github, $technologies, $status, $text) = getDataFields();
-
         if($query = mysqli_query($connect, "INSERT INTO `portfolio` (`id`, `name`, `link`, `picture`, `anons`, `title`, `description`, `github`, `about`, `date`, `status`, `technologies`) 
                                                    VALUES (NULL, '$name', '$link', '$picture', '$anons', '$title', '$description', '$github', '$text', '$date', '$status', '$technologies')") and ($query)){
             $info = '<div class="green info">Запись <strong>'.$name.'</strong> успешно добавлена! <a href="#'.$link.'">Посмотреть</a> или <a href="/admin/portfolio/#edit">добавить еще одну</a></div>';
         }else{
-            $info = '<div class="red info">Запись не была добавлена! Провеьте корректность подключения к БД.</div>';
+            $info = '<div class="red info">Запись не была добавлена! Проверьте корректность подключения к БД.</div>';
         }
     }
 }
@@ -70,6 +107,8 @@ if($actionType[1] == 'edit'){
             $technologies = $row['technologies'];
             $status = $row['status'];
             $text = $row['about'];
+
+            $technologiesCheck = (string) getTechnologies($connect, $technologiesCheck, $technologies);
         }
     }else{
         $info = '<div class="red info">Проверьте корректность подключения к БД.</div>';
@@ -93,26 +132,10 @@ if($actionType[1] == 'edit'){
                                                         WHERE `portfolio`.`id` = ".$id."") and ($query)){
             $info = '<div class="green info">Запись <strong>'.$name.'</strong> успешно отредактирована! <a href="#'.$link.'">Посмотреть</a> или <a href="/admin/portfolio/#edit"> добавить еще одну</a></div>';
         }else{
-            var_dump($query);
             $info = '<div class="red info">Запись не была обновлена! Проверьте корректность подключения к БД.</div>';
         }
     }
 }
-
-// Вывод технологий
-$technologiesCheck = '';
-if($query = mysqli_query($connect, "SELECT * FROM technologies") and mysqli_fetch_assoc($query) !=''){
-    mysqli_data_seek($query, 0);
-    while($row = mysqli_fetch_assoc($query)) {
-        $technologiesCheck .= '
-                    <div class="checkbox">
-                      <input type="checkbox" id="'.$row['name'].'" name="'.$row['name'].'">
-                      <label for="'.$row['name'].'">'.$row['name'].'</label>
-                    </div>';
-    }
-}
-
-
 
 // Вывод всех записей
 if($query = mysqli_query($connect, "SELECT * FROM portfolio") and mysqli_fetch_assoc($query) !=''){
@@ -130,8 +153,6 @@ if($query = mysqli_query($connect, "SELECT * FROM portfolio") and mysqli_fetch_a
                 $technologiesItems .= ' ';
             }
         }
-
-
 
         $out .= '<tr>';
         $out .= '
@@ -154,5 +175,10 @@ if($query = mysqli_query($connect, "SELECT * FROM portfolio") and mysqli_fetch_a
     }
     $github = '';
 }
+
+if(empty($technologiesCheck)){
+    $technologiesCheck = (string) getTechnologies($connect, $technologiesCheck, '');
+}
+
 
 require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/templates/portfolio.html");
