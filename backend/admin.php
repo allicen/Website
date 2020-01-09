@@ -2,39 +2,41 @@
 require_once($_SERVER['DOCUMENT_ROOT']."/backend/auth.php");
 $userName = $_SESSION['user'];
 $out = '';
+$page = '';
 
 $url = $_SERVER['REQUEST_URI'];
-$delete = array('?', '=');
+$delete = array('?', '&');
 $url = explode('/', str_replace($delete, '/', $url));
 
-if($url[2] == ''){
-    $out = 'Вы успешно авторизовались как <strong>'.$userName .'</strong>';
-}else{
-    $out = 'Вы находитесь на странице: ';
-}
+require_once($_SERVER['DOCUMENT_ROOT'] . "/backend/templates/header.html");
 
+if($url[2] == ''){
+    $page = 'Вы успешно авторизовались как <strong>'.$userName .'</strong>';
+}else{
+    $page = 'Вы находитесь на странице: ';
+}
 
 switch ($url[2]){
     case ('options'):
-        $out .= '<strong>Опции</strong>';
+        $page .= '<strong>Опции</strong>';
         require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/options.php");
         break;
     case ('pages'):
-        $out .= '<strong>Страницы</strong>';
+        $page .= '<strong>Страницы</strong>';
         break;
     case ('blog'):
-        $out .= '<strong>Блог</strong>';
+        $page .= '<strong>Блог</strong>';
         break;
     case ('portfolio'):
-        $out .= '<strong>Портфолио</strong>';
+        $page .= '<strong>Портфолио</strong>';
+        require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/portfolio.php");
         break;
     case ('files'):
-        $out .= '<strong>Файлы</strong>';
+        $page .= '<strong>Файлы</strong>';
         break;
 }
 
 
 
 //print_r(get_defined_vars());
-
-require_once($_SERVER['DOCUMENT_ROOT']."/backend/admin.html");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/backend/templates/footer.html");

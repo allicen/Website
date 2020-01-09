@@ -1417,7 +1417,7 @@ sh.Highlighter.prototype = {
 	/**
 	 * Splits block of text into individual DIV lines.
 	 * @param {String} code     Code to highlight.
-	 * @return {String}         Returns highlighted code in HTML form.
+	 * @return {String}         Returns highlighted code in HTML templates.
 	 */
 	createDisplayLines : function(code)
 	{

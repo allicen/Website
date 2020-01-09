@@ -12,4 +12,8 @@ function tabColor() {
     }
 }
 
+function deleteCheck() {
+    return confirm('Удалить запись безвозвратно? Вы уверены?');
+}
+
 tabColor();

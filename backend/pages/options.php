@@ -1,5 +1,5 @@
 <?php
-$out .= file_get_contents($_SERVER['DOCUMENT_ROOT']."/backend/pages/form/options.html");
+$out .= file_get_contents($_SERVER['DOCUMENT_ROOT']."/backend/pages/templates/options.html");
 
 
 require_once($_SERVER['DOCUMENT_ROOT']."/core/connect.php");
@@ -19,3 +19,4 @@ if($query = mysqli_query($connect, "SELECT * FROM options") and mysqli_fetch_ass
 }
 
 $out .= '</tbody></table>';
+$out .= file_get_contents($_SERVER['DOCUMENT_ROOT']."/backend/templates/footer.html");

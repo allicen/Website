@@ -11,6 +11,10 @@ body {
     height: 100%;
 }
 
+h1, h2, h3, h4{
+    margin-top: 20px;
+}
+
 a{
     text-decoration: none;
     color: #A668D5;
@@ -29,6 +33,14 @@ a:hover{
     align-items: center;
     align-content: stretch;
     height: 100vh;
+}
+
+.footer{
+    text-align: center;
+    margin: 20px;
+    padding: 20px;
+    border-top: 10px solid #bec8fd;
+    color:#2E3983;
 }
 
 .form{
@@ -77,6 +89,7 @@ a:hover{
     padding: 10px;
     width: 300px;
     margin-left: 20px;
+    outline: none;
 }
 
 .form .fields label{
@@ -144,6 +157,129 @@ a:hover{
     background-color: #fff;
     border-top: 10px solid #FFF700;
     margin-top: 19.8px;
+}
+
+.content table {
+    margin-top: 20px;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.content .data{
+    overflow: auto;
+}
+
+.content table td, .content table th{
+    border: 1px solid #cecece;
+    padding: 10px;
+}
+
+.content table th{
+    background-color: #f2f4fc;
+}
+
+.content a.img{
+    border-bottom: none;
+}
+
+.content img.icon{
+    width: 24px;
+    height: 24px;
+}
+
+.content .form-editor{
+    padding: 20px 30px;
+    background-color: #fdfdf8;
+    margin-top: 20px;
+    border: 1px dotted #cecece;
+}
+
+.content .form-editor p{
+    padding: 20px 0;
+}
+
+.content .form-editor .note{
+    color: #f00;
+    font-size: larger;
+    padding: 10px 0;
+}
+
+.content .form-editor .row{
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+
+.content .form-editor input[type=text]{
+    padding: 10px 20px;
+    outline: none;
+    border: 1px solid #cecece;
+    width: 100%;
+}
+
+.content .form-editor input[type=text]:focus{
+    border: 1px solid #A668D5;
+}
+
+.content .form-editor input[type=submit]{
+    background-color: #660BAB;
+    color: #fff;
+    padding: 10px 30px;
+    outline: none;
+    border: 0;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.content .form-editor input[type=submit]:hover{
+    background-color: #FFF700;
+    color: #660BAB;
+}
+
+.content .form-editor .row .name{
+    width: 200px;
+    flex-grow: 1;
+}
+
+.content .form-editor .row .value{
+    display: flex;
+    flex-grow: 20;
+    flex-wrap: wrap;
+}
+
+.content .form-editor .row .editor{
+    width: 100%;
+}
+
+.content .form-editor .row .right{
+    justify-content: flex-end;
+}
+
+.content .red{
+     color: #f00;
+}
+
+.content .green{
+    color: green;
+}
+
+.content .form-editor .row select{
+    padding: 10px;
+    outline: none;
+    border: 1px solid #cecece;
+}
+
+.content .form-editor .row select:focus{
+    border: 1px solid #A668D5;
+}
+
+.content .info{
+    margin: 20px 0;
+}
+
+.content .form-editor .value .checkbox{
+    margin-left: 30px;
+    margin-top: 10px;
 }
 
 

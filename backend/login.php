@@ -32,4 +32,4 @@ if(isset($_POST['submit']) && isset($_POST['submit']) != ''){
     }
 }
 
-require_once($_SERVER['DOCUMENT_ROOT'] . "/backend/login.html");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/backend/templates/login.html");
