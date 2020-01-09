@@ -121,7 +121,8 @@ a:hover{
 }
 
 .content .auth div{
-    margin-left: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .content .tabs .tabs-header{
@@ -178,11 +179,11 @@ a:hover{
     background-color: #f2f4fc;
 }
 
-.content a.img{
+a.img{
     border-bottom: none;
 }
 
-.content img.icon{
+img.icon{
     width: 24px;
     height: 24px;
 }

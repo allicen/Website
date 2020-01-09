@@ -12,8 +12,10 @@
     <div class="top">
         <div class="header">Админ-панель сайта</div>
         <div class="auth">
-            <div>Пользователь: <?=$userName;?></div>
+            <img src="/img/user.png" class="icon" alt="user">
+            <div><?=$userName;?></div> 	&rArr;
             <div><a href="/admin?do=logout">выйти из аккаунта</a></div>
+            <a href="/admin?do=logout" class="img"><img src="/img/sign-out.png" class="icon" alt="go out"></a>
         </div>
     </div>
     <div class="note"><?=$note;?></div>
