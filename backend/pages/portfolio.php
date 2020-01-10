@@ -60,7 +60,7 @@ function getTechnologies($connect, $technologiesCheck, $useTech){
                 }
             }
             $technologiesCheck .= '
-                    <div class="checkbox">
+                    <div class="checkbox">$actionType
                       <input type="checkbox" id="'.$row['id'].'" name="technologies[]" value="'.$row['id'].'" '.$checked.'>
                       <label for="'.$row['id'].'">'.$row['name'].'</label>
                     </div>';
@@ -166,9 +166,11 @@ if($query = mysqli_query($connect, "SELECT * FROM portfolio") and mysqli_fetch_a
                 <td>'.$technologiesItems.'</td>
                 <td>'.$status.'</td>
                 <td>
-                    <a href="?id='.$row['id'].'&action=edit" class="img"><img src="/img/edit.png" alt="Редактировать" title="Редактировать" class="icon"></a>
-                    <a href="?id='.$row['id'].'&action=delete" class="img"><img src="/img/delete.png" alt="Удалить" onclick="return deleteCheck();" title="Удалить" class="icon"></a>
-                    '.$go.'
+                    <div class="nowrap">
+                        <a href="?id='.$row['id'].'&action=edit" class="img"><img src="/img/edit.png" alt="Редактировать" title="Редактировать" class="icon"></a>
+                        <a href="?id='.$row['id'].'&action=delete" class="img"><img src="/img/delete.png" alt="Удалить" onclick="return deleteCheck();" title="Удалить" class="icon"></a>
+                        '.$go.'
+                    </div>
                 </td>
             ';
         $out .= '</tr>';
@@ -181,4 +183,5 @@ if(empty($technologiesCheck)){
 }
 
 
+require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/templates/portfolio-header.html");
 require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/templates/portfolio.html");

@@ -23,13 +23,18 @@ switch ($url[2]){
         break;
     case ('pages'):
         $page .= '<strong>Страницы</strong>';
+        require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/pages.php");
         break;
     case ('blog'):
         $page .= '<strong>Блог</strong>';
         break;
     case ('portfolio'):
         $page .= '<strong>Портфолио</strong>';
-        require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/portfolio.php");
+        if($url[3] == 'technologies'){
+            require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/technologies.php");
+        }else{
+            require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/portfolio.php");
+        }
         break;
     case ('files'):
         $page .= '<strong>Файлы</strong>';

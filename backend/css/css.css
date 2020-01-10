@@ -283,6 +283,38 @@ img.icon{
     margin-top: 10px;
 }
 
+.nowrap{
+    display: flex;
+}
+.nowrap a:first-child{
+    margin-right: 10px;
+}
+.nowrap a:last-child{
+    margin-left: 10px;
+}
 
 
+.navigate {
+    display: flex;
+    margin: 40px 0;
+}
 
+.navigate div{
+    margin-right: 10px;
+}
+
+.navigate .item a{
+    padding: 10px 20px;
+    border: 1px solid #A668D5;
+}
+
+.navigate .active a{
+    padding: 10px 20px;
+    background-color: #A668D5;
+    border: 1px solid #A668D5;
+    color: #fff;
+}
+
+.navigate .item a:hover{
+    border: 1px solid #41046F;
+}
