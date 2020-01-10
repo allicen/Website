@@ -25,6 +25,9 @@ switch ($url[2]){
         $page .= '<strong>Страницы</strong>';
         require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/pages.php");
         break;
+    case ('main'):
+        $page .= '<strong>Главная</strong>';
+        break;
     case ('blog'):
         $page .= '<strong>Блог</strong>';
         break;
