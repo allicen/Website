@@ -7,3 +7,31 @@
         <th>Значение</th>
         <th>Действия</th>
     </tr>
+    <?=$out;?>
+    </tbody>
+</table>
+<a name="edit"></a>
+<div class="form-editor">
+    <h3><?=$action;?></h3>
+    <p><span class="red">*</span> - обязательные для заполнения поля</p>
+    <form method="post" name="edit" enctype="multipart/form-data">
+        <div class="row">
+            <div class="name">Ключ <span class="red">*</span></div>
+            <label class="value">
+                <input type="text" name="name" placeholder="Ключ" required value="<?=$name;?>"/>
+            </label>
+        </div>
+        <div class="row">
+            <div class="name">Значение <span class="red">*</span></div>
+            <label class="value">
+                <input type="text" name="link" placeholder="Значение" required value="<?=$value;?>"/>
+            </label>
+        </div>
+        <div class="row">
+            <label class="value right">
+                <input type="submit" value="Отправить" class="" name="submit" />
+            </label>
+        </div>
+    </form>
+</div>
+<?=$save;?>
