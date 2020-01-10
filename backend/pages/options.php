@@ -18,11 +18,10 @@ if($actionType[1] == 'edit'){
         $info = '<div class="red info">Проверьте корректность подключения к БД.</div>';
     }
     if(isset($_POST['submit']) && $_POST['submit'] != ''){
-        if($query = mysqli_query($connect, "UPDATE `options` SET 
-                                                        `name` = '$name', 
-                                                        `value` = '$value', 
-                                                        WHERE `options`.`id` = ".$id."") and ($query)){
-            $info = '<div class="green info">Запись <strong>'.$name.'</strong> успешно отредактирована! <a href="#'.$link.'">Посмотреть</a>';
+        $name = $_POST['name'];
+        $value = $_POST['value'];
+        if($query = mysqli_query($connect, "UPDATE `options` SET `value` = '$value' WHERE `options`.`id` = ".$id."") and ($query)){
+            $info = '<div class="green info">Запись <strong>'.$name.'</strong> успешно отредактирована! <a href="#'.$name.'">Посмотреть</a></div>';
         }else{
             $info = '<div class="red info">Запись не была обновлена! Проверьте корректность подключения к БД.</div>';
         }
@@ -45,6 +44,4 @@ if($query = mysqli_query($connect, "SELECT * FROM options") and mysqli_fetch_ass
         $out .= '</tr>';
     }
 }
-
-$out .= '</tbody></table>';
 require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/templates/options.html");
