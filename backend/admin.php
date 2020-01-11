@@ -21,7 +21,6 @@ if($url[2] == ''){
 
 require_once($_SERVER['DOCUMENT_ROOT'] . "/backend/templates/header.html");
 
-
 switch ($url[2]){
     case ('options'):
         $page .= '<strong>Опции</strong>';
@@ -37,6 +36,11 @@ switch ($url[2]){
         break;
     case ('blog'):
         $page .= '<strong>Блог</strong>';
+        if($url[3] == 'category'){
+            require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/category.php");
+        }else{
+            require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/blog.php");
+        }
         break;
     case ('portfolio'):
         $page .= '<strong>Портфолио</strong>';
@@ -50,8 +54,6 @@ switch ($url[2]){
         $page .= '<strong>Файлы</strong>';
         break;
 }
-
-
 
 //print_r(get_defined_vars());
 require_once($_SERVER['DOCUMENT_ROOT'] . "/backend/templates/footer.html");
