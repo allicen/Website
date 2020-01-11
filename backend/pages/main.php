@@ -1,14 +1,11 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT']."/core/connect.php");
-$id = explode('=', $url[4])[1];
-$actionType = explode('=', $url[5])[1];
+require_once($_SERVER['DOCUMENT_ROOT']."/backend/functions.php");
 
 $action = 'Добавление записи';
 $link = '';
 $name = '';
 $title = '';
 $text = '';
-
 
 if($url[4] == '' && $actionType != 'edit'){
     if(isset($_POST['submit']) && $_POST['submit'] != ''){
@@ -52,15 +49,9 @@ if($actionType == 'edit'){
 }
 
 
-
 if($actionType == 'delete'){
-    if($query = mysqli_query($connect, "DELETE FROM `top_menu` WHERE `top_menu`.`id` = ".$id."") and ($query)){
-        $info = '<div class="green info">Запись <strong>'.$id.'</strong> успешно удалена! <a href="/admin/main/#edit">Добавить новую</a></div>';
-    }else{
-        $info = '<div class="red info">Произошал ошибка подключения к БД.</div>';
-    }
+    $info = delete($connect, $id, 'top_menu', '/admin/main/');
 }
-
 
 if($query = mysqli_query($connect, "SELECT * FROM top_menu") and mysqli_fetch_assoc($query) !=''){
     mysqli_data_seek($query, 0);

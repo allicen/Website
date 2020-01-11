@@ -1,13 +1,11 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT']."/core/connect.php");
-$id = explode('=', $url[4])[1];
-$actionType = explode('=', $url[5]);
+require_once($_SERVER['DOCUMENT_ROOT']."/backend/functions.php");
 
 $action = 'Редактирование записи';
 $name = '';
 $value = '';
 
-if($actionType[1] == 'edit'){
+if($actionType == 'edit'){
     if($query = mysqli_query($connect, "SELECT * FROM options WHERE id = ".$id."") and mysqli_fetch_assoc($query) !=''){
         mysqli_data_seek($query, 0);
         while($row = mysqli_fetch_assoc($query)){
@@ -28,9 +26,6 @@ if($actionType[1] == 'edit'){
     }
 }
 
-
-
-
 if($query = mysqli_query($connect, "SELECT * FROM options") and mysqli_fetch_assoc($query) !=''){
     mysqli_data_seek($query, 0);
     while($row = mysqli_fetch_assoc($query)){
@@ -44,4 +39,5 @@ if($query = mysqli_query($connect, "SELECT * FROM options") and mysqli_fetch_ass
         $out .= '</tr>';
     }
 }
+
 require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/templates/options.html");

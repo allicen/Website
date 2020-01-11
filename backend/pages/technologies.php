@@ -1,5 +1,6 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT']."/core/connect.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/backend/functions.php");
+
 $id = explode('=', $url[5])[1];
 $actionType = explode('=', $url[6])[1];
 
@@ -40,11 +41,7 @@ if($actionType == 'edit'){
 }
 
 if($actionType == 'delete'){
-    if($query = mysqli_query($connect, "DELETE FROM `technologies`WHERE `technologies`.`id` = ".$id."") and ($query)){
-        $info = '<div class="green info">Запись <strong>'.$name.'</strong> успешно удалена! <a href="/admin/portfolio/technologies/#edit">Добавить новую</a></div>';
-    }else{
-        $info = '<div class="red info">Произошал ошибка подключения к БД.</div>';
-    }
+    $info = delete($connect, $id, 'technologies', '/admin/portfolio/technologies/');
 }
 
 if($query = mysqli_query($connect, "SELECT * FROM technologies") and mysqli_fetch_assoc($query) !=''){
@@ -64,7 +61,6 @@ if($query = mysqli_query($connect, "SELECT * FROM technologies") and mysqli_fetc
         $out .= '</tr>';
     }
 }
-
 
 require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/templates/portfolio-header.html");
 require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/templates/technologies.html");

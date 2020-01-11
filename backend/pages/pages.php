@@ -1,7 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT']."/core/connect.php");
-$id = explode('=', $url[4])[1];
-$actionType = explode('=', $url[5]);
+require_once($_SERVER['DOCUMENT_ROOT']."/backend/functions.php");
 
 $action = 'Редактировать запись';
 $name = '';
@@ -9,36 +7,8 @@ $link = '';
 $title = '';
 $description = '';
 $text = '';
-$date = (string) date("Y-m-d");
 
-function getLink($connect, $linkId){
-    $link = '';
-    if($query = mysqli_query($connect, "SELECT * FROM links WHERE `id` = ".$linkId."") and $row = mysqli_fetch_assoc($query) and $row != '') {
-        $link = $row['link'];
-    }
-    return $link;
-}
-
-function getSelect($connect, $linkId){
-    $selectOut = '<select required name="link">';
-    if($query = mysqli_query($connect, "SELECT * FROM links") and mysqli_fetch_assoc($query) !=''){
-        mysqli_data_seek($query, 0);
-        while($row = mysqli_fetch_assoc($query)){
-            if($row['link'] != ''){
-                $selected = '';
-                if($row['id'] == $linkId){
-                    $selected = ' selected';
-                }
-                $selectOut .= '<option value="'.$row['id'].'"'.$selected.'>'.$row['link'].'</option>';
-            }
-        }
-    }
-    $selectOut .= '</select>';
-    return $selectOut;
-}
-
-
-if($actionType[1] == 'edit'){
+if($actionType == 'edit'){
     if($query = mysqli_query($connect, "SELECT * FROM content WHERE id = ".$id."") and mysqli_fetch_assoc($query) !=''){
         mysqli_data_seek($query, 0);
         while($row = mysqli_fetch_assoc($query)){
@@ -73,8 +43,6 @@ if($actionType[1] == 'edit'){
         }
     }
 }
-
-
 
 if($query = mysqli_query($connect, "SELECT * FROM content") and mysqli_fetch_assoc($query) !=''){
     mysqli_data_seek($query, 0);
