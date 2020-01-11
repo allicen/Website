@@ -21,6 +21,11 @@ a{
     border-bottom: 1px solid #A668D5;
 }
 
+ul{
+    margin-left: 30px;
+}
+
+
 a:hover{
     border-bottom: 1px solid #fff;
 }

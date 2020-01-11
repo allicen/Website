@@ -8,13 +8,19 @@ $url = $_SERVER['REQUEST_URI'];
 $delete = array('?', '&');
 $url = explode('/', str_replace($delete, '/', $url));
 
-require_once($_SERVER['DOCUMENT_ROOT'] . "/backend/templates/header.html");
-
 if($url[2] == ''){
     $page = 'Вы успешно авторизовались как <strong>'.$userName .'</strong>';
 }else{
     $page = 'Вы находитесь на странице: ';
 }
+
+if($url[2] == ''){
+    $out = 'Вы авторизовались как <strong>'.$userName.'</strong>.<br><br>';
+    $out .= 'Выберите раздел для редактирования.';
+}
+
+require_once($_SERVER['DOCUMENT_ROOT'] . "/backend/templates/header.html");
+
 
 switch ($url[2]){
     case ('options'):
@@ -27,6 +33,7 @@ switch ($url[2]){
         break;
     case ('main'):
         $page .= '<strong>Главная</strong>';
+        require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/main.php");
         break;
     case ('blog'):
         $page .= '<strong>Блог</strong>';
