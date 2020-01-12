@@ -12,13 +12,14 @@ $github = '';
 $technologies = '';
 $technologiesCheck = '';
 $status = '';
+$end = '';
 $text = '';
 
 if($url[3] == '' && $actionType != 'edit'){
     if(isset($_POST['submit']) && $_POST['submit'] != ''){
-        list($name, $link, $picture, $title, $description, $anons, $github, $technologies, $status, $text) = getDataFields();
-        if($query = mysqli_query($connect, "INSERT INTO `portfolio` (`id`, `name`, `link`, `picture`, `anons`, `title`, `description`, `github`, `about`, `date`, `status`, `technologies`) 
-                                                   VALUES (NULL, '$name', '$link', '$picture', '$anons', '$title', '$description', '$github', '$text', '$date', '$status', '$technologies')") and ($query)){
+        list($name, $link, $picture, $title, $description, $anons, $github, $technologies, $status, $end, $text) = getDataFields();
+        if($query = mysqli_query($connect, "INSERT INTO `portfolio` (`id`, `name`, `link`, `picture`, `anons`, `title`, `description`, `github`, `about`, `date`, `status`, `end`, `technologies`) 
+                                                   VALUES (NULL, '$name', '$link', '$picture', '$anons', '$title', '$description', '$github', '$text', '$date', '$status', '$end', '$technologies')") and ($query)){
             $info = '<div class="green info">Запись <strong>'.$name.'</strong> успешно добавлена! <a href="#'.$link.'">Посмотреть</a> или <a href="/admin/portfolio/#edit">добавить еще одну</a></div>';
         }else{
             $info = '<div class="red info">Запись не была добавлена! Проверьте корректность подключения к БД.</div>';
@@ -44,6 +45,7 @@ if($actionType == 'edit'){
             $github = $row['github'];
             $technologies = $row['technologies'];
             $status = $row['status'];
+            $end = $row['end'];
             $text = $row['about'];
 
             $technologiesCheck = (string) getTechnologies($connect, $technologiesCheck, $technologies);
@@ -53,7 +55,7 @@ if($actionType == 'edit'){
     }
 
     if(isset($_POST['submit']) && $_POST['submit'] != ''){
-        list($name, $link, $picture, $title, $description, $anons, $github, $technologies, $status, $text) = getDataFields();
+        list($name, $link, $picture, $title, $description, $anons, $github, $technologies, $status, $end, $text) = getDataFields();
         if($query = mysqli_query($connect, "UPDATE `portfolio` SET 
                                                         `name` = '$name', 
                                                         `link` = '$link', 
@@ -64,6 +66,7 @@ if($actionType == 'edit'){
                                                         `github` = '$github', 
                                                         `technologies` = '$technologies', 
                                                         `status` = '$status', 
+                                                        `end` = '$end',
                                                         `about` = '$text',
                                                         `date` = '$date'
                                                         WHERE `portfolio`.`id` = ".$id."") and ($query)){

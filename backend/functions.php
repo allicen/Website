@@ -28,6 +28,7 @@ function getDataFields(){
     $anons = (string) $_POST['anons'];
     $github = (string) $_POST['github'];
     $status = (string) $_POST['status'];
+    $end = (string) $_POST['end'];
     $text = (string) $_POST['text'];
     $technologies = $_POST['technologies'];
     $technologiesCheck = '';
@@ -42,7 +43,7 @@ function getDataFields(){
     $technologies = (string) $technologiesCheck;
     $technologies = substr($technologies, 0, -1);
 
-    return array($name, $link, $picture, $title, $description, $anons, $github, $technologies, $status, $text);
+    return array($name, $link, $picture, $title, $description, $anons, $github, $technologies, $status, $end, $text);
 }
 
 
