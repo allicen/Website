@@ -1,13 +1,13 @@
 <p><?=$page;?></p>
 <?=$info;?>
-<p><span class="red">Важно!</span> Имена файлов должны быть без пробелов и русских букв</p>
+<p><span class="red">Важно!</span> Имена <u><strong>файлов</strong> и <strong>папок</strong></u> должны быть без пробелов и русских букв</p>
 <p>Директория: <strong><?=getPath($url, $path)[1];?></strong></p>
 <div class="folders"><?=$navigate;?></div>
 <?=$catalog;?>
 <div class="form-editor">
     <form method="post" enctype="multipart/form-data">
         <div class="row">
-            <input type="file" name="picture">
+            <input type="file" name="picture" required>
         </div>
         <div class="row">
             <div class="name">Ширина файла не более: </div>
@@ -15,7 +15,7 @@
                 <input type="text" name="size" placeholder="Введите ширину файла в px" value="700"/>
             </label>
         </div>
-        <input type="submit" value="Загрузить">
+        <input type="submit" name="submit" value="Загрузить">
     </form>
 </div>
 <h3>Все изображения:</h3>

@@ -27,8 +27,7 @@ if($actionType == 'delete'){
 }
 
 
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']) && $_POST['submit'] != ''){
     if (!in_array($_FILES['picture']['type'], $types)) die('<script>location="?type-error";</script>');
     if($_FILES['picture']['size'] > $maxSize) die('<script>location="?size-error";</script>');
     $name = resize($_FILES['picture'], $quality,  $_POST['size'], $dir);
@@ -58,6 +57,24 @@ if($active == 'delete'){
 $navigate = '';
 $index = 1;
 
+if(isset($_POST['folder']) && $_POST['folder'] != ''){
+    if($_POST['add'] != ''){
+        $newDir = $dir.$_POST['add'];
+        if(!is_dir($newDir)) {
+            mkdir($newDir, 0755);
+            if(file_exists($newDir)){
+                $info = '<div class="green info">Директория <u><strong>'.$_POST['add'].'</strong></u> успешно создана.</div>';
+            }else{
+                $info = '<div class="red info">Директория <u><strong>'.$_POST['add'].'</strong></u> не была создана.</div>';
+            }
+        }else{
+            $info = '<div class="red info">Директория <u><strong>'.$_POST['add'].'</strong></u> уже существует на сервере!</div>';
+        }
+    }else{
+        $info = '<div class="red info">Введите название папки</div>';
+    }
+}
+
 
 if ($handle = opendir($dir)) {
     while (false !== ($file = readdir($handle))) {
@@ -73,13 +90,11 @@ if ($handle = opendir($dir)) {
                 $out .= '</tr>';
                 $index++;
             } else {
-                $navigate .= '<div class="folder"><img src="/img/folder.png" alt="Папка" class="icon"><div class="link"><a href="/admin/' . getPath($url, $path)[0] . $file . '/">' . $file . "</a></div></div>";
+                $navigate .= '<div class="folder"><img src="/img/folder.png" alt="Папка" class="icon"><div class="link"><a href="/admin/' . getPath($url, $path)[0] . $file . '/">' . $file . '</a></div></div>';
             }
         }
     }
+    $navigate .= file_get_contents($_SERVER['DOCUMENT_ROOT']."/backend/pages/templates/new-folder.html");
 }
-
-
-
 
 require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/templates/file.html");

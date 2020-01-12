@@ -146,6 +146,7 @@ function getPath($url, $path){
             $url[$i] != 'type-error' &&
             $url[$i] != 'size-error' &&
             $url[$i] != 'delete' &&
+            $url[$i] != 'add' &&
             !stripos($url[$i], '.png') &&
             !stripos($url[$i], '.jpg') &&
             !stripos($url[$i], '.jpeg') &&

@@ -79,7 +79,7 @@ a:hover{
     font-weight: 600;
 }
 
-.form .fields input[type=submit]{
+.form .fields input[type=submit], .folder input[type=submit]{
     background-color: #660BAB;
     color: #fff;
     padding: 10px 30px;
@@ -89,12 +89,12 @@ a:hover{
     cursor: pointer;
 }
 
-.form .fields input[type=submit]:hover{
+.form .fields input[type=submit]:hover, .folder input[type=submit]:hover{
     background-color: #FFF700;
     color: #660BAB;
 }
 
-.form .fields input[type=text], input[type=password]{
+input[type=text], input[type=password]{
     padding: 10px;
     width: 300px;
     margin-left: 20px;
@@ -342,4 +342,8 @@ img.icon{
 
 .folders .folder {
     display: flex;
+}
+
+.folder input[type=text]{
+    margin: 0 10px;
 }
