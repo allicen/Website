@@ -69,17 +69,17 @@ function getTechnologies($connect, $technologiesCheck, $useTech){
     return $technologiesCheck;
 }
 
-function getLink($connect, $linkId){
+function getLink($connect, $linkId, $table){
     $link = '';
-    if($query = mysqli_query($connect, "SELECT * FROM links WHERE `id` = ".$linkId."") and $row = mysqli_fetch_assoc($query) and $row != '') {
+    if($query = mysqli_query($connect, "SELECT * FROM $table WHERE `id` = $linkId") and $row = mysqli_fetch_assoc($query) and $row != '') {
         $link = $row['link'];
     }
     return $link;
 }
 
-function getSelect($connect, $linkId){
-    $selectOut = '<select required name="link">';
-    if($query = mysqli_query($connect, "SELECT * FROM links") and mysqli_fetch_assoc($query) !=''){
+function getSelect($connect, $linkId, $table){
+    $selectOut = '<select required name="select"><option value="">Выберите значение</option>';
+    if($query = mysqli_query($connect, "SELECT * FROM $table") and mysqli_fetch_assoc($query) !=''){
         mysqli_data_seek($query, 0);
         while($row = mysqli_fetch_assoc($query)){
             if($row['link'] != ''){
@@ -95,3 +95,27 @@ function getSelect($connect, $linkId){
     return $selectOut;
 }
 
+function getStatus($status){
+    return $status = $status == '1' ? 'Опубликовано' : 'Черновик';
+}
+
+function getAllSelect($connect, $table){
+    $category = '';
+    if($query = mysqli_query($connect, "SELECT * FROM $table") and mysqli_fetch_assoc($query) !=''){
+        $category = '<select required name="select"><option value="">Выберите значение</option>';
+        mysqli_data_seek($query, 0);
+        while($row = mysqli_fetch_assoc($query)){
+            $category .= '<option value="'.$row['id'].'">'.$row['name'].'</option>';
+        }
+        $category .= '</select>';
+    }
+    return $category;
+}
+
+function getSelectId($connect, $table, $link){
+    $linkId = '';
+    if($query = mysqli_query($connect, "SELECT * FROM $table WHERE `link` = '$link'") and $row = mysqli_fetch_assoc($query) and $row != '') {
+        $linkId = $row['id'];
+    }
+    return $linkId;
+}

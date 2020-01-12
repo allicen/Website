@@ -1,0 +1,88 @@
+<table>
+    <tbody>
+    <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Ссылка</th>
+        <th>Статус</th>
+        <th>Картинка</th>
+        <th>Категория</th>
+        <th>Title</th>
+        <th>Дата</th>
+        <th>Действия</th>
+    </tr>
+    <?=$out;?>
+    </tbody>
+</table>
+<a name="edit"></a>
+<div class="form-editor">
+    <h3><?=$action;?></h3>
+    <p><span class="red">*</span> - обязательные для заполнения поля</p>
+    <form method="post" name="edit" enctype="multipart/form-data">
+        <div class="row">
+            <div class="name">Название <span class="red">*</span></div>
+            <label class="value">
+                <input type="text" name="name" placeholder="Введите название записи" required value="<?=$name;?>"/>
+            </label>
+        </div>
+        <div class="row">
+            <div class="name">Ссылка <span class="red">*</span></div>
+            <label class="value">
+                <input type="text" name="link" placeholder="Введите ссылку на запись" required value="<?=$link;?>"/>
+            </label>
+        </div>
+        <div class="row">
+            <div class="name">Статус <span class="red">*</span></div>
+            <label class="value">
+                <select required name="status">
+                    <option value="1">Опубликовано</option>
+                    <option value="0">Черновик</option>
+                </select>
+            </label>
+        </div>
+        <div class="row">
+            <div class="name">Картинка</div>
+            <label class="value">
+                <input type="text" name="picture" placeholder="Введите ссылку на картинку" value="<?=$picture;?>"/>
+            </label>
+        </div>
+        <div class="row">
+            <div class="name">Категория <span class="red">*</span></div>
+            <label class="value">
+                <?=$allCategory;?>
+            </label>
+        </div>
+        <div class="row">
+            <div class="name">Title</div>
+            <label class="value">
+                <input type="text" name="title" placeholder="Введите title" value="<?=$title;?>"/>
+            </label>
+        </div>
+        <div class="row">
+            <div class="name">Description</div>
+            <label class="value">
+                <input type="text" name="description" placeholder="Введите description" value="<?=$description;?>"/>
+            </label>
+        </div>
+        <div class="row">
+            <div class="name">Анонс</div>
+            <label class="value">
+                <input type="text" name="anons" placeholder="Введите анонс" value="<?=$anons?>"/>
+            </label>
+        </div>
+        <div class="row">
+            <div class="editor">
+                <textarea name="text" id="editor"><?=$text;?></textarea>
+            </div>
+            <script>
+                CKEDITOR.replace( 'editor' );
+            </script>
+        </div>
+        <div class="row">
+            <label class="value right">
+                <input type="submit" value="Отправить" class="" name="submit" />
+            </label>
+        </div>
+    </form>
+</div>
+<?=$save;?>

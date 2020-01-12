@@ -13,7 +13,7 @@ if($actionType == 'edit'){
         mysqli_data_seek($query, 0);
         while($row = mysqli_fetch_assoc($query)){
             $name = $row['name'];
-            $links = getSelect($connect, $row['link_id']);
+            $links = getSelect($connect, $row['link_id'], 'links');
             $title = $row['title'];
             $description = $row['description'];
             $text = $row['text'];
@@ -24,7 +24,7 @@ if($actionType == 'edit'){
 
     if(isset($_POST['submit']) && $_POST['submit'] != ''){
         $name = $_POST['name'];
-        $link_id = $_POST['link'];
+        $link_id = $_POST['select'];
         $title = $_POST['title'];
         $description = $_POST['description'];
         $text = $_POST['text'];
@@ -36,7 +36,7 @@ if($actionType == 'edit'){
                                                         `text` = '$text',
                                                         `date` = '$date'
                                                         WHERE `content`.`id` = ".$id."") and ($query)){
-            $link = getLink($connect, $link_id);
+            $link = getLink($connect, $link_id, 'links');
             $info = '<div class="green info">Запись <strong>'.$name.'</strong> успешно отредактирована! <a href="/'.$link.'/" target="_blank">Посмотреть</a></div>';
         }else{
             $info = '<div class="red info">Запись не была обновлена! Проверьте корректность подключения к БД.</div>';
@@ -48,7 +48,7 @@ if($query = mysqli_query($connect, "SELECT * FROM content") and mysqli_fetch_ass
     mysqli_data_seek($query, 0);
     while($row = mysqli_fetch_assoc($query)){
         if($row['name'] != ''){
-            $link = getLink($connect, $row['link_id']);
+            $link = getLink($connect, $row['link_id'], 'links');
             $out .= '<tr>';
             $out .= '
                 <td><a name="'.$row['link'].'"></a>'.$row['id'].'</td>

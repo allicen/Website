@@ -77,7 +77,7 @@ if($actionType == 'edit'){
 if($query = mysqli_query($connect, "SELECT * FROM portfolio") and mysqli_fetch_assoc($query) !=''){
     mysqli_data_seek($query, 0);
     while($row = mysqli_fetch_assoc($query)){
-        $status = $row['status'] == '1' ? 'Опубликовано' : 'Черновик';
+        $status = getStatus($row['status']);
         $github = $row['github'] != '' ? '<a href="'.$row['github'].'" target="_blank">Репозиторий</a>' : '';
         $go = $row['status'] == '1' ? '<a href="/portfolio/'.$row['link'].'/" target="_blank" class="img"><img src="/img/go.png" alt="Открыть в новой вкладке" title="Открыть в новой вкладке" class="icon"></a>' : '';
         $technologies = explode(',', $row['technologies']);
