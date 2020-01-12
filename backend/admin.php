@@ -50,8 +50,9 @@ switch ($url[2]){
             require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/portfolio.php");
         }
         break;
-    case ('files'):
-        $page .= '<strong>Файлы</strong>';
+    case ('user-files'):
+        $page .= '<strong>Загрузка изображений</strong>';
+        require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/file.php");
         break;
 }
 

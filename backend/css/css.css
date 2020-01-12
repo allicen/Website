@@ -25,6 +25,10 @@ ul{
     margin-left: 30px;
 }
 
+p{
+    margin-bottom: 20px;
+}
+
 
 a:hover{
     border-bottom: 1px solid #fff;
@@ -288,6 +292,10 @@ img.icon{
     margin-top: 10px;
 }
 
+.content .tab-content .thumb{
+    max-width: 150px;
+}
+
 .nowrap{
     display: flex;
 }
@@ -322,4 +330,16 @@ img.icon{
 
 .navigate .item a:hover{
     border: 1px solid #41046F;
+}
+
+.folders{
+    padding-left: 20px;
+}
+
+.folders .folder img{
+    margin-right: 10px;
+}
+
+.folders .folder {
+    display: flex;
 }

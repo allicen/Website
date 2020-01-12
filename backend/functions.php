@@ -119,3 +119,88 @@ function getSelectId($connect, $table, $link){
     }
     return $linkId;
 }
+
+
+function getLinkPath($url, $path){
+    $link = '';
+    for($j = 0; $j < count($url); $j++){
+        if($url[$j] == $path){
+            $link .= $url[$j];
+            $link .= '/';
+            break;
+        }else{
+            $link .= $url[$j];
+            if($url[$j] != '') $link .= '/';
+        }
+    }
+    return $link;
+}
+
+
+function getPath($url, $path){
+    $start = false;
+    $fullPath = '';
+    $fullPathWithTags = '';
+    for($i = 0; $i < count($url); $i++){
+        if($url[$i] != 'error' &&
+            $url[$i] != 'type-error' &&
+            $url[$i] != 'size-error' &&
+            $url[$i] != 'delete' &&
+            !stripos($url[$i], '.png') &&
+            !stripos($url[$i], '.jpg') &&
+            !stripos($url[$i], '.jpeg') &&
+            !stripos($url[$i], '.gif')
+        ){
+            if($url[$i] == $path){
+                $start = true;
+            }
+            if($start) {
+                $fullPath .= $url[$i];
+                $fullPathWithTags .= '<a href="/'.getLinkPath($url, $url[$i]).'">'.$url[$i].'</a>';
+                if($url[$i] != '') {
+                    $fullPath .= '/';
+                    $fullPathWithTags .= '/';
+                }
+            }
+        }
+    }
+    return array($fullPath, $fullPathWithTags);
+}
+
+
+function resize($file, $quality, $max_size, $dir){
+    global $src;
+
+    if ($file['type'] == 'image/jpeg')
+        $source = imagecreatefromjpeg($file['tmp_name']);
+    elseif ($file['type'] == 'image/png')
+        $source = imagecreatefrompng($file['tmp_name']);
+    elseif ($file['type'] == 'image/gif')
+        $source = imagecreatefromgif($file['tmp_name']);
+    else
+        return false;
+    $src = $source;
+
+    // Определяем ширину и высоту изображения
+    $w_src = imagesx($src);
+    $h_src = imagesy($src);
+
+    if($w_src > $max_size){
+        $ratio = $w_src / $max_size;
+        $w_dest = round($w_src/$ratio);
+        $h_dest = round($h_src/$ratio);
+        $dest = imagecreatetruecolor($w_dest, $h_dest);
+        imagealphablending($dest, true);
+        imagecopyresampled($dest, $src, 0, 0, 0, 0, $w_dest, $h_dest, $w_src, $h_src);
+        imagejpeg($dest, $dir.$file['name'], $quality);
+        return $file['name'];
+    }else{
+        imagejpeg($src, $dir.$file['name'], $quality);
+        imagedestroy($src);
+        return $file['name'];
+    }
+}
+
+
+
+
