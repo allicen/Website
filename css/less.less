@@ -285,24 +285,19 @@ pre{
       border-bottom: none;
     }
 
-    .title {
-      background-image: linear-gradient(to bottom, #dbe0fd 33%, transparent 33%, transparent 66%, #dbe0fd 66%, #dbe0fd);
-      background-position: 0 1.4em;
-      background-size: 2px 6px;
-      font-size: 24px;
-      height: 31px;
-      margin-bottom: 25px;
-      margin-top: 40px;
-    }
 
     .header-block{
-      display: flex;
-      justify-content: center;
-      color: #2E3983;
-      font-weight: 600;
-      background-size: 2px 6px;
-      font-size: 24px;
-      margin-bottom: 20px;
+        display: flex;
+        /* justify-content: center; */
+        color: #41046F;
+        font-weight: 600;
+        background-size: 2px 6px;
+        font-size: 24px;
+        margin-bottom: 40px;
+        padding: 30px 30px;
+        background-color: #dbe0fd;
+        text-transform: uppercase;
+        margin-top: 50px;
     }
 
     .hello {
@@ -381,7 +376,7 @@ pre{
       order: 6;
 
       .submenu {
-        margin: 20px 0 0 0;
+        margin: -40px 0 0 0;
 
         .categoryList{
           display: flex;
@@ -502,15 +497,39 @@ pre{
         align-self: flex-start;
         flex-grow: 1;
 
+        .other-block{
+          margin-top: 30px;
+        }
+
         .item{
           display: block;
           background-color: @background-text;
 
-          a{
-            width: 100%;
+          .text{
             padding: 10px 20px;
-            display: inline-block;
+            display: flex;
+
+            img{
+              margin-right: 10px;
+              width: 20px;
+            }
+          }
+
+
+          a{
+            padding: 10px 20px;
+            display: flex;
             border-bottom: none;
+
+            img{
+              margin-right: 10px;
+              width: 20px;
+            }
+          }
+          ul{
+            a{
+              padding: 10px 15px;
+            }
           }
         }
 
@@ -536,13 +555,13 @@ pre{
 
 
   footer {
-    margin-top: 40px;
+    margin-top: 100px;
     flex-basis: @max-width;
     order: 3;
-    border-top: 1px solid @light-color;
-    color: @light-color;
+    border-top: 1px solid @dark-color;
+    color: @dark-color;
     text-align: center;
-    padding: 10px 10px 30px 10px;
+    padding: 30px 10px 60px 10px;
   }
 
 

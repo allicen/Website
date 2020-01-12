@@ -10,11 +10,7 @@
     $postCount = 0;
     $emptyCategory = 'В этой категории нет записей.';
     $relevantPostsBlock = '';
-    $shareBlock = '<div class="share-social"><div class="header">Поделиться: </div><div class="icons">
-            <script src="https://yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
-            <script src="https://yastatic.net/share2/share.js"></script>
-            <div class="ya-share2" pages-services="vkontakte,facebook,odnoklassniki,moimir,twitter,blogger,linkedin,lj,viber,whatsapp,skype,telegram"></div>
-            </div></div>';
+    $shareBlock = file_get_contents($_SERVER['DOCUMENT_ROOT']."/templates/share.html");
     $categoryDescription = '';
 
     $categoryUrl = $url[2];
