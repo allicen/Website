@@ -5,8 +5,7 @@ $path = 'user-files';
 $dir = $_SERVER['DOCUMENT_ROOT'].getPath($url, $path)[0];
 $types = array('image/gif', 'image/png', 'image/jpeg');
 $maxSize = 1024000; // В байтах
-$max_thumb_size = 200; // В пикселах
-$max_size = 1000; // В пикселах
+$max_size = 2000; // В пикселах
 $quality = 75; // Качество
 $active = $url[count($url)-1];
 

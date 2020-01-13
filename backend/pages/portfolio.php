@@ -39,15 +39,14 @@ if($actionType == 'edit'){
             $name = $row['name'];
             $link = $row['link'];
             $picture = $row['picture'];
+            $anons = $row['anons'];
             $title = $row['title'];
             $description = $row['description'];
-            $anons = $row['anons'];
             $github = $row['github'];
             $technologies = $row['technologies'];
             $status = $row['status'];
             $end = $row['end'];
             $text = $row['about'];
-
             $technologiesCheck = (string) getTechnologies($connect, $technologiesCheck, $technologies);
         }
     }else{
@@ -81,7 +80,7 @@ if($query = mysqli_query($connect, "SELECT * FROM portfolio") and mysqli_fetch_a
     mysqli_data_seek($query, 0);
     while($row = mysqli_fetch_assoc($query)){
         $status = getStatus($row['status']);
-        $github = $row['github'] != '' ? '<a href="'.$row['github'].'" target="_blank">Репозиторий</a>' : '';
+        $githublink = $row['github'] != '' ? '<a href="'.$row['github'].'" target="_blank">Репозиторий</a>' : '';
         $go = $row['status'] == '1' ? '<a href="/portfolio/'.$row['link'].'/" target="_blank" class="img"><img src="/img/go.png" alt="Открыть в новой вкладке" title="Открыть в новой вкладке" class="icon"></a>' : '';
         $technologies = explode(',', $row['technologies']);
         $technologiesItems = '';
@@ -101,7 +100,7 @@ if($query = mysqli_query($connect, "SELECT * FROM portfolio") and mysqli_fetch_a
                 <td>'.$row['date'].'</td>
                 <td>'.$row['picture'].'</td>
                 <td>'.$row['title'].'</td>
-                <td>'.$github.'</td>
+                <td>'.$githublink.'</td>
                 <td>'.$technologiesItems.'</td>
                 <td>'.$status.'</td>
                 <td>
@@ -114,7 +113,6 @@ if($query = mysqli_query($connect, "SELECT * FROM portfolio") and mysqli_fetch_a
             ';
         $out .= '</tr>';
     }
-    $github = '';
 }
 
 if(empty($technologiesCheck)){
