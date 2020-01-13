@@ -1,4 +1,6 @@
 <?php
+require_once($_SERVER['DOCUMENT_ROOT']."/core/functions.php");
+$slider = getImgSlider();
     $out = '';
     if($query = mysqli_query($connect, "SELECT * FROM top_menu") and mysqli_fetch_assoc($query) !=''){
         mysqli_data_seek($query, 0);
