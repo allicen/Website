@@ -34,7 +34,8 @@ if($urlItem == null){
         mysqli_data_seek($query, 0);
         $previewPortfolio = '<div class="articles">';
         while($row = mysqli_fetch_assoc($query)){
-            $previewPortfolio .= '
+            if($row['status'] == '1'){
+                $previewPortfolio .= '
                 <article>
                     <div class="title">
                         <a href="/'.$prefix.$row['link'].'/">'.$row['name'].'</a>
@@ -49,38 +50,39 @@ if($urlItem == null){
                     <a href="/'.$prefix.$row['link'].'/">подробнее</a>
                 </article>
             ';
+            }
         }
         $previewPortfolio .= '</div>';
     }
 }else{
     if($query = mysqli_query($connect, "SELECT * FROM portfolio WHERE link = '$urlItem'") and $row = mysqli_fetch_assoc($query) and $row != '') {
+        if($row['status'] == '1'){
+            $pageName = $row['name'];
+            $date = $row['date'];
+            $title = $row['title'];
+            $description = $row['description'];
+            $out = '<div class="item"></div>';
 
-        $pageName = $row['name'];
-        $date = $row['date'];
-        $title = $row['title'];
-        $description = $row['description'];
-        $out = '<div class="item"></div>';
-
-        $out = '<div class="details">
+            $out = '<div class="details">
                         <div class="date">Дата: '.$date.'</div>
                         <div class="category">Технологии: '.getTech($connect, $row).'</div>
                     </div>'
-            .$row['about'];
-        $breadCrumb .= '<a href="/portfolio/">'.$portfolio.'</a> / '.$pageName;
+                .$row['about'];
+            $breadCrumb .= '<a href="/portfolio/">'.$portfolio.'</a> / '.$pageName;
 
-        $end = $row['end'] == '1' ? '<img src="/img/ok.png" alt="Завершен">Завершен' : '<img src="/img/process.png" alt="В разработке">В зазработке';
-        $github = $row['github'] != '' ? '<div class="item"><a href="'.$row['github'].'" target="_blank"><img src="/img/github.png" alt="Github">Ссылка на Github</a></div>' : '';
+            $end = $row['end'] == '1' ? '<img src="/img/ok.png" alt="Завершен">Завершен' : '<img src="/img/process.png" alt="В разработке">В зазработке';
+            $github = $row['github'] != '' ? '<div class="item"><a href="'.$row['github'].'" target="_blank"><img src="/img/github.png" alt="Github">Ссылка на Github</a></div>' : '';
 
-        $blogCategory = '<div class="categoryList">
+            $blogCategory = '<div class="categoryList">
                             <div class="header-blog">Детали проекта</div>';
-        $blogCategory .= '<div class="item"><div class="text">'.$end.'</div></div>';
-        $blogCategory .= '<div class="item"><div class="text"><img src="/img/calendar.png" alt="Дата"> Дата: '.$row['date'].'</div></div>';
-        $blogCategory .= $github;
-        $blogCategory .= '<div class="other-block"><div class="header-blog">Кратко о проекте</div>';
-        $blogCategory .= '<div class="item"><div class="text">'.$row['anons'].'</div></div></div>';
-        $blogCategory .= '<div class="other-block"><div class="item">'.$shareBlock.'</div></div>';
-        $blogCategory .= '</div>';
-
+            $blogCategory .= '<div class="item"><div class="text">'.$end.'</div></div>';
+            $blogCategory .= '<div class="item"><div class="text"><img src="/img/calendar.png" alt="Дата"> Дата: '.$row['date'].'</div></div>';
+            $blogCategory .= $github;
+            $blogCategory .= '<div class="other-block"><div class="header-blog">Кратко о проекте</div>';
+            $blogCategory .= '<div class="item"><div class="text">'.$row['anons'].'</div></div></div>';
+            $blogCategory .= '<div class="other-block"><div class="item">'.$shareBlock.'</div></div>';
+            $blogCategory .= '</div>';
+        }
     }
 }
 

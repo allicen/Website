@@ -10,32 +10,40 @@
     }
 
     if($module === 'blog'){
-        if($page !== '' && $post === ''){
-            $is404 = true;
-            if($query = mysqli_query($connect, "SELECT * FROM blog_category") and mysqli_fetch_assoc($query) !=''){
-                mysqli_data_seek($query, 0);
-                while($row = mysqli_fetch_assoc($query)){
-                    if($row['link'] == $page){
-                        $is404 = false;
-                    }
-                }
+        if($page !== ''){
+            if($query = mysqli_query($connect, "SELECT * FROM `blog_category` WHERE `link` = '$page'") and $row = mysqli_fetch_assoc($query) and $row != '') {
+                $is404 = false;
+            }else{
+                $is404 = true;
             }
         }
+
         if($page !== '' && $post !== ''){
-            $is404 = true;
-            if($query = mysqli_query($connect, "SELECT * FROM blog_posts") and mysqli_fetch_assoc($query) !=''){
-                mysqli_data_seek($query, 0);
-                while($row = mysqli_fetch_assoc($query)){
-                    if($row['link'] == $post){
-                        $is404 = false;
-                    }
-                }
+            if($query = mysqli_query($connect, "SELECT * FROM `blog_posts` WHERE `link` = '$post'") and $row = mysqli_fetch_assoc($query) and $row != '') {
+                $is404 = false;
+            }else{
+                $is404 = true;
             }
         }
+
         if($page !== '' && $post !== '' && $page404 !== ''){
             $is404 = true;
         }
     }
+
+    if($module === 'portfolio'){
+        if($page !== '' && $post !== ''){
+            $is404 = true;
+        }
+        if($page !== '' && $post === ''){
+            if($query = mysqli_query($connect, "SELECT * FROM `portfolio` WHERE `link` = '$page'") and $row = mysqli_fetch_assoc($query) and $row != '') {
+                $is404 = false;
+            }else{
+                $is404 = true;
+            }
+        }
+    }
+
     if($is404 === true){
         $module = '404';
     }
