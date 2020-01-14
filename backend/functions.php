@@ -78,7 +78,7 @@ function getLink($connect, $linkId, $table){
     return $link;
 }
 
-function getSelect($connect, $linkId, $table){
+function getSelectFromOtherTable($connect, $linkId, $table){ // Select из другой таблицы.
     $selectOut = '<select required name="select"><option value="">Выберите значение</option>';
     if($query = mysqli_query($connect, "SELECT * FROM $table") and mysqli_fetch_assoc($query) !=''){
         mysqli_data_seek($query, 0);
@@ -95,6 +95,21 @@ function getSelect($connect, $linkId, $table){
     $selectOut .= '</select>';
     return $selectOut;
 }
+
+function getSelect($id, $key, $value){
+    $selectOut = '';
+    for ($i = 0; $i < count($key); $i++){
+        $selected = '';
+        if($key[$i] == $id){
+            $selected = ' selected';
+        }
+        $selectOut .= '<option value="'.$key[$i].'" '.$selected.'>'.$value[$i].'</option>';
+    }
+    return $selectOut;
+}
+
+
+
 
 function getStatus($status){
     return $status = $status == '1' ? 'Опубликовано' : 'Черновик';
@@ -113,9 +128,9 @@ function getAllSelect($connect, $table){
     return $category;
 }
 
-function getSelectId($connect, $table, $link){
+function getSelectId($connect, $table, $id, $link){
     $linkId = '';
-    if($query = mysqli_query($connect, "SELECT * FROM $table WHERE `link` = '$link'") and $row = mysqli_fetch_assoc($query) and $row != '') {
+    if($query = mysqli_query($connect, "SELECT * FROM $table WHERE `$id` = '$link'") and $row = mysqli_fetch_assoc($query) and $row != '') {
         $linkId = $row['id'];
     }
     return $linkId;

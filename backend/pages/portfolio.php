@@ -15,6 +15,9 @@ $status = '';
 $end = '';
 $text = '';
 
+$endSelect = getSelect('', array('0', '1'), array('В разработке', 'Завершено'));
+$statusSelect = getSelect('', array('0', '1'), array('Черновик', 'Опубликовано'));
+
 if($url[3] == '' && $actionType != 'edit'){
     if(isset($_POST['submit']) && $_POST['submit'] != ''){
         list($name, $link, $picture, $title, $description, $anons, $github, $technologies, $status, $end, $text) = getDataFields();
@@ -44,8 +47,8 @@ if($actionType == 'edit'){
             $description = $row['description'];
             $github = $row['github'];
             $technologies = $row['technologies'];
-            $status = $row['status'];
-            $end = $row['end'];
+            $statusSelect = getSelect($row['status'], array('0', '1'), array('Черновик', 'Опубликовано'));
+            $endSelect = getSelect($row['end'], array('0', '1'), array('В разработке', 'Завершено'));
             $text = $row['about'];
             $technologiesCheck = (string) getTechnologies($connect, $technologiesCheck, $technologies);
         }
@@ -80,6 +83,7 @@ if($query = mysqli_query($connect, "SELECT * FROM portfolio") and mysqli_fetch_a
     mysqli_data_seek($query, 0);
     while($row = mysqli_fetch_assoc($query)){
         $status = getStatus($row['status']);
+        $end = $row['end'] == '1' ? 'Завершен' : 'В разработке';
         $githublink = $row['github'] != '' ? '<a href="'.$row['github'].'" target="_blank">Репозиторий</a>' : '';
         $go = $row['status'] == '1' ? '<a href="/portfolio/'.$row['link'].'/" target="_blank" class="img"><img src="/img/go.png" alt="Открыть в новой вкладке" title="Открыть в новой вкладке" class="icon"></a>' : '';
         $technologies = explode(',', $row['technologies']);
@@ -102,6 +106,7 @@ if($query = mysqli_query($connect, "SELECT * FROM portfolio") and mysqli_fetch_a
                 <td>'.$row['title'].'</td>
                 <td>'.$githublink.'</td>
                 <td>'.$technologiesItems.'</td>
+                <td>'.$end.'</td>
                 <td>'.$status.'</td>
                 <td>
                     <div class="nowrap">

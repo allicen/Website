@@ -6,7 +6,7 @@ $dir = $_SERVER['DOCUMENT_ROOT'].getPath($url, $path)[0];
 $types = array('image/gif', 'image/png', 'image/jpeg');
 $maxSize = 1024000; // В байтах
 $max_size = 2000; // В пикселах
-$quality = 75; // Качество
+$quality = 100; // Качество
 $active = $url[count($url)-1];
 
 

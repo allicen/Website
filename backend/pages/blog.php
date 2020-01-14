@@ -11,13 +11,14 @@ $title = '';
 $description = '';
 $link = '';
 $status = '';
+$statusSelect = getSelect('', array('0', '1'), array('Черновик', 'Опубликовано'));
 
 if($url[3] == '' && $actionType != 'edit'){
     if(isset($_POST['submit']) && $_POST['submit'] != ''){
         $name = $_POST['name'];
         $text = $_POST['text'];
         $anons = $_POST['anons'];
-        $categoryId = getSelectId($connect, 'blog_category', $_POST['id']);
+        $categoryId = getSelectId($connect, 'blog_category', 'link', $_POST['id']);
         $picture = $_POST['picture'];
         $title = $_POST['title'];
         $description = $_POST['description'];
@@ -48,8 +49,8 @@ if($actionType == 'edit'){
         $title = $row['title'];
         $description = $row['description'];
         $link = $row['link'];
-        $status = getStatus($row['status']);
-        $allCategory = getSelect($connect, $row['category_id'], 'blog_category');
+        $statusSelect = getSelect($row['status'], array('0', '1'), array('Черновик', 'Опубликовано'));
+        $allCategory = getSelectFromOtherTable($connect, $row['category_id'], 'blog_category');
     }else{
         $info = '<div class="red info">Проверьте корректность подключения к БД.</div>';
     }

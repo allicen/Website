@@ -13,7 +13,7 @@ if($actionType == 'edit'){
         mysqli_data_seek($query, 0);
         while($row = mysqli_fetch_assoc($query)){
             $name = $row['name'];
-            $links = getSelect($connect, $row['link_id'], 'links');
+            $links = getSelectFromOtherTable($connect, $row['link_id'], 'links');
             $title = $row['title'];
             $description = $row['description'];
             $text = $row['text'];

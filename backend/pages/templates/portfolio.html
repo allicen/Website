@@ -10,7 +10,8 @@
             <th>Title</th>
             <th>Ссылка на GitHub</th>
             <th>Технологии</th>
-            <th>Статус</th>
+            <th>Завершено</th>
+            <th>Публикация</th>
             <th>Действия</th>
         </tr>
         <?=$out;?>
@@ -75,17 +76,17 @@
             <div class="name">Статус <span class="red">*</span></div>
             <label class="value">
                 <select required name="status">
-                    <option value="1">Опубликовано</option>
-                    <option value="0">Черновик</option>
+                    <option value="">Выберите вариант</option>
+                    <?=$statusSelect;?>
                 </select>
             </label>
         </div>
         <div class="row">
             <div class="name">Завершен </div>
             <label class="value">
-                <select required name="status">
-                    <option value="1">Завершен</option>
-                    <option value="0">В разработке</option>
+                <select required name="end">
+                    <option value="">Выберите вариант</option>
+                    <?=$endSelect;?>
                 </select>
             </label>
         </div>
