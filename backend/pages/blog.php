@@ -67,7 +67,7 @@ if($actionType == 'edit'){
         $status = $_POST['status'];
 
         if($query = mysqli_query($connect, "UPDATE `blog_posts` SET 
-                                                        `h1` = '$text', 
+                                                        `h1` = '$name', 
                                                         `text` = '$link', 
                                                         `anons` = '$anons',
                                                         `category_id` = '$category', 
@@ -78,7 +78,7 @@ if($actionType == 'edit'){
                                                         `link` = '$link', 
                                                         `status` = '$status'
                                                         WHERE `blog_posts`.`id` = $id") and ($query)){
-            $info = '<div class="green info">Запись <strong>'.$name.'</strong> успешно отредактирована! <a href="#'.$link.'">Посмотреть</a> или <a href="/admin/portfolio/#edit"> добавить еще одну</a></div>';
+            $info = '<div class="green info">Запись <strong>'.$name.'</strong> успешно отредактирована! <a href="#'.$id.'">Посмотреть</a> или <a href="/admin/portfolio/#edit"> добавить еще одну</a></div>';
         }else{
             $info = '<div class="red info">Запись не была обновлена! Проверьте корректность подключения к БД.</div>';
         }
@@ -89,12 +89,13 @@ if($query = mysqli_query($connect, "SELECT * FROM blog_posts") and mysqli_fetch_
     mysqli_data_seek($query, 0);
     while($row = mysqli_fetch_assoc($query)){
         $status = getStatus($row['status']);
-        $go = $row['status'] == '1' ? '<a href="/portfolio/'.$row['link'].'/" target="_blank" class="img"><img src="/img/go.png" alt="Открыть в новой вкладке" title="Открыть в новой вкладке" class="icon"></a>' : '';
-
         $category = getLink($connect, $row['category_id'], 'blog_category');
+        $go = $row['status'] == '1' ? goIcon('/blog/'.$category.'/'.$row['link']) : '';
         if($actionType != 'edit'){
             $allCategory = getAllSelect($connect, 'blog_category');
         }
+
+        $pictureIcon = $row['picture'] != '' ? '<img src="'.$row['picture'].'" class="thumb" alt="icon"/>' : '-';
 
         $out .= '<tr>';
         $out .= '
@@ -102,14 +103,14 @@ if($query = mysqli_query($connect, "SELECT * FROM blog_posts") and mysqli_fetch_
                 <td>'.$row['h1'].'</td>
                 <td>'.$row['link'].'</td>
                 <td>'.$status.'</td>
-                <td>'.$row['picture'].'</td>
+                <td>'.$pictureIcon.'</td>
                 <td>'.$category.'</td>
                 <td>'.$row['title'].'</td>
                 <td>'.$date.'</td>
                 <td>
                     <div class="nowrap">
-                        <a href="?id='.$row['id'].'&action=edit" class="img"><img src="/img/edit.png" alt="Редактировать" title="Редактировать" class="icon"></a>
-                        <a href="?id='.$row['id'].'&action=delete" class="img"><img src="/img/delete.png" alt="Удалить" onclick="return deleteCheck();" title="Удалить" class="icon"></a>
+                        '.editIcon($row['id']).'
+                        '.deleteIcon($row['id']).'
                         '.$go.'
                     </div>
                 </td>

@@ -218,6 +218,16 @@ function resize($file, $quality, $max_size, $dir){
     }
 }
 
+function deleteIcon($id){
+    return '<a href="?id='.$id.'&action=delete" class="img"><img src="/img/delete.png" alt="Удалить" onclick="return deleteCheck();" title="Удалить" class="icon"></a>';
+}
 
+function editIcon($id){
+    return '<a href="?id='.$id.'&action=edit" class="img"><img src="/img/edit.png" alt="Редактировать" title="Редактировать" class="icon"></a>';
+}
+
+function goIcon($link){
+    return '<a href="'.$link.'/" target="_blank" class="img"><img src="/img/go.png" alt="Открыть в новой вкладке" title="Открыть в новой вкладке" class="icon"></a>';
+}
 
 

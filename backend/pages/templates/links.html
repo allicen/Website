@@ -1,6 +1,3 @@
-<p><?=$page;?></p>
-<?=$info;?>
-<h3>Все записи:</h3>
 <div class="edit-frame">
     <div class="data">
         <table>
@@ -9,8 +6,7 @@
                 <th>ID</th>
                 <th>Название</th>
                 <th>Ссылка</th>
-                <th>Заголовок</th>
-                <th>Текст</th>
+                <th>Модуль</th>
                 <th>Действия</th>
             </tr>
             <?=$out;?>
@@ -25,28 +21,14 @@
             <div class="row">
                 <div class="name">Название <span class="red">*</span></div>
                 <label class="value">
-                    <input type="text" name="name" placeholder="Название" required value="<?=$name;?>"/>
+                    <input type="text" name="name" placeholder="Введите название категории" required value="<?=$name;?>"/>
                 </label>
             </div>
             <div class="row">
                 <div class="name">Ссылка <span class="red">*</span></div>
                 <label class="value">
-                    <input type="text" name="link" placeholder="Ссылка" required value="<?=$link;?>"/>
+                    <input type="text" name="link" placeholder="Введите ссылку на категорию" required value="<?=$link;?>"/>
                 </label>
-            </div>
-            <div class="row">
-                <div class="name">Заголовок <span class="red">*</span></div>
-                <label class="value">
-                    <input type="text" name="title" placeholder="Заголовок" required value="<?=$title;?>"/>
-                </label>
-            </div>
-            <div class="row">
-                <div class="editor">
-                    <textarea name="text" id="editor"><?=$text;?></textarea>
-                </div>
-                <script>
-                    CKEDITOR.replace( 'editor' );
-                </script>
             </div>
             <div class="row">
                 <label class="value right">

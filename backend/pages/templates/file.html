@@ -4,31 +4,35 @@
 <p>Директория: <strong><?=getPath($url, $path)[1];?></strong></p>
 <div class="folders"><?=$navigate;?></div>
 <?=$catalog;?>
-<div class="form-editor">
-    <form method="post" enctype="multipart/form-data">
-        <div class="row">
-            <input type="file" name="picture" required>
-        </div>
-        <div class="row">
-            <div class="name">Ширина файла не более: </div>
-            <label class="value">
-                <input type="text" name="size" placeholder="Введите ширину файла в px" value="700"/>
-            </label>
-        </div>
-        <input type="submit" name="submit" value="Загрузить">
-    </form>
-</div>
 <h3>Все изображения:</h3>
-<table>
-    <tbody>
-    <tr>
-        <th>№</th>
-        <th>Иконка</th>
-        <th>Ссылка на файл</th>
-        <th>Размер файла</th>
-        <th>Удалить</th>
-    </tr>
-    <?=$out;?>
-    </tbody>
-</table>
+<div class="edit-frame">
+    <div class="data">
+        <table>
+            <tbody>
+            <tr>
+                <th>№</th>
+                <th>Иконка</th>
+                <th>Ссылка на файл</th>
+                <th>Размер файла</th>
+                <th>Удалить</th>
+            </tr>
+            <?=$out;?>
+            </tbody>
+        </table>
+    </div>
+    <div class="form-editor">
+        <form method="post" enctype="multipart/form-data">
+            <div class="row">
+                <input type="file" name="picture" required>
+            </div>
+            <div class="row">
+                <div class="name">Ширина файла не более: </div>
+                <label class="value">
+                    <input type="text" name="size" placeholder="Введите ширину файла в px" value="700"/>
+                </label>
+            </div>
+            <input type="submit" name="submit" value="Загрузить">
+        </form>
+    </div>
+</div>
 <?=$save;?>

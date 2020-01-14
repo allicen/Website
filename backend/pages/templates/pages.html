@@ -1,61 +1,62 @@
-<p><?=$page;?></p>
-<?=$info;?>
-<h3>Все записи:</h3>
-<table>
-    <tbody>
-    <tr>
-        <th>ID</th>
-        <th>Название</th>
-        <th>Ссылка</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Действия</th>
-    </tr>
-    <?=$out;?>
-    </tbody>
-</table>
-<a name="edit"></a>
-<div class="form-editor">
-    <h3><?=$action;?></h3>
-    <p><span class="red">*</span> - обязательные для заполнения поля</p>
-    <form method="post" name="edit" enctype="multipart/form-data">
-        <div class="row">
-            <div class="name">Название <span class="red">*</span></div>
-            <label class="value">
-                <input type="text" name="name" placeholder="Название страницы" required value="<?=$name;?>"/>
-            </label>
-        </div>
-        <div class="row">
-            <div class="name">Ссылка <span class="red">*</span></div>
-            <label class="value">
-                <?=$links;?>
-            </label>
-        </div>
-        <div class="row">
-            <div class="name">Title <span class="red">*</span></div>
-            <label class="value">
-                <input type="text" name="title" placeholder="Title" required value="<?=$title;?>"/>
-            </label>
-        </div>
-        <div class="row">
-            <div class="name">Description</div>
-            <label class="value">
-                <input type="text" name="description" placeholder="Description" value="<?=$description;?>"/>
-            </label>
-        </div>
-        <div class="row">
-            <div class="editor">
-                <textarea name="text" id="editor"><?=$text;?></textarea>
+<div class="edit-frame">
+    <div class="data">
+        <table>
+            <tbody>
+            <tr>
+                <th>ID</th>
+                <th>Название</th>
+                <th>Ссылка</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Действия</th>
+            </tr>
+            <?=$out;?>
+            </tbody>
+        </table>
+    </div>
+    <div class="form-editor">
+        <a name="edit"></a>
+        <h3><?=$action;?></h3>
+        <p><span class="red">*</span> - обязательные для заполнения поля</p>
+        <form method="post" name="edit" enctype="multipart/form-data">
+            <div class="row">
+                <div class="name">Название <span class="red">*</span></div>
+                <label class="value">
+                    <input type="text" name="name" placeholder="Название страницы" required value="<?=$name;?>"/>
+                </label>
             </div>
-            <script>
-                CKEDITOR.replace( 'editor' );
-            </script>
-        </div>
-        <div class="row">
-            <label class="value right">
-                <input type="submit" value="Отправить" class="" name="submit" />
-            </label>
-        </div>
-    </form>
+            <div class="row">
+                <div class="name">Ссылка <span class="red">*</span></div>
+                <label class="value">
+                    <?=$links;?>
+                </label>
+            </div>
+            <div class="row">
+                <div class="name">Title <span class="red">*</span></div>
+                <label class="value">
+                    <input type="text" name="title" placeholder="Title" required value="<?=$title;?>"/>
+                </label>
+            </div>
+            <div class="row">
+                <div class="name">Description</div>
+                <label class="value">
+                    <input type="text" name="description" placeholder="Description" value="<?=$description;?>"/>
+                </label>
+            </div>
+            <div class="row">
+                <div class="editor">
+                    <textarea name="text" id="editor"><?=$text;?></textarea>
+                </div>
+                <script>
+                    CKEDITOR.replace( 'editor' );
+                </script>
+            </div>
+            <div class="row">
+                <label class="value right">
+                    <input type="submit" value="Отправить" class="" name="submit" />
+                </label>
+            </div>
+        </form>
+    </div>
 </div>
 <?=$save;?>

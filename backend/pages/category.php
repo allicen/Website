@@ -69,9 +69,9 @@ if($query = mysqli_query($connect, "SELECT * FROM blog_category") and mysqli_fet
                 <td>'.$row['title'].'</td>
                 <td>
                     <div class="nowrap">
-                        <a href="?id='.$row['id'].'&action=edit" class="img"><img src="/img/edit.png" alt="Редактировать" title="Редактировать" class="icon"></a>
-                        <a href="?id='.$row['id'].'&action=delete" class="img"><img src="/img/delete.png" alt="Удалить" onclick="return deleteCheck();" title="Удалить" class="icon"></a>
-                        <a href="/portfolio/'.$row['link'].'/" target="_blank" class="img"><img src="/img/go.png" alt="Открыть в новой вкладке" title="Открыть в новой вкладке" class="icon"></a>
+                        '.editIcon($row['id']).'
+                        '.deleteIcon($row['id']).'
+                        '.goIcon('/blog/'.$row['link'].'/').'
                     </div>
                 </td>
             ';

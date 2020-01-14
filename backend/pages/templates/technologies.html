@@ -1,29 +1,33 @@
-<table>
-    <tbody>
-    <tr>
-        <th>ID</th>
-        <th>Название</th>
-        <th>Действия</th>
-    </tr>
-    <?=$out;?>
-    </tbody>
-</table>
-<a name="edit"></a>
-<div class="form-editor">
-    <h3><?=$action;?></h3>
-    <p><span class="red">*</span> - обязательные для заполнения поля</p>
-    <form method="post" name="edit" enctype="multipart/form-data">
-        <div class="row">
-            <div class="name">Технология <span class="red">*</span></div>
-            <label class="value">
-                <input type="text" name="name" placeholder="Введите технологию" required value="<?=$name;?>"/>
-            </label>
-        </div>
-        <div class="row">
-            <label class="value right">
-                <input type="submit" value="Отправить" class="" name="submit" />
-            </label>
-        </div>
-    </form>
+<div class="edit-frame">
+    <div class="data">
+        <table>
+            <tbody>
+            <tr>
+                <th>ID</th>
+                <th>Название</th>
+                <th>Действия</th>
+            </tr>
+            <?=$out;?>
+            </tbody>
+        </table>
+    </div>
+    <div class="form-editor">
+        <a name="edit"></a>
+        <h3><?=$action;?></h3>
+        <p><span class="red">*</span> - обязательные для заполнения поля</p>
+        <form method="post" name="edit" enctype="multipart/form-data">
+            <div class="row">
+                <div class="name">Технология <span class="red">*</span></div>
+                <label class="value">
+                    <input type="text" name="name" placeholder="Введите технологию" required value="<?=$name;?>"/>
+                </label>
+            </div>
+            <div class="row">
+                <label class="value right">
+                    <input type="submit" value="Отправить" class="" name="submit" />
+                </label>
+            </div>
+        </form>
+    </div>
 </div>
 <?=$save;?>

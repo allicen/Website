@@ -85,7 +85,7 @@ if($query = mysqli_query($connect, "SELECT * FROM portfolio") and mysqli_fetch_a
         $status = getStatus($row['status']);
         $end = $row['end'] == '1' ? 'Завершен' : 'В разработке';
         $githublink = $row['github'] != '' ? '<a href="'.$row['github'].'" target="_blank">Репозиторий</a>' : '';
-        $go = $row['status'] == '1' ? '<a href="/portfolio/'.$row['link'].'/" target="_blank" class="img"><img src="/img/go.png" alt="Открыть в новой вкладке" title="Открыть в новой вкладке" class="icon"></a>' : '';
+        $go = $row['status'] == '1' ? goIcon('/portfolio/'.$row['link'].'/') : '';
         $technologies = explode(',', $row['technologies']);
         $technologiesItems = '';
 
@@ -96,13 +96,15 @@ if($query = mysqli_query($connect, "SELECT * FROM portfolio") and mysqli_fetch_a
             }
         }
 
+        $pictureIcon = $row['picture'] != '' ? '<img src="'.$row['picture'].'" class="thumb" alt="icon"/>' : '';
+
         $out .= '<tr>';
         $out .= '
                 <td><a name="'.$row['link'].'"></a>'.$row['id'].'</td>
                 <td>'.$row['name'].'</td>
                 <td>'.$row['link'].'</td>
                 <td>'.$row['date'].'</td>
-                <td>'.$row['picture'].'</td>
+                <td>'.$pictureIcon.'</td>
                 <td>'.$row['title'].'</td>
                 <td>'.$githublink.'</td>
                 <td>'.$technologiesItems.'</td>
@@ -110,8 +112,8 @@ if($query = mysqli_query($connect, "SELECT * FROM portfolio") and mysqli_fetch_a
                 <td>'.$status.'</td>
                 <td>
                     <div class="nowrap">
-                        <a href="?id='.$row['id'].'&action=edit" class="img"><img src="/img/edit.png" alt="Редактировать" title="Редактировать" class="icon"></a>
-                        <a href="?id='.$row['id'].'&action=delete" class="img"><img src="/img/delete.png" alt="Удалить" onclick="return deleteCheck();" title="Удалить" class="icon"></a>
+                        '.editIcon($row['id']).'
+                        '.deleteIcon($row['id']).'
                         '.$go.'
                     </div>
                 </td>

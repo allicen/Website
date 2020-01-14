@@ -1,42 +1,46 @@
 <p><?=$page;?></p>
 <?=$info;?>
 <h3>Все записи:</h3>
-<table>
-    <tbody>
-    <tr>
-        <th>ID</th>
-        <th>Ключ</th>
-        <th>Значение</th>
-        <th>Действия</th>
-    </tr>
-    <?=$out;?>
-    </tbody>
-</table>
-<a name="edit"></a>
-<div class="form-editor">
-    <h3><?=$action;?></h3>
-    <p><span class="red">*</span> - обязательные для заполнения поля</p>
-    <form method="post" name="edit" enctype="multipart/form-data">
-        <div class="row">
-            <div class="name">Ключ</div>
-            <div class="value" name="name"><?=$name;?></div>
-        </div>
-        <div class="row">
-            <div class="name">Значение <span class="red">*</span></div>
-        </div>
-        <div class="row">
-            <div class="editor">
-                <textarea name="value" id="editor"><?=$value;?></textarea>
+<div class="edit-frame">
+    <div class="data">
+        <table>
+            <tbody>
+            <tr>
+                <th>ID</th>
+                <th>Ключ</th>
+                <th>Значение</th>
+                <th>Действия</th>
+            </tr>
+            <?=$out;?>
+            </tbody>
+        </table>
+    </div>
+    <div class="form-editor">
+        <a name="edit"></a>
+        <h3><?=$action;?></h3>
+        <p><span class="red">*</span> - обязательные для заполнения поля</p>
+        <form method="post" name="edit" enctype="multipart/form-data">
+            <div class="row">
+                <div class="name">Ключ</div>
+                <div class="value" name="name"><?=$name;?></div>
             </div>
-            <script>
-                CKEDITOR.replace( 'editor' );
-            </script>
-        </div>
-        <div class="row">
-            <label class="value right">
-                <input type="submit" value="Отправить" class="" name="submit" />
-            </label>
-        </div>
-    </form>
+            <div class="row">
+                <div class="name">Значение <span class="red">*</span></div>
+            </div>
+            <div class="row">
+                <div class="editor">
+                    <textarea name="value" id="editor"><?=$value;?></textarea>
+                </div>
+                <script>
+                    CKEDITOR.replace( 'editor' );
+                </script>
+            </div>
+            <div class="row">
+                <label class="value right">
+                    <input type="submit" value="Отправить" class="" name="submit" />
+                </label>
+            </div>
+        </form>
+    </div>
 </div>
 <?=$save;?>

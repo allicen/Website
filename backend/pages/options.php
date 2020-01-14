@@ -34,7 +34,7 @@ if($query = mysqli_query($connect, "SELECT * FROM options") and mysqli_fetch_ass
                 <td><a name="'.$row['name'].'"></a>'.$row['id'].'</td>
                 <td>'.$row['name'].'</td>
                 <td>'.$row['value'].'</td>
-                <td><a href="?id='.$row['id'].'&action=edit" class="img"><img src="/img/edit.png" alt="Редактировать" title="Редактировать" class="icon"></a></td>
+                <td>'.editIcon($row['id']).'</td>
             ';
         $out .= '</tr>';
     }

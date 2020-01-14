@@ -28,7 +28,11 @@ switch ($url[2]){
         break;
     case ('pages'):
         $page .= '<strong>Страницы</strong>';
-        require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/pages.php");
+        if($url[3] == 'links'){
+            require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/links.php");
+        }else{
+            require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/pages.php");
+        }
         break;
     case ('main'):
         $page .= '<strong>Главная</strong>';

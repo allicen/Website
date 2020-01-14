@@ -48,7 +48,6 @@ if($actionType == 'edit'){
     }
 }
 
-
 if($actionType == 'delete'){
     $info = delete($connect, $id, 'top_menu', '/admin/main/');
 }
@@ -65,8 +64,8 @@ if($query = mysqli_query($connect, "SELECT * FROM top_menu") and mysqli_fetch_as
             <td>'.$row['text'].'</td>
             <td>
                 <div class="nowrap">
-                    <a href="?id='.$row['id'].'&action=edit" class="img"><img src="/img/edit.png" alt="Редактировать" title="Редактировать" class="icon"></a>
-                    <a href="?id='.$row['id'].'&action=delete" class="img"><img src="/img/delete.png" alt="Удалить" onclick="return deleteCheck();" title="Удалить" class="icon"></a>
+                    '.editIcon($row['id']).'
+                    '.deleteIcon($row['id']).'
                 </div>
             </td>';
         $out .= '</tr>';

@@ -177,6 +177,12 @@ input[type=text], input[type=password]{
 
 .content .data{
     overflow: auto;
+    margin-right: 30px;
+}
+
+.content .tabs-content .edit-frame{
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .content table td, .content table th{
@@ -198,6 +204,7 @@ img.icon{
 }
 
 .content .form-editor{
+    height: 100%;
     padding: 20px 30px;
     background-color: #fdfdf8;
     margin-top: 20px;
@@ -224,7 +231,6 @@ img.icon{
     padding: 10px 20px;
     outline: none;
     border: 1px solid #cecece;
-    width: 100%;
 }
 
 .content .form-editor input[type=text]:focus{
@@ -253,7 +259,7 @@ img.icon{
 
 .content .form-editor .row .value{
     display: flex;
-    flex-grow: 20;
+    flex-grow: 8;
     flex-wrap: wrap;
 }
 
@@ -347,3 +353,4 @@ img.icon{
 .folder input[type=text]{
     margin: 0 10px;
 }
+
