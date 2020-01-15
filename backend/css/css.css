@@ -34,6 +34,15 @@ a:hover{
     border-bottom: 1px solid #fff;
 }
 
+a.false{
+    text-decoration: none;
+    border-bottom: 1px dashed #A668D5;
+}
+
+a.false:hover{
+    border-bottom: 1px dashed #fff;
+}
+
 .center{
     display: flex;
     flex-direction: row;
@@ -353,4 +362,6 @@ img.icon{
 .folder input[type=text]{
     margin: 0 10px;
 }
+
+
 

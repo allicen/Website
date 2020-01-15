@@ -15,6 +15,8 @@ function tabColor() {
     }
 }
 
+
+
 function changeSubMenu() {
     let tabs = document.querySelectorAll('.navigate div');
     for(let elem = 0; elem < tabs.length; elem++){
@@ -25,6 +27,24 @@ function changeSubMenu() {
             tabs[elem].classList.remove('active');
         }
     }
+}
+
+function setStatus(event, id, table) { // Смена статуса без перезагрузки
+    if (event.target.tagName === 'A'){
+        event.target.classList.add('check-'+id);
+    }
+
+    event.preventDefault();
+    let request = new XMLHttpRequest();
+
+    request.onreadystatechange = function(){
+       if(this.readyState === 4 && this.status === 200){
+            document.querySelector('.check-'+id).innerText = this.responseText;
+       }
+    };
+
+    request.open('GET', '/backend/pages/handlers/handler.php?id='+id+'&table='+table, true);
+    request.send();
 }
 
 function deleteCheck() {

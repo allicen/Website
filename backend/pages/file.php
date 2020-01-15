@@ -3,7 +3,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/backend/functions.php");
 
 $path = 'user-files';
 $dir = $_SERVER['DOCUMENT_ROOT'].getPath($url, $path)[0];
-$types = array('image/gif', 'image/png', 'image/jpeg');
+$types = array('image/gif', 'image/png', 'image/jpeg', 'image/svg+xml'); // svg не работает!!!
 $maxSize = 1024000; // В байтах
 $max_size = 2000; // В пикселах
 $quality = 100; // Качество
@@ -79,7 +79,7 @@ if ($handle = opendir($dir)) {
     while (false !== ($file = readdir($handle))) {
         if ($file != "." && $file != ".." && $file != '.gitkeep' && $file) {
             $isFile = explode('.', $file);
-            if (in_array($isFile[count($isFile) - 1], array('jpg', 'jpeg', 'png', 'gif'))) {
+            if (in_array(strtolower($isFile[count($isFile) - 1]), array('jpg', 'jpeg', 'png', 'gif', 'svg'))) {
                 $out .= '<tr>';
                 $out .= '<td><a name="' . $file . '"></a>' . $index . '</td>
                 <td><img src="/' . getPath($url, $path)[0] . $file . '" alt="' . $file . '" class="thumb"/></td>

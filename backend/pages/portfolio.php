@@ -109,7 +109,7 @@ if($query = mysqli_query($connect, "SELECT * FROM portfolio") and mysqli_fetch_a
                 <td>'.$githublink.'</td>
                 <td>'.$technologiesItems.'</td>
                 <td>'.$end.'</td>
-                <td>'.$status.'</td>
+                <td><a href="#" class="false" onclick="setStatus(event, '.(string)$row['id'].', \'portfolio\'); return false;" data-id="'.$row['id'].'">'.$status.'</a></td>
                 <td>
                     <div class="nowrap">
                         '.editIcon($row['id']).'

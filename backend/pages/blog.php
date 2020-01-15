@@ -102,7 +102,7 @@ if($query = mysqli_query($connect, "SELECT * FROM blog_posts") and mysqli_fetch_
                 <td><a name="'.$row['id'].'"></a>'.$row['id'].'</td>
                 <td>'.$row['h1'].'</td>
                 <td>'.$row['link'].'</td>
-                <td>'.$status.'</td>
+                <td><a href="#" class="false" onclick="setStatus(event, '.(string)$row['id'].', \'blog_posts\'); return false;" data-id="'.$row['id'].'">'.$status.'</a></td>
                 <td>'.$pictureIcon.'</td>
                 <td>'.$category.'</td>
                 <td>'.$row['title'].'</td>
@@ -118,6 +118,8 @@ if($query = mysqli_query($connect, "SELECT * FROM blog_posts") and mysqli_fetch_
         $out .= '</tr>';
     }
 }
+
+//print_r($_POST['getStatus']);
 
 require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/templates/blog-header.html");
 require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/templates/blog.html");

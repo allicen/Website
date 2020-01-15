@@ -163,10 +163,11 @@ function getPath($url, $path){
             $url[$i] != 'size-error' &&
             $url[$i] != 'delete' &&
             $url[$i] != 'add' &&
-            !stripos($url[$i], '.png') &&
-            !stripos($url[$i], '.jpg') &&
-            !stripos($url[$i], '.jpeg') &&
-            !stripos($url[$i], '.gif')
+            !stripos(strtolower($url[$i]), strtolower('.png')) &&
+            !stripos(strtolower($url[$i]), strtolower('.jpg')) &&
+            !stripos(strtolower($url[$i]), strtolower('.jpeg')) &&
+            !stripos(strtolower($url[$i]), strtolower('.svg')) &&
+            !stripos(strtolower($url[$i]), strtolower('.gif'))
         ){
             if($url[$i] == $path){
                 $start = true;
@@ -216,6 +217,17 @@ function resize($file, $quality, $max_size, $dir){
         imagedestroy($src);
         return $file['name'];
     }
+}
+
+function changeStatusAjax($connect, $id, $table){
+    $newStatus = '';
+    if($query = mysqli_query($connect, "SELECT * FROM $table WHERE `id` = $id") and $row = mysqli_fetch_assoc($query) and $row != '') {
+        $newStatus = $row['status'] == '1' ? '0' : '1';
+    }
+    if($newStatus != ''){
+        print_r(getStatus($newStatus));
+        return mysqli_query($connect, "UPDATE `$table` SET `status` = '$newStatus' WHERE `$table`.`id` = '$id';");
+    }else return false;
 }
 
 function deleteIcon($id){
