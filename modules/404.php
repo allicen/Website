@@ -20,7 +20,11 @@
 
         if($page !== '' && $post !== ''){
             if($query = mysqli_query($connect, "SELECT * FROM `blog_posts` WHERE `link` = '$post'") and $row = mysqli_fetch_assoc($query) and $row != '') {
-                $is404 = false;
+                if($row['status'] == '0'){
+                    $is404 = true;
+                }else{
+                    $is404 = false;
+                }
             }else{
                 $is404 = true;
             }
@@ -37,7 +41,11 @@
         }
         if($page !== '' && $post === ''){
             if($query = mysqli_query($connect, "SELECT * FROM `portfolio` WHERE `link` = '$page'") and $row = mysqli_fetch_assoc($query) and $row != '') {
-                $is404 = false;
+                if($row['status'] == '0'){
+                    $is404 = true;
+                }else{
+                    $is404 = false;
+                }
             }else{
                 $is404 = true;
             }
