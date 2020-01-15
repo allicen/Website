@@ -64,8 +64,8 @@
                     if($postUrl !== null){ // Если нет
                         $categoryUrl = '';
                     }
-
-                    $preview .= '
+                    if($row['status'] == '1'){
+                        $preview .= '
                         <article>
                             <div class="title">
                                 <a href="'.$prefix.$categoryUrl.$row['link'].'/">'.$row['h1'].'</a>
@@ -79,7 +79,8 @@
                             <a href="'.$prefix.$categoryUrl.$row['link'].'/">читать далее</a>
                         </article>
                     ';
-                    $postCount++;
+                        $postCount++;
+                    }
                 }
             }
             $preview .= '</div>';
@@ -104,44 +105,46 @@
         }
     }else{
         if($query = mysqli_query($connect, "SELECT * FROM blog_posts WHERE link = '$postUrl'") and $row = mysqli_fetch_assoc($query) and $row != ''){
-            $categoryId = $row['category_id'];
-            if($queryUrl = mysqli_query($connect, "SELECT * FROM blog_category WHERE id = '$categoryId'") and $rowUrl = mysqli_fetch_assoc($queryUrl) and $rowUrl != ''){
-                $categoryName = $rowUrl['name'];
-                $linkPost = $rowUrl['link'];
-            }
-
-            // Вывод других записей из этой же категории
-            if($queryRelevant = mysqli_query($connect, "SELECT * FROM blog_posts WHERE category_id = '$categoryId' AND link != '$postUrl'") and mysqli_fetch_assoc($queryRelevant) !=''){
-                mysqli_data_seek($queryRelevant, 0);
-                $relevantPosts = '<ul>';
-                while($rowRelevant = mysqli_fetch_assoc($queryRelevant)){
-                    $relevantPosts .= '<li><a href="/blog/'.$linkPost.'/'.$rowRelevant['link'].'/">';
-                    $relevantPosts .= $rowRelevant['h1'];
-                    $relevantPosts .= '</a></li>';
+            if($row['status'] == '1'){
+                $categoryId = $row['category_id'];
+                if($queryUrl = mysqli_query($connect, "SELECT * FROM blog_category WHERE id = '$categoryId'") and $rowUrl = mysqli_fetch_assoc($queryUrl) and $rowUrl != ''){
+                    $categoryName = $rowUrl['name'];
+                    $linkPost = $rowUrl['link'];
                 }
-                $relevantPosts .= '</ul>';
-            }
 
-           // echo ($relevantPosts);
-            if($relevantPosts != ''){ // Релевантные записи
-                $relevantPostsBlock = '<div class="relevant-post"><div class="header">Еще записи из этой категории:</div><div class="list">'.$relevantPosts.'</div></div>';
-            }
+                // Вывод других записей из этой же категории
+                if($queryRelevant = mysqli_query($connect, "SELECT * FROM blog_posts WHERE category_id = '$categoryId' AND link != '$postUrl'") and mysqli_fetch_assoc($queryRelevant) !=''){
+                    mysqli_data_seek($queryRelevant, 0);
+                    $relevantPosts = '<ul>';
+                    while($rowRelevant = mysqli_fetch_assoc($queryRelevant)){
+                        $relevantPosts .= '<li><a href="/blog/'.$linkPost.'/'.$rowRelevant['link'].'/">';
+                        $relevantPosts .= $rowRelevant['h1'];
+                        $relevantPosts .= '</a></li>';
+                    }
+                    $relevantPosts .= '</ul>';
+                }
+
+                // echo ($relevantPosts);
+                if($relevantPosts != ''){ // Релевантные записи
+                    $relevantPostsBlock = '<div class="relevant-post"><div class="header">Еще записи из этой категории:</div><div class="list">'.$relevantPosts.'</div></div>';
+                }
 
 
-            $pageName = $row['h1'];
-            $date = $row['date'];
-            $out = '<div class="details">
+                $pageName = $row['h1'];
+                $date = $row['date'];
+                $out = '<div class="details">
                         <div class="date">Дата: '.$date.'</div>
                         <div class="category">Рубрика: <a href="/blog/'.$linkPost.'/">'.$categoryName.'</a></div>
                     </div>'
-                .$row['text']
-                .$shareBlock
-                .$relevantPostsBlock;
-            $preview = '';
-            $breadCrumb .= '<a href="/blog/">'.$blog.'</a> / <a href="/blog/'.$linkPost.'/">'.$categoryName.'</a> / '.$pageName;
-            if($pageName != ''){
-                $pageName = '<h1>'.$pageName.'</h1>';
+                    .$row['text']
+                    .$shareBlock
+                    .$relevantPostsBlock;
+                $preview = '';
+                $breadCrumb .= '<a href="/blog/">'.$blog.'</a> / <a href="/blog/'.$linkPost.'/">'.$categoryName.'</a> / '.$pageName;
+                if($pageName != ''){
+                    $pageName = '<h1>'.$pageName.'</h1>';
+                }
+                require_once($_SERVER['DOCUMENT_ROOT']."/templates/page.html");
             }
-            require_once($_SERVER['DOCUMENT_ROOT']."/templates/page.html");
         }
     }
