@@ -52,7 +52,10 @@
             <div class="row">
                 <div class="name">Категория <span class="red">*</span></div>
                 <label class="value">
-                    <?=$allCategory;?>
+                    <select required name="select">
+                        <option value="">Выберите значение</option>
+                        <?=$allCategory;?>
+                    </select>
                 </label>
             </div>
             <div class="row">

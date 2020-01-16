@@ -11,20 +11,22 @@ $title = '';
 $description = '';
 $link = '';
 $status = '';
+$allCategory = '';
 $statusSelect = getSelect('', array('0', '1'), array('Черновик', 'Опубликовано'));
 
 if($url[3] == '' && $actionType != 'edit'){
+    $allCategory = getAllSelect($connect, 'blog_category');
+
     if(isset($_POST['submit']) && $_POST['submit'] != ''){
         $name = $_POST['name'];
         $text = $_POST['text'];
         $anons = $_POST['anons'];
-        $categoryId = getSelectId($connect, 'blog_category', 'link', $_POST['id']);
         $picture = $_POST['picture'];
         $title = $_POST['title'];
         $description = $_POST['description'];
         $link = $_POST['link'];
         $status = $_POST['status'];
-
+        $categoryId = $_POST['select'];
         if($query = mysqli_query($connect, "INSERT INTO `blog_posts` (`id`, `h1`, `text`, `anons`, `category_id`, `picture`, `date`, `title`, `description`, `link`, `status`) 
                                                    VALUES (NULL, '$name',  '$text', '$anons', '$categoryId', '$picture', '$date', '$title', '$description', '$link', '$status')") and ($query)){
             $info = '<div class="green info">Запись <strong>'.$name.'</strong> успешно добавлена! <a href="#'.$link.'">Посмотреть</a> или <a href="/admin/blog/#edit">добавить еще одну</a></div>';
@@ -68,7 +70,7 @@ if($actionType == 'edit'){
 
         if($query = mysqli_query($connect, "UPDATE `blog_posts` SET 
                                                         `h1` = '$name', 
-                                                        `text` = '$link', 
+                                                        `text` = '$text', 
                                                         `anons` = '$anons',
                                                         `category_id` = '$category', 
                                                         `picture` = '$picture', 

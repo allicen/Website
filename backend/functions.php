@@ -79,7 +79,7 @@ function getLink($connect, $linkId, $table){
 }
 
 function getSelectFromOtherTable($connect, $linkId, $table){ // Select из другой таблицы.
-    $selectOut = '<select required name="select"><option value="">Выберите значение</option>';
+    $selectOut = '';
     if($query = mysqli_query($connect, "SELECT * FROM $table") and mysqli_fetch_assoc($query) !=''){
         mysqli_data_seek($query, 0);
         while($row = mysqli_fetch_assoc($query)){
@@ -92,7 +92,6 @@ function getSelectFromOtherTable($connect, $linkId, $table){ // Select из др
             }
         }
     }
-    $selectOut .= '</select>';
     return $selectOut;
 }
 
@@ -118,12 +117,10 @@ function getStatus($status){
 function getAllSelect($connect, $table){
     $category = '';
     if($query = mysqli_query($connect, "SELECT * FROM $table") and mysqli_fetch_assoc($query) !=''){
-        $category = '<select required name="select"><option value="">Выберите значение</option>';
         mysqli_data_seek($query, 0);
         while($row = mysqli_fetch_assoc($query)){
             $category .= '<option value="'.$row['id'].'">'.$row['name'].'</option>';
         }
-        $category .= '</select>';
     }
     return $category;
 }
