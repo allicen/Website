@@ -164,6 +164,7 @@ function getPath($url, $path){
             !stripos(strtolower($url[$i]), strtolower('.jpg')) &&
             !stripos(strtolower($url[$i]), strtolower('.jpeg')) &&
             !stripos(strtolower($url[$i]), strtolower('.svg')) &&
+            !stripos(strtolower($url[$i]), strtolower('.pdf')) &&
             !stripos(strtolower($url[$i]), strtolower('.gif'))
         ){
             if($url[$i] == $path){
@@ -185,6 +186,7 @@ function getPath($url, $path){
 
 function resize($file, $quality, $max_size, $dir){
     global $src;
+    $img = true;
 
     if ($file['type'] == 'image/jpeg')
         $source = imagecreatefromjpeg($file['tmp_name']);
@@ -192,27 +194,36 @@ function resize($file, $quality, $max_size, $dir){
         $source = imagecreatefrompng($file['tmp_name']);
     elseif ($file['type'] == 'image/gif')
         $source = imagecreatefromgif($file['tmp_name']);
+    elseif ($file['type'] == 'image/svg+xml' || $file['type'] == 'application/pdf')
+        $img = false;
     else
         return false;
-    $src = $source;
+    if($img){
+        $src = $source;
+        // Определяем ширину и высоту изображения
+        $w_src = imagesx($src);
+        $h_src = imagesy($src);
 
-    // Определяем ширину и высоту изображения
-    $w_src = imagesx($src);
-    $h_src = imagesy($src);
-
-    if($w_src > $max_size){
-        $ratio = $w_src / $max_size;
-        $w_dest = round($w_src/$ratio);
-        $h_dest = round($h_src/$ratio);
-        $dest = imagecreatetruecolor($w_dest, $h_dest);
-        imagealphablending($dest, true);
-        imagecopyresampled($dest, $src, 0, 0, 0, 0, $w_dest, $h_dest, $w_src, $h_src);
-        imagejpeg($dest, $dir.$file['name'], $quality);
-        return $file['name'];
+        if($w_src > $max_size){
+            $ratio = $w_src / $max_size;
+            $w_dest = round($w_src/$ratio);
+            $h_dest = round($h_src/$ratio);
+            $dest = imagecreatetruecolor($w_dest, $h_dest);
+            imagealphablending($dest, true);
+            imagecopyresampled($dest, $src, 0, 0, 0, 0, $w_dest, $h_dest, $w_src, $h_src);
+            imagejpeg($dest, $dir.$file['name'], $quality);
+            return $file['name'];
+        }else{
+            imagejpeg($src, $dir.$file['name'], $quality);
+            imagedestroy($src);
+            return $file['name'];
+        }
     }else{
-        imagejpeg($src, $dir.$file['name'], $quality);
-        imagedestroy($src);
-        return $file['name'];
+        if(copy($_FILES['picture']['tmp_name'], $dir.basename($_FILES['picture']['name']))){
+            return $file['name'];
+        }else{
+            return false;
+        }
     }
 }
 

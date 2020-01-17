@@ -3,7 +3,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/backend/functions.php");
 
 $path = 'user-files';
 $dir = $_SERVER['DOCUMENT_ROOT'].getPath($url, $path)[0];
-$types = array('image/gif', 'image/png', 'image/jpeg', 'image/svg+xml'); // svg не работает!!!
+$types = array('image/gif', 'image/png', 'image/jpeg', 'image/svg+xml', 'application/pdf');
 $maxSize = 1024000; // В байтах
 $max_size = 2000; // В пикселах
 $quality = 100; // Качество
@@ -79,10 +79,11 @@ if ($handle = opendir($dir)) {
     while (false !== ($file = readdir($handle))) {
         if ($file != "." && $file != ".." && $file != '.gitkeep' && $file) {
             $isFile = explode('.', $file);
-            if (in_array(strtolower($isFile[count($isFile) - 1]), array('jpg', 'jpeg', 'png', 'gif', 'svg'))) {
+            if (in_array(strtolower($isFile[count($isFile) - 1]), array('jpg', 'jpeg', 'png', 'gif', 'svg', 'pdf'))) {
+                $img = $isFile[count($isFile) - 1] != 'pdf' ? '<img src="/' . getPath($url, $path)[0] . $file . '" alt="' . $file . '" class="thumb"/>' : '';
                 $out .= '<tr>';
                 $out .= '<td><a name="' . $file . '"></a>' . $index . '</td>
-                <td><img src="/' . getPath($url, $path)[0] . $file . '" alt="' . $file . '" class="thumb"/></td>
+                <td>'.$img.'</td>
                 <td><a href="/' . getPath($url, $path)[0] . $file . '" target="_blank">' . $file . '</a></td>
                 <td>' . bcdiv(filesize(getPath($url, $path)[0] . $file), '1024', 2) . ' Кб</td>
                 <td> <a href="?delete='.$file.'" class="img"><img src="/img/delete.png" alt="Удалить" onclick="return deleteCheck();" title="Удалить" class="icon"></a></td>';

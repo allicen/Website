@@ -1,6 +1,9 @@
 <p><?=$page;?></p>
 <?=$info;?>
-<p><span class="red">Важно!</span> Имена <u><strong>файлов</strong> и <strong>папок</strong></u> должны быть без пробелов и русских букв</p>
+<div class="important">
+    <p><span class="red">Важно!</span> Имена <u><strong>файлов</strong> и <strong>папок</strong></u> должны быть без пробелов и русских букв</p>
+    <p>Разрешенные форматы: jpg, png, gif, svg, pdf.</p>
+</div>
 <p>Директория: <strong><?=getPath($url, $path)[1];?></strong></p>
 <div class="folders"><?=$navigate;?></div>
 <?=$catalog;?>

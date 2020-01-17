@@ -61,6 +61,7 @@ img {
 
 a {
   text-decoration: none;
+  color: @dark-color;
 }
 
 table {
@@ -214,6 +215,7 @@ pre{
     article {
       flex: 1 1 300px;
       padding: 0 0 30px 60px;
+      max-width: 600px;
 
       .desc{
         padding: 10px 0 5px 0;
@@ -239,6 +241,10 @@ pre{
       .photo{
         a{
           border-bottom: none !important;
+        }
+        img:hover{
+          opacity: 0.5;
+          transition: 1s;
         }
       }
 
@@ -376,6 +382,11 @@ pre{
     .share {
       order: 6;
 
+      img:hover{
+        opacity: 0.5;
+        transition: 1s;
+      }
+
       .submenu {
         margin: -40px 0 0 0;
 
@@ -473,6 +484,12 @@ pre{
           }
           .icons{
             margin-left: 20px;
+          }
+          a{
+            border-bottom: none;
+          }
+          a:hover{
+            border-bottom: none;
           }
         }
 
@@ -576,12 +593,29 @@ pre{
 //Слайдер
 
 .gallery{
-  display: flex;
-  flex-flow: row wrap;
-  align-content: space-between;
-  text-align: center;
-  justify-content: flex-start;
+
   order: 6;
+  overflow: hidden;
+
+  .items{
+    display: flex;
+    flex-flow: row wrap;
+    align-content: space-between;
+    text-align: center;
+    justify-content: flex-start;
+
+    dl{
+      display: none;
+    }
+  }
+
+  .more{
+    text-align: center;
+    padding: 10px;
+    a{
+      border-bottom: 1px dashed #A668D5;
+    }
+  }
 }
 
 .gallery .gallery-item{

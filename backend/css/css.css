@@ -43,6 +43,18 @@ a.false:hover{
     border-bottom: 1px dashed #fff;
 }
 
+textarea{
+    width: 100%;
+    min-height: 100px;
+}
+
+.important{
+    background-color: #fdfdf8;
+    padding: 20px;
+    border: 1px dotted #cecece;
+    margin-bottom: 20px;
+}
+
 .center{
     display: flex;
     flex-direction: row;

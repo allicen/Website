@@ -23,7 +23,8 @@ if($url[3] == '' && $actionType != 'edit'){
         list($name, $link, $picture, $title, $description, $anons, $github, $technologies, $status, $end, $text) = getDataFields();
         if($query = mysqli_query($connect, "INSERT INTO `portfolio` (`id`, `name`, `link`, `picture`, `anons`, `title`, `description`, `github`, `about`, `date`, `status`, `end`, `technologies`) 
                                                    VALUES (NULL, '$name', '$link', '$picture', '$anons', '$title', '$description', '$github', '$text', '$date', '$status', '$end', '$technologies')") and ($query)){
-            $info = '<div class="green info">Запись <strong>'.$name.'</strong> успешно добавлена! <a href="#'.$link.'">Посмотреть</a> или <a href="/admin/portfolio/#edit">добавить еще одну</a></div>';
+            $go = $status == '1' ? '<a href="/portfolio/'.$link.'/" target="_blank">Открыть в отдельном окне</a> или ' : '';
+            $info = '<div class="green info">Запись <strong>'.$name.'</strong> успешно добавлена! '.$go.' <a href="/admin/portfolio/#edit">добавить еще одну</a></div>';
         }else{
             $info = '<div class="red info">Запись не была добавлена! Проверьте корректность подключения к БД.</div>';
         }
@@ -72,7 +73,8 @@ if($actionType == 'edit'){
                                                         `about` = '$text',
                                                         `date` = '$date'
                                                         WHERE `portfolio`.`id` = ".$id."") and ($query)){
-            $info = '<div class="green info">Запись <strong>'.$name.'</strong> успешно отредактирована! <a href="#'.$link.'">Посмотреть</a> или <a href="/admin/portfolio/#edit"> добавить еще одну</a></div>';
+            $go = $status == '1' ? '<a href="/portfolio/'.$link.'/" target="_blank">Открыть в отдельном окне</a> или ' : '';
+            $info = '<div class="green info">Запись <strong>'.$name.'</strong> успешно отредактирована! '.$go.' Добавить еще одну</a></div>';
         }else{
             $info = '<div class="red info">Запись не была обновлена! Проверьте корректность подключения к БД.</div>';
         }
@@ -85,7 +87,7 @@ if($query = mysqli_query($connect, "SELECT * FROM portfolio") and mysqli_fetch_a
         $status = getStatus($row['status']);
         $end = $row['end'] == '1' ? 'Завершен' : 'В разработке';
         $githublink = $row['github'] != '' ? '<a href="'.$row['github'].'" target="_blank">Репозиторий</a>' : '';
-        $go = $row['status'] == '1' ? goIcon('/portfolio/'.$row['link'].'/') : '';
+        $go = $row['status'] == '1' ? goIcon('/portfolio/'.$row['link']) : '';
         $technologies = explode(',', $row['technologies']);
         $technologiesItems = '';
 

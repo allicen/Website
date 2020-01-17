@@ -7,6 +7,7 @@ $(function(){
                     $("html, body").animate({
                         scrollTop: $(this).offset().top
                     }, 500);
+                    console.log(this);
                     return false;
                 }
             });
@@ -24,7 +25,7 @@ $(function(){
     // Обрезание анонса блога до 100 символов до целого слова
     $(".articles article .desc").each(function () {
         $(this).text(function (i, text) {
-            if(text.length > 100){
+            if(text.length > 200){
                 text = text.substring(0, 99);
                 let lastIndex = text.lastIndexOf(" ");
                 text = text.substring(0, lastIndex) + "...";
@@ -38,6 +39,7 @@ $(function(){
         contentCenter();
         preWidth();
         heigthSertificats();
+        getFirstLine(heightGallery);
     });
 
     contentCenter();
@@ -158,6 +160,74 @@ $(function(){
     function heigthSertificats(){
         $(".gallery-background .big .photo img").css("max-height", window.innerHeight/100*90);
     }
+
+
+    // вывод сертификатов
+    // let heightGallery = Number($(".gallery .items dl").height());
+    // getGalleryLine(heightGallery);
+    //
+    // function getGalleryLine(heightGallery){
+    //     $(".gallery .items dl").each(function (index) {
+    //         if(index < 7){
+    //             $(this).show();
+    //         }
+    //     });
+    // }
+    //
+    // function getHeightGallery() {
+    //     return Number($(".gallery .items").height());
+    // }
+    //
+    // $(".gallery .more").click(function () {
+    //     $(".gallery .items dl").each(function (index) {
+    //         if($(this).css("display") === "none"){
+    //             $(this).show();
+    //             return false;
+    //         }
+    //     });
+    // });
+    let index = 2;
+    let heightGallery = 194;
+    let stop = false;
+    getFirstLine(heightGallery);
+    function getFirstLine(height){
+        let elem = $(".gallery .items dl");
+        elem.each(function (index) {
+            if($(".gallery .items").height() <= height || index === 0){
+                $(this).show();
+            }else {
+                $(this).prev().hide();
+                return false;
+            }
+            if(elem.length === index+1){
+                $(".gallery .more").hide();
+            }
+        });
+    }
+
+    $(".gallery .more").click(function () {
+        getFirstLine(heightGallery * index);
+        index++;
+    });
+
+    console.log(index);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

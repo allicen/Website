@@ -1,4 +1,6 @@
 <?php
+require_once($_SERVER['DOCUMENT_ROOT']."/core/functions.php");
+
     $preview = '';
     $blogCategory = '';
     $prefix = 'blog/';
@@ -71,7 +73,7 @@
                                 <a href="'.$prefix.$categoryUrl.$row['link'].'/">'.$row['h1'].'</a>
                             </div>
                             <div class="photo">
-                                <a href="'.$prefix.$categoryUrl.$row['link'].'/"><img src="'.$row['picture'].'" alt=""></a>
+                                <a href="'.$prefix.$categoryUrl.$row['link'].'/"><img src="'.$row['picture'].'" alt="'.$row['h1'].'" title="Подробнее"></a>
                             </div>
                             <div class="desc">
                                 '.$row['anons'].'
@@ -131,7 +133,7 @@
 
 
                 $pageName = $row['h1'];
-                $date = $row['date'];
+                $date = dateFormat($row['date']);
                 $out = '<div class="details">
                         <div class="date">Дата: '.$date.'</div>
                         <div class="category">Рубрика: <a href="/blog/'.$linkPost.'/">'.$categoryName.'</a></div>
