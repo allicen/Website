@@ -36,7 +36,6 @@ if($url[3] == '' && $actionType != 'edit'){
     }
 }
 
-
 if($actionType == 'delete'){
     $info = delete($connect, $id, 'blog_posts', '/admin/blog/');
 }
@@ -120,8 +119,6 @@ if($query = mysqli_query($connect, "SELECT * FROM blog_posts") and mysqli_fetch_
         $out .= '</tr>';
     }
 }
-
-//print_r($_POST['getStatus']);
 
 require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/templates/blog-header.html");
 require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/templates/blog.html");

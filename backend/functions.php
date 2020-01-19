@@ -46,11 +46,9 @@ function getDataFields(){
     return array($name, $link, $picture, $title, $description, $anons, $github, $technologies, $status, $end, $text);
 }
 
-
 function replaceImgA($text){
     return str_replace('pages-cke-saved-', '', $text);
 }
-
 
 // Вывод технологий
 function getTechnologies($connect, $technologiesCheck, $useTech){
@@ -112,9 +110,6 @@ function getSelect($id, $key, $value){
     return $selectOut;
 }
 
-
-
-
 function getStatus($status){
     return $status = $status == '1' ? 'Опубликовано' : 'Черновик';
 }
@@ -138,7 +133,6 @@ function getSelectId($connect, $table, $id, $link){
     return $linkId;
 }
 
-
 function getLinkPath($url, $path){
     $link = '';
     for($j = 0; $j < count($url); $j++){
@@ -153,7 +147,6 @@ function getLinkPath($url, $path){
     }
     return $link;
 }
-
 
 function getPath($url, $path){
     $start = false;
@@ -187,7 +180,6 @@ function getPath($url, $path){
     }
     return array($fullPath, $fullPathWithTags);
 }
-
 
 function resize($file, $quality, $max_size, $dir){
     global $src;

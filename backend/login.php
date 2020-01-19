@@ -9,7 +9,6 @@ if(isset($_SESSION['admin'])){
     exit;
 }
 
-
 require_once($_SERVER['DOCUMENT_ROOT']."/core/connect.php");
 $url = $_SERVER['REQUEST_URI'];
 $delete = array('?', '=');

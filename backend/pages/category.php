@@ -57,7 +57,6 @@ if($actionType == 'edit'){
     }
 }
 
-
 if($actionType == 'delete'){
     $info = delete($connect, $id, 'blog_category', '/admin/blog/category/');
 }

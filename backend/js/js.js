@@ -15,8 +15,6 @@ function tabColor() {
     }
 }
 
-
-
 function changeSubMenu() {
     let tabs = document.querySelectorAll('.navigate div');
     for(let elem = 0; elem < tabs.length; elem++){
@@ -62,5 +60,3 @@ if((pageUrl === 'options' || (pageUrl === 'pages' && subPageUrl === '')) && acti
 
 tabColor();
 changeSubMenu(); 
-
-

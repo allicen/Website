@@ -9,7 +9,6 @@ $max_size = 2000; // В пикселах
 $quality = 100; // Качество
 $active = $url[count($url)-1];
 
-
 $actionType = explode('=', $url[count($url)-1])[0];
 $fileDelete =  explode('=', $url[count($url)-1])[1];
 
@@ -24,7 +23,6 @@ if($actionType == 'delete'){
         }
     }
 }
-
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']) && $_POST['submit'] != ''){
     if (!in_array($_FILES['picture']['type'], $types)) die('<script>location="?type-error";</script>');
@@ -52,7 +50,6 @@ if($active == 'delete'){
     $info = '<div class="green info">Файл успешно удален</div>';
 }
 
-
 $navigate = '';
 $index = 1;
 
@@ -73,7 +70,6 @@ if(isset($_POST['folder']) && $_POST['folder'] != ''){
         $info = '<div class="red info">Введите название папки</div>';
     }
 }
-
 
 if ($handle = opendir($dir)) {
     while (false !== ($file = readdir($handle))) {

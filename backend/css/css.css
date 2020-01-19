@@ -171,8 +171,6 @@ input[type=text], input[type=password]{
     color: #fff;
 }
 
-
-
 .content .tabs .tabs-header .tab-header a:hover{
     background-color: #FFF700;
     color: #41046F;
@@ -326,9 +324,11 @@ img.icon{
 .nowrap{
     display: flex;
 }
+
 .nowrap a:first-child{
     margin-right: 10px;
 }
+
 .nowrap a:last-child{
     margin-left: 10px;
 }
@@ -374,6 +374,3 @@ img.icon{
 .folder input[type=text]{
     margin: 0 10px;
 }
-
-
-

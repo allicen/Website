@@ -10,7 +10,6 @@ $blogCategory = '';
 
 $shareBlock = file_get_contents($_SERVER['DOCUMENT_ROOT']."/templates/share.html");
 
-
 if($urlItem == null){
     if($module == 'portfolio'){
         $pageName = 'Портфолио';
@@ -78,7 +77,5 @@ if($urlItem == null){
 if($pageName != ''){
     $pageName = '<h1>'.$pageName.'</h1>';
 }
-
-
 
 require_once($_SERVER['DOCUMENT_ROOT']."/templates/page.html");

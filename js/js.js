@@ -70,12 +70,7 @@ $(function(){
         $(".syntaxhighlighter").css("max-width", window.innerWidth-80);
     }
 
-    //confirm("Внимание! Сайт находится в разработке. Внешний вид и функционал может отличаться от запланированного.");
-
-
-
     // Фотогаларея
-
     let photo = $(".gallery .gallery-item");
     let scrollPoint = $(".gallery").offset();
     let photoId = 1;
@@ -162,8 +157,7 @@ $(function(){
     }
 
 
-    // вывод сертификатов
-
+    // вывод сертификатов построчно
     let index = 2;
     let heightGallery = 194;
     let stop = false;

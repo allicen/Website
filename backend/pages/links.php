@@ -44,7 +44,6 @@ if($actionType == 'edit'){
     }
 }
 
-
 if($actionType == 'delete'){
     if($query = mysqli_query($connect, "SELECT * FROM `links` WHERE `id` = '$id'") and $row = mysqli_fetch_assoc($query) and $row != ''){
         if($module_id == '3'){
