@@ -9,7 +9,7 @@
 
 /** * @license Apache-2.0
  */
-
+// Для IE11
 if (typeof Object.assign != 'function') {
         Object.assign = function(target) {
                 'use strict';

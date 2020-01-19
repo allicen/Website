@@ -50,7 +50,7 @@ if($actionType == 'edit'){
             $technologies = $row['technologies'];
             $statusSelect = getSelect($row['status'], array('0', '1'), array('Черновик', 'Опубликовано'));
             $endSelect = getSelect($row['end'], array('0', '1'), array('В разработке', 'Завершено'));
-            $text = $row['about'];
+            $text = htmlspecialchars($row['about']);
             $technologiesCheck = (string) getTechnologies($connect, $technologiesCheck, $technologies);
         }
     }else{

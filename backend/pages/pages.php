@@ -16,7 +16,7 @@ if($actionType == 'edit'){
             $links = getSelectFromOtherTable($connect, $row['link_id'], 'links');
             $title = $row['title'];
             $description = $row['description'];
-            $text = $row['text'];
+            $text = htmlspecialchars($row['text']);
         }
     }else{
         $info = '<div class="red info">Проверьте корректность подключения к БД.</div>';
@@ -27,7 +27,7 @@ if($actionType == 'edit'){
         $link_id = $_POST['select'];
         $title = $_POST['title'];
         $description = $_POST['description'];
-        $text = $_POST['text'];
+        $text = replaceImgA($_POST['text']);
         if($query = mysqli_query($connect, "UPDATE `content` SET 
                                                         `name` = '$name', 
                                                         `link_id` = '$link_id', 

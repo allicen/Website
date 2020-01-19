@@ -12,7 +12,7 @@ if($url[4] == '' && $actionType != 'edit'){
         $name = $_POST['name'];
         $link = $_POST['link'];
         $title = $_POST['title'];
-        $text = $_POST['text'];
+        $text = replaceImgA($_POST['text']);
         if($query = mysqli_query($connect, "INSERT INTO `top_menu` (`id`, `name`, `link`, `title`, `text`) 
                                                    VALUES (NULL, '$name', '$link', '$title', '$text')") and ($query)){
             $info = '<div class="green info">Запись <strong>'.$name.'</strong> успешно добавлена! <a href="#'.$id.'">Посмотреть</a> или <a href="/admin/portfolio/technologies/#edit">добавить еще одну</a></div>';
@@ -30,7 +30,7 @@ if($actionType == 'edit'){
             $name = $row['name'];
             $link = $row['link'];
             $title = $row['title'];
-            $text = $row['text'];
+            $text = htmlspecialchars($row['text']);
         }
     }else{
         $info = '<div class="red info">Проверьте корректность подключения к БД.</div>';
@@ -39,7 +39,7 @@ if($actionType == 'edit'){
         $name = $_POST['name'];
         $link = $_POST['link'];
         $title = $_POST['title'];
-        $text = $_POST['text'];
+        $text = replaceImgA($_POST['text']);
         if($query = mysqli_query($connect, "UPDATE `top_menu` SET `link` = '$link', `name` = '$name', `title` = '$title', `text` = '$text' WHERE `top_menu`.`id` = ".$id."") and ($query)){
             $info = '<div class="green info">Запись <strong>'.$name.'</strong> успешно отредактирована! <a href="#'.$id.'">Посмотреть</a></div>';
         }else{

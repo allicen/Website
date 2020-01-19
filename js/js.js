@@ -1,7 +1,7 @@
 $(function(){
     $("a").click(function () {
         if($(this).attr("href").indexOf("#") !== -1){
-            let element = $(this).attr("href").replace("/#", "");
+            let element = $(this).attr("href").replace("/#", "").replace("#", "");
             $("a").each(function () { // Плавный скролл до элемента
                 if($(this).attr("name") === element){
                     $("html, body").animate({
@@ -163,43 +163,21 @@ $(function(){
 
 
     // вывод сертификатов
-    // let heightGallery = Number($(".gallery .items dl").height());
-    // getGalleryLine(heightGallery);
-    //
-    // function getGalleryLine(heightGallery){
-    //     $(".gallery .items dl").each(function (index) {
-    //         if(index < 7){
-    //             $(this).show();
-    //         }
-    //     });
-    // }
-    //
-    // function getHeightGallery() {
-    //     return Number($(".gallery .items").height());
-    // }
-    //
-    // $(".gallery .more").click(function () {
-    //     $(".gallery .items dl").each(function (index) {
-    //         if($(this).css("display") === "none"){
-    //             $(this).show();
-    //             return false;
-    //         }
-    //     });
-    // });
+
     let index = 2;
     let heightGallery = 194;
     let stop = false;
     getFirstLine(heightGallery);
     function getFirstLine(height){
         let elem = $(".gallery .items dl");
-        elem.each(function (index) {
-            if($(".gallery .items").height() <= height || index === 0){
+        elem.each(function (i) {
+            if($(".gallery .items").height() <= height || i === 0){
                 $(this).show();
             }else {
                 $(this).prev().hide();
                 return false;
             }
-            if(elem.length === index+1){
+            if(elem.length === i+1){
                 $(".gallery .more").hide();
             }
         });
@@ -209,28 +187,6 @@ $(function(){
         getFirstLine(heightGallery * index);
         index++;
     });
-
-    console.log(index);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 });
 

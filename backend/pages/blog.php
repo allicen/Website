@@ -19,7 +19,7 @@ if($url[3] == '' && $actionType != 'edit'){
 
     if(isset($_POST['submit']) && $_POST['submit'] != ''){
         $name = $_POST['name'];
-        $text = $_POST['text'];
+        $text = replaceImgA($_POST['text']);
         $anons = $_POST['anons'];
         $picture = $_POST['picture'];
         $title = $_POST['title'];
@@ -45,7 +45,7 @@ if($actionType == 'edit'){
     $action = 'Редактирование записи';
     if($query = mysqli_query($connect, "SELECT * FROM blog_posts WHERE id = '$id'") and $row = mysqli_fetch_assoc($query) and $row != '') {
         $name = $row['h1'];
-        $text = $row['text'];
+        $text = htmlspecialchars($row['text']);
         $anons = $row['anons'];
         $picture = $row['picture'];
         $title = $row['title'];
@@ -59,7 +59,7 @@ if($actionType == 'edit'){
 
     if(isset($_POST['submit']) && $_POST['submit'] != ''){
         $name = $_POST['name'];
-        $text = $_POST['text'];
+        $text = replaceImgA($_POST['text']);
         $anons = $_POST['anons'];
         $category = $_POST['select'];
         $picture = $_POST['picture'];

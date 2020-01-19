@@ -18,7 +18,7 @@ if($url[4] == '' && $actionType != 'edit'){
         $link = $_POST['link'];
         $title = $_POST['title'];
         $description = $_POST['description'];
-        $text = $_POST['text'];
+        $text = replaceImgA($_POST['text']);
 
         if($query = mysqli_query($connect, "INSERT INTO `blog_category` (`id`, `link`, `name`, `title`, `description`, `about`) 
                                                    VALUES (NULL, '$link', '$name', '$title', '$description', '$text')") and ($query)){
@@ -38,13 +38,17 @@ if($actionType == 'edit'){
             $link = $row['link'];
             $title = $row['title'];
             $description = $row['description'];
-            $text = $row['about'];
+            $text = htmlspecialchars($row['about']);
         }
     }else{
         $info = '<div class="red info">Проверьте корректность подключения к БД.</div>';
     }
     if(isset($_POST['submit']) && $_POST['submit'] != ''){
         $name = $_POST['name'];
+        $link = $_POST['link'];
+        $title = $_POST['title'];
+        $description = $_POST['description'];
+        $text = replaceImgA($_POST['text']);
         if($query = mysqli_query($connect, "UPDATE `blog_category` SET `link` = '$link', `name` = '$name', `title` = '$title', `description` = '$description', `about` = '$text' WHERE `blog_category`.`id` = ".$id."") and ($query)){
             $info = '<div class="green info">Запись <strong>'.$name.'</strong> успешно отредактирована! <a href="#'.$id.'">Посмотреть</a></div>';
         }else{

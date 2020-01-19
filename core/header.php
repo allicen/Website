@@ -2,6 +2,10 @@
     $menu = '';
     $submenu = '';
 
+    if($module == 'main'){
+        $addTitle = '';
+    }
+
     if($query = mysqli_query($connect, "SELECT * FROM top_menu") and mysqli_fetch_assoc($query) !=''){
         mysqli_data_seek($query, 0);
         while($row = mysqli_fetch_assoc($query)){
