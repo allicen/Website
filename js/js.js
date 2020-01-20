@@ -182,5 +182,8 @@ $(function(){
         index++;
     });
 
+    // Удаление заголовка 1 блока
+    document.querySelector('.header-block').removeAttribute('class');
+
 });
 

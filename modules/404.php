@@ -1,13 +1,10 @@
 <?php
+$content = $url[1];
 $page = $url[2];
 $post = $url[3];
 $page404 = $url[4];
 
 $is404 = false;
-
-if($module == 'page' && $page !== ''){
-    $module = '404';
-}
 
 if($module === 'blog'){
     if($page !== ''){
@@ -49,6 +46,12 @@ if($module === 'portfolio'){
         }else{
             $is404 = true;
         }
+    }
+}
+
+if($module === 'page'){
+    if(!($query = mysqli_query($connect, "SELECT * FROM `links` WHERE `link` = '$content'") and $row = mysqli_fetch_assoc($query) and $row != '') || $page != '') {
+        $is404 = true;
     }
 }
 

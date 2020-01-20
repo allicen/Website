@@ -20,9 +20,9 @@ $breadCrumb = '';
 
 $module = ($link == '' || $link == 'index.php' || $link == 'login.html') ? 'main' :
     (($link == 'admin') ? 'admin' :
-        (($link == 'contacts' || $link == 'search') ? 'page' :
+//        (($link == 'contacts' || $link == 'search') ? 'page' :
             (($link == 'blog') ? 'blog' :
-                (($link == 'portfolio') ? 'portfolio' : '404'))));
+                (($link == 'portfolio') ? 'portfolio' : 'page')));
 
 if($module !== 'admin'){
     require_once($_SERVER['DOCUMENT_ROOT']."/modules/404.php");

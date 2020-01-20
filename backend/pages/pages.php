@@ -8,6 +8,23 @@ $title = '';
 $description = '';
 $text = '';
 
+if($url[4] == '' && $actionType != 'edit'){
+    $links = getAllSelect($connect, 'links');
+    if(isset($_POST['submit']) && $_POST['submit'] != ''){
+        $name = $_POST['name'];
+        $link_id = $_POST['select'];
+        $title = $_POST['title'];
+        $description = $_POST['description'];
+        $text = replaceImgA($_POST['text']);
+        if($query = mysqli_query($connect, "INSERT INTO `content` (`id`, `link_id`, `name`, `text`, `title`, `description`, `date`) 
+                                                   VALUES (NULL, '$link_id', '$name', '$text', '$title', '$description', '$date')") and ($query)){
+            $info = '<div class="green info">Запись <strong>'.$name.'</strong> успешно добавлена!</div>';
+        }else{
+            $info = '<div class="red info">Запись не была добавлена! Проверьте корректность подключения к БД.</div>';
+        }
+    }
+}
+
 if($actionType == 'edit'){
     if($query = mysqli_query($connect, "SELECT * FROM content WHERE id = ".$id."") and mysqli_fetch_assoc($query) !=''){
         mysqli_data_seek($query, 0);

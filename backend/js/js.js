@@ -54,7 +54,7 @@ function hideEditForm() {
     form.remove();
 }
 
-if((pageUrl === 'options' || (pageUrl === 'pages' && subPageUrl === '')) && actionUrl !== 'edit'){
+if((pageUrl === 'options') && actionUrl !== 'edit'){
     hideEditForm();
 }
 
