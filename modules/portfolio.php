@@ -41,7 +41,15 @@ if($urlItem == null){
             }
         }
         $previewPortfolio .= '</div>';
+        if($module == 'main'){
+            $previewPortfolio .= '
+            <div class="button">
+                <a href="/portfolio/">'.$goToPortfolio.'</a>
+            </div>
+        ';
+        }
     }
+
 }else{
     if($query = mysqli_query($connect, "SELECT * FROM portfolio WHERE link = '$urlItem'") and $row = mysqli_fetch_assoc($query) and $row != '') {
         if($row['status'] == '1'){

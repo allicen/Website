@@ -337,19 +337,20 @@ pre {
 .center main .share .submenu .categoryList .item a:hover {
   background-color: #dbe0fd;
 }
-.center main .share .button {
+.center main .button {
   width: 100%;
   text-align: center;
   margin-top: 50px;
 }
-.center main .share .button a {
+.center main .button a {
   background: #41046F;
-  color: #fff;
+  color: #fff !important;
   padding: 10px 20px;
   border-radius: 5px;
   transition: 0.3s;
+  border-bottom: none !important;
 }
-.center main .share .button a:hover {
+.center main .button a:hover {
   background: #660BAB;
 }
 .center main .center-column {
@@ -701,6 +702,11 @@ pre {
 }
 .ya-site-form table td, #ya-site-results table td{
   border: none;
+}
+
+.link-more a{
+  text-decoration: none;
+  border-bottom: 1px dashed #A668D5 !important;
 }
 
 /*# sourceMappingURL=css.css.map */

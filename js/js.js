@@ -183,7 +183,26 @@ $(function(){
     });
 
     // Удаление заголовка 1 блока
-    document.querySelector('.header-block').removeAttribute('class');
+    $(".header-block").each(function () {
+        $(this).removeClass();
+        return false;
+    });
+
+    $(".show").each(function () {
+        $(this).hide();
+    });
+
+    $(".link-more").click(function () {
+        let linkValue = "Показать подробности";
+
+        if($(this).next().css('display') === "none"){
+            $(this).next().fadeIn(100);
+            $(this).find("a").text("Скрыть");
+        }else {
+            $(this).next().fadeOut(100);
+            $(this).find("a").text(linkValue);
+        }
+    });
 
 });
 
