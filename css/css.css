@@ -695,4 +695,12 @@ pre {
 .gallery-background .big img {
   max-height: 95%;
 }
+.ya-site-form table{
+  margin: 20px 0;
+  padding: 0;
+}
+.ya-site-form table td, #ya-site-results table td{
+  border: none;
+}
+
 /*# sourceMappingURL=css.css.map */

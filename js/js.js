@@ -98,7 +98,7 @@ $(function(){
         prev.show();
         next.show();
         $(".gallery-background").fadeIn();
-        let pic = $(this).find("img").attr("src");
+        let pic = $(this).find("img").attr("data-src");
         let desc = $(this).find(".gallery-caption").text();
         $(".gallery-background .big .photo img").attr("src", pic);
         $(".gallery-background .big .photo .desc").text(desc);
@@ -127,7 +127,7 @@ $(function(){
             $(".gallery-background .right .next").hide();
         }
         let item = $(".gallery .gallery-item[data-id="+next+"]");
-        let pic = item.find("img").attr("src");
+        let pic = item.find("img").attr("data-src");
         let desc = item.find(".gallery-caption").text();
         $(".gallery-background .big .photo img").attr("src", pic);
         $(".gallery-background .big .photo .desc").text(desc);
@@ -145,7 +145,7 @@ $(function(){
             $(".gallery-background .left .prev").hide();
         }
         let item = $(".gallery .gallery-item[data-id="+prev+"]");
-        let pic = item.find("img").attr("src");
+        let pic = item.find("img").attr("data-src");
         let desc = item.find(".gallery-caption").text();
         $(".gallery-background .big .photo img").attr("src", pic);
         $(".gallery-background .big .photo .desc").text(desc);

@@ -6,14 +6,14 @@ function getImgName(){ // Только jpg
     if ($handle = opendir($dir)) {
         while (false !== ($file = readdir($handle))) {
             $isFile = explode('.', $file);
-            if (in_array($isFile[count($isFile) - 1], array('jpg'))) {
+            if (in_array($isFile[count($isFile) - 1], array('svg'))) {
                 array_push($images, $isFile[0]);
             }
         }
     }
     rsort($images);
     for ($i = 0; $i < count($images); $i++){
-        array_push($imagesOut, $images[$i].'.jpg');
+        array_push($imagesOut, $images[$i].'.svg');
     }
     return $imagesOut;
 }
@@ -26,7 +26,7 @@ function getImgSlider(){
                     <dl class="gallery-item">
                         <dt class="gallery-icon">
                             <span class="lupa"></span>
-                            <img src="/user-files/slider/'.$images[$i].'">
+                            <img src="/user-files/slider/thumb/'.$images[$i].'" data-src="/user-files/slider/'.$images[$i].'">
                         </dt>
                     </dl>
                 ';
