@@ -2,10 +2,10 @@
 $content = $url[1];
 $page = $url[2];
 $post = $url[3];
+$isChangelog = $url[3] == 'changelog';
 $page404 = $url[4];
 
 $is404 = false;
-
 if($module === 'blog'){
     if($page !== ''){
         if($query = mysqli_query($connect, "SELECT * FROM `blog_category` WHERE `link` = '$page'") and $row = mysqli_fetch_assoc($query) and $row != '') {
@@ -36,7 +36,7 @@ if($module === 'portfolio'){
     if($page !== '' && $post !== ''){
         $is404 = true;
     }
-    if($page !== '' && $post === ''){
+    if($page !== '' && $post === '' || $isChangelog){
         if($query = mysqli_query($connect, "SELECT * FROM `portfolio` WHERE `link` = '$page'") and $row = mysqli_fetch_assoc($query) and $row != '') {
             if($row['status'] == '0'){
                 $is404 = true;

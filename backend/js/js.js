@@ -54,6 +54,44 @@ function hideEditForm() {
     form.remove();
 }
 
+function generateLink(event) {
+    event.preventDefault();
+    let text = document.querySelector('.name-for-generate').value;
+    if (text === null || text === '') {
+        return '';
+    }
+
+    const englishAndNumbers = 'abcdefghijklmnopqrstuvwxyz1234567890';
+    const russian = ['а', 'a', 'б', 'b', 'в', 'v', 'г', 'g', 'д',  'd', 'е', 'e', 'ё', 'e', 'ж', 'zh', 'з', 'z', 'и', 'i', 'й', 'y', 'к', 'k',
+                    'л', 'l', 'м', 'm', 'н', 'n', 'о', 'o', 'п', 'p', 'р', 'r', 'с', 's', 'т', 't', 'у', 'u', 'ф', 'f', 'х', 'h', 'ц', 'ts',
+                    'ч', 'ch', 'ш', 'sh', 'щ', 'shch', 'ъ', '', 'ы', 'i', 'ь', '', 'э', 'e', 'ю', 'yu', 'я', 'ya' ];
+
+    let newLink = '';
+    let textArray = text.split('');
+
+    textArray.forEach(function (item) {
+        let itemLowerCase = item.toLowerCase();
+        if(englishAndNumbers.indexOf(itemLowerCase) !== -1) {
+            newLink += itemLowerCase;
+        } else {
+            let addSymbol = false;
+            for (let index = 0; index < russian.length; index++) {
+                if (russian[index] === itemLowerCase) {
+                    newLink += russian[index+1];
+                    addSymbol = true;
+                    break;
+                }
+            }
+            if (!addSymbol) {
+                newLink += '-';
+            }
+        }
+    });
+
+    let inputLink = document.querySelector('.input-for-generate');
+    inputLink.value = newLink.replace(/(-)+/g, '-');
+}
+
 if((pageUrl === 'options') && actionUrl !== 'edit'){
     hideEditForm();
 }
