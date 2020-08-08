@@ -27,11 +27,13 @@ if($url[3] == '' && $actionType != 'edit'){
         $link = $_POST['link'];
         $status = $_POST['status'];
         $categoryId = $_POST['select'];
-        if($query = mysqli_query($connect, "INSERT INTO `blog_posts` (`id`, `h1`, `text`, `anons`, `category_id`, `picture`, `date`, `title`, `description`, `link`, `status`) 
-                                                   VALUES (NULL, '$name',  '$text', '$anons', '$categoryId', '$picture', '$date', '$title', '$description', '$link', '$status')") and ($query)){
-            $info = '<div class="green info">Запись <strong>'.$name.'</strong> успешно добавлена! <a href="#'.$link.'">Посмотреть</a> или <a href="/admin/blog/#edit">добавить еще одну</a></div>';
+
+        $category = getLink($connect, $categoryId, 'blog_category');
+        if($query = mysqli_query($connect, "INSERT INTO `blog_posts` (`id`, `h1`, `text`, `anons`, `category_id`, `picture`, `date`, `title`, `description`, `link`, `status`, `date_update`) 
+                                                   VALUES (NULL, '$name',  '$text', '$anons', '$categoryId', '$picture', '$date', '$title', '$description', '$link', '$status', '$date')") and ($query)){
+            $info = '<div class="green info">Запись <strong>'.$name.'</strong> успешно добавлена! <a href="/blog/'.$category.'/'.$link.'/" target="_blank">Посмотреть в отдельной вкладке</a> или <a href="/admin/blog/#edit">добавить еще одну</a></div>';
         }else{
-            $info = '<div class="red info">Запись не была добавлена! Проверьте корректность подключения к БД.</div>';
+             $info = '<div class="red info">Запись не была добавлена! Проверьте корректность подключения к БД.</div>';
         }
     }
 }
@@ -67,19 +69,20 @@ if($actionType == 'edit'){
         $link = $_POST['link'];
         $status = $_POST['status'];
 
+        $categoryLink = getLink($connect, $category, 'blog_category');
         if($query = mysqli_query($connect, "UPDATE `blog_posts` SET 
                                                         `h1` = '$name', 
                                                         `text` = '$text', 
                                                         `anons` = '$anons',
                                                         `category_id` = '$category', 
                                                         `picture` = '$picture', 
-                                                        `date` = '$date', 
+                                                        `date_update` = '$date', 
                                                         `title` = '$title', 
                                                         `description` = '$description', 
                                                         `link` = '$link', 
                                                         `status` = '$status'
                                                         WHERE `blog_posts`.`id` = $id") and ($query)){
-            $info = '<div class="green info">Запись <strong>'.$name.'</strong> успешно отредактирована! <a href="#'.$id.'">Посмотреть</a> или <a href="/admin/portfolio/#edit"> добавить еще одну</a></div>';
+            $info = '<div class="green info">Запись <strong>'.$name.'</strong> успешно отредактирована! <a href="/blog/'.$categoryLink.'/'.$link.'/" target="_blank">Посмотреть в отдельной вкладке</a> или <a href="/admin/portfolio/#edit"> добавить еще одну</a></div>';
         }else{
             $info = '<div class="red info">Запись не была обновлена! Проверьте корректность подключения к БД.</div>';
         }

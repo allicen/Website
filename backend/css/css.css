@@ -117,8 +117,7 @@ textarea{
 
 input[type=text], input[type=password]{
     padding: 10px;
-    width: 300px;
-    margin-left: 20px;
+    width: 100%;
     outline: none;
 }
 
@@ -197,6 +196,7 @@ input[type=text], input[type=password]{
 .content .data{
     overflow: auto;
     margin-right: 30px;
+    flex-grow: 2;
 }
 
 .content .tabs-content .edit-frame{
@@ -228,10 +228,19 @@ img.icon{
     background-color: #fdfdf8;
     margin-top: 20px;
     border: 1px dotted #cecece;
+    flex-grow: 1;
 }
 
 .content .form-editor p{
     padding: 20px 0;
+}
+
+.content .form-editor .value a{
+    border-bottom: 1px dashed #A668D5;
+}
+
+.content .form-editor .value a:hover{
+    border-bottom-color: #fdfdf8;
 }
 
 .content .form-editor .note{
@@ -272,13 +281,13 @@ img.icon{
 }
 
 .content .form-editor .row .name{
-    width: 200px;
+    width: 300px;
     flex-grow: 1;
 }
 
 .content .form-editor .row .value{
     display: flex;
-    flex-grow: 8;
+    width: 100%;
     flex-wrap: wrap;
 }
 

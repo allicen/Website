@@ -19,9 +19,11 @@ $categoryUrl = $url[2];
 $categoryUrlAdd = $url[2];
 $postUrl = $url[3];
 $relevantPosts = '';
+$queryText = ''; // текст запроса
+$blogPostPicture = ''; // картинка для поста
 
 // Вывод категорий
-if($query = mysqli_query($connect, "SELECT * FROM blog_category") and mysqli_fetch_assoc($query) !=''){
+if($query = mysqli_query($connect, "SELECT * FROM blog_category ORDER BY name") and mysqli_fetch_assoc($query) !=''){
     mysqli_data_seek($query, 0);
     $blogCategory = '<div class="categoryList">
                         <div class="header-blog">Категории</div>';
@@ -48,7 +50,13 @@ if(($module == 'blog' && $categoryUrl !== '' && $postUrl == null) || $module == 
         }
     }
 
-    if($query = mysqli_query($connect, "SELECT * FROM blog_posts") and mysqli_fetch_assoc($query) !=''){
+    if ($module == 'main') { // ограничить вывод записей блога на главной странице
+        $queryText = "SELECT * FROM blog_posts ORDER BY date DESC LIMIT 6";
+    } else {
+        $queryText = "SELECT * FROM blog_posts ORDER BY date DESC";
+    }
+
+    if($query = mysqli_query($connect, $queryText) and mysqli_fetch_assoc($query) !=''){
         mysqli_data_seek($query, 0);
             $preview = '<div class="articles">';
             while($row = mysqli_fetch_assoc($query)){
@@ -66,14 +74,20 @@ if(($module == 'blog' && $categoryUrl !== '' && $postUrl == null) || $module == 
                     $categoryUrl = '';
                 }
                 if($row['status'] == '1'){
+                    if ($row['picture']) {
+                        $blogPostPicture = '
+                            <div class="photo">
+                                <a href="'.$prefix.$categoryUrl.$row['link'].'/"><img src="'.$row['picture'].'" alt="'.$row['h1'].'" title="Подробнее"></a>
+                            </div>';
+                    }
+
                     $preview .= '
                     <article>
                         <div class="title">
                             <a href="'.$prefix.$categoryUrl.$row['link'].'/">'.$row['h1'].'</a>
                         </div>
-                        <div class="photo">
-                            <a href="'.$prefix.$categoryUrl.$row['link'].'/"><img src="'.$row['picture'].'" alt="'.$row['h1'].'" title="Подробнее"></a>
-                        </div>
+                        <div class="date">'.dateFormat($row['date']).'</div>
+                        '.$blogPostPicture.'
                         <div class="desc">
                             '.$row['anons'].'
                         </div>
@@ -131,8 +145,9 @@ if(($module == 'blog' && $categoryUrl !== '' && $postUrl == null) || $module == 
 
             $pageName = $row['h1'];
             $date = dateFormat($row['date']);
+            $dateUpdate = strtotime($row['date_update']) < 0 || $row['date_update'] == $row['date'] ? '' : '<br>Обновлено: '.dateFormat($row['date_update']);
             $out = '<div class="details">
-                    <div class="date">Дата: '.$date.'</div>
+                    <div class="date">Опубликовано: '.$date.$dateUpdate.'</div>
                     <div class="category">Рубрика: <a href="/blog/'.$linkPost.'/">'.$categoryName.'</a></div>
                 </div>'
                 .$row['text']

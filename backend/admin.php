@@ -50,7 +50,9 @@ switch ($url[2]){
         $page .= '<strong>Портфолио</strong>';
         if($url[3] == 'technologies'){
             require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/technologies.php");
-        }else{
+        }elseif ($url[3] == 'changelog') {
+            require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/changelog.php");
+        } else{
             require_once($_SERVER['DOCUMENT_ROOT']."/backend/pages/portfolio.php");
         }
         break;

@@ -7,6 +7,7 @@ $prefix = 'portfolio/';
 $urlItem = $url[2];
 $breadCrumb = '<a href = "/">Главная</a> / ';
 $blogCategory = '';
+$isChangelog = $url[3] == 'changelog';
 
 $shareBlock = file_get_contents($_SERVER['DOCUMENT_ROOT']."/templates/share.html");
 
@@ -53,6 +54,7 @@ if($urlItem == null){
 }else{
     if($query = mysqli_query($connect, "SELECT * FROM portfolio WHERE link = '$urlItem'") and $row = mysqli_fetch_assoc($query) and $row != '') {
         if($row['status'] == '1'){
+            $id = $row['id'];
             $pageName = $row['name'];
             $date = dateFormat($row['date']);
             $title = $row['title'];
@@ -60,10 +62,40 @@ if($urlItem == null){
             $out = '<div class="item"></div>';
 
             $out = '<div class="details">
-                        <div class="date">Дата: '.$date.'</div>
+                        <div class="date">Добавлен: '.$date.'</div>
                         <div class="category">Технологии: '.getTech($connect, $row).'</div>
-                    </div>'
-                .$row['about'];
+                    </div>
+                    <div class="tabs">
+                        <a href="/portfolio/'.$urlItem.'/" data-id="">Описание</a>
+                        <a href="/portfolio/'.$urlItem.'/changelog/" data-id="changelog">История обновлений</a>
+                    </div>';
+
+            if ($isChangelog) {
+                if($queryChangeLog = mysqli_query($connect, "SELECT * FROM portfolio_changelog WHERE portfolio_id = '$id' ORDER BY date DESC") and mysqli_fetch_assoc($queryChangeLog) != '') {
+                    mysqli_data_seek($queryChangeLog, 0);
+                    while($rowChangeLog = mysqli_fetch_assoc($queryChangeLog)){
+                        $logVersion = $rowChangeLog['version'];
+                        $logDate = $rowChangeLog['date'];
+                        $logText = $rowChangeLog['text'];
+
+                        $out .= '
+                        <p><strong>'.$logVersion.' от '.$logDate.'</strong></p>
+                        '.$logText;
+                    }
+                }
+                if ($row['end'] == '1') {
+                    $out .= '
+                        <p><strong>'.$date.'</strong></p>
+                        <p>Выпуск первой версии.</p>
+                    ';
+                } else {
+                    $out .= '<p>Продукт не опубликован</p>';
+                }
+            } else {
+                $out .= $row['about'];
+            }
+
+
             $breadCrumb .= '<a href="/portfolio/">'.$portfolio.'</a> / '.$pageName;
 
             $end = $row['end'] == '1' ? '<img src="/img/ok.png" alt="Завершен">Завершен' : '<img src="/img/process.png" alt="В разработке">В разработке';
@@ -72,7 +104,7 @@ if($urlItem == null){
             $blogCategory = '<div class="categoryList">
                             <div class="header-blog">Детали проекта</div>';
             $blogCategory .= '<div class="item"><div class="text">'.$end.'</div></div>';
-            $blogCategory .= '<div class="item"><div class="text"><img src="/img/calendar.png" alt="Дата"> Дата: '.$date.'</div></div>';
+            $blogCategory .= '<div class="item"><div class="text"><img src="/img/calendar.png" alt="Дата"> Добавлен: '.$date.'</div></div>';
             $blogCategory .= $github;
             $blogCategory .= '<div class="other-block"><div class="header-blog">Кратко о проекте</div>';
             $blogCategory .= '<div class="item"><div class="text">'.$row['anons'].'</div></div></div>';

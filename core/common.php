@@ -28,7 +28,7 @@ if($module !== 'admin'){
     require_once($_SERVER['DOCUMENT_ROOT']."/modules/404.php");
 
     if($module == '404'){
-        header("HTTP/1.0 404 Not Found");
+       // header("HTTP/1.0 404 Not Found");
     }
 
     // Получение всех мета-тегов

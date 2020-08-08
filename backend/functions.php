@@ -81,6 +81,14 @@ function getLink($connect, $linkId, $table){
     return $link;
 }
 
+function getName ($connect, $linkId, $table) {
+    $name = '';
+    if($query = mysqli_query($connect, "SELECT * FROM $table WHERE `id` = $linkId") and $row = mysqli_fetch_assoc($query) and $row != '') {
+        $name = $row['name'];
+    }
+    return $name;
+}
+
 function getSelectFromOtherTable($connect, $linkId, $table){ // Select из другой таблицы.
     $selectOut = '';
     if($query = mysqli_query($connect, "SELECT * FROM $table") and mysqli_fetch_assoc($query) !=''){
@@ -91,7 +99,7 @@ function getSelectFromOtherTable($connect, $linkId, $table){ // Select из др
                 if($row['id'] == $linkId){
                     $selected = ' selected';
                 }
-                $selectOut .= '<option value="'.$row['id'].'"'.$selected.'>'.$row['link'].'</option>';
+                $selectOut .= '<option value="'.$row['id'].'"'.$selected.'>'.$row['name'].'</option>';
             }
         }
     }

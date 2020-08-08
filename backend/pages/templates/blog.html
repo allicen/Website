@@ -10,7 +10,7 @@
                 <th>Картинка</th>
                 <th>Категория</th>
                 <th>Title</th>
-                <th>Дата</th>
+                <th>Обновлено</th>
                 <th>Действия</th>
             </tr>
             <?=$out;?>
@@ -25,13 +25,14 @@
             <div class="row">
                 <div class="name">Название <span class="red">*</span></div>
                 <label class="value">
-                    <input type="text" name="name" placeholder="Введите название записи" required value="<?=$name;?>"/>
+                    <input type="text" name="name" placeholder="Введите название записи" required value="<?=$name;?>" class="name-for-generate"/>
                 </label>
             </div>
             <div class="row">
                 <div class="name">Ссылка <span class="red">*</span></div>
                 <label class="value">
-                    <input type="text" name="link" placeholder="Введите ссылку на запись" required value="<?=$link;?>"/>
+                    <input type="text" name="link" placeholder="Введите ссылку на запись" required value="<?=$link;?>" class="input-for-generate"/>
+                    <a href="#" title="Сгенерировать ссылку по заголовку" class="generate-link" onclick="generateLink(event)">сгенерировать ссылку</a>
                 </label>
             </div>
             <div class="row">

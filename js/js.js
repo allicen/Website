@@ -161,7 +161,10 @@ $(function(){
     let index = 2;
     let heightGallery = 194;
     let stop = false;
-    getFirstLine(heightGallery);
+    // время на загрузку
+    setTimeout(function(){
+        getFirstLine(heightGallery);
+    },2000);
     function getFirstLine(height){
         let elem = $(".gallery .items dl");
         elem.each(function (i) {
@@ -204,5 +207,20 @@ $(function(){
         }
     });
 
+    getColorForTabs();
+
 });
 
+// Поменять цвет вкладок в портфолио
+function getColorForTabs() {
+    let tabs = document.querySelectorAll('.tabs a');
+    const pageUrl = document.location.pathname.toString().split('/')[3];
+    for(let elem = 0; elem < tabs.length; elem++){
+        let attr = tabs[elem].dataset.id;
+        if(attr === pageUrl){
+            tabs[elem].classList.add('active');
+        }else {
+            tabs[elem].classList.remove('active');
+        }
+    }
+}
