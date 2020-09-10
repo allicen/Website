@@ -18,17 +18,22 @@ $pageName = '';
 $out = '';
 $breadCrumb = '';
 
+// Подключение справочника
+if ($link == 'manual') {
+    require_once($_SERVER['DOCUMENT_ROOT']."/manual/index.php");
+}
+
 $module = ($link == '' || $link == 'index.php' || $link == 'login.html') ? 'main' :
     (($link == 'admin') ? 'admin' :
 //        (($link == 'contacts' || $link == 'search') ? 'page' :
             (($link == 'blog') ? 'blog' :
                 (($link == 'portfolio') ? 'portfolio' : 'page')));
 
-if($module !== 'admin'){
+if($module !== 'admin' && $link != 'manual'){
     require_once($_SERVER['DOCUMENT_ROOT']."/modules/404.php");
 
     if($module == '404'){
-       // header("HTTP/1.0 404 Not Found");
+        header("HTTP/1.0 404 Not Found");
     }
 
     // Получение всех мета-тегов
@@ -64,7 +69,7 @@ if($module !== 'admin'){
 
     // Вывод подвала
     require_once($_SERVER['DOCUMENT_ROOT']."/core/footer.php");
-}else{
+}else if ($link != 'manual') {
     require_once($_SERVER['DOCUMENT_ROOT']."/backend/admin.php");
 }
 

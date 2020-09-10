@@ -1,0 +1,111 @@
+<div class="item" data-category="python">
+    <a name="python"></a>
+    <h2>Примеры на Python</h2>
+    <h3>1. Вывести стоки, содержащие подстроку "cat"</h3>
+    <pre>
+        <code class="python">
+import re
+import sys
+
+pattern = r"cat"
+
+for line in sys.stdin:
+    line = line.rstrip()
+    out = re.findall(pattern, line)
+    if len(out) >= 2:
+        print(line)
+        </code>
+    </pre>
+    <h3>2. Вывести стоки, содержащие слово "cat"</h3>
+    <pre>
+        <code class="python">
+pattern = r"\bcat*?\b"
+
+for line in sys.stdin:
+    line = line.rstrip()
+    out = re.findall(pattern, line)
+    if len(out) > 0:
+        print(line)
+        </code>
+    </pre>
+    <h3>3. Вывести стоки, содержащие 2 буквы "z", между которыми находится ровно 3 символа</h3>
+    <pre>
+        <code class="python">
+pattern = r"z.{3}z"
+
+for line in sys.stdin:
+    line = line.rstrip()
+    out = re.findall(pattern, line)
+    if len(out) > 0:
+        print(line)
+        </code>
+    </pre>
+    <h3>4. Вывести стоки, содержащие обратный слеш "\"</h3>
+    <pre>
+        <code class="python">
+pattern = r"\\"
+
+for line in sys.stdin:
+    line = line.rstrip()
+    out = re.findall(pattern, line)
+    if len(out) > 0:
+        print(line)
+        </code>
+    </pre>
+    <h3>5. Заменить в каждой строке "human" на подстроку "computer"</h3>
+    <pre>
+        <code class="python">
+pattern = r"human"
+
+for line in sys.stdin:
+    line = line.rstrip()
+    out = re.sub(pattern, "computer", line)
+    print(out)
+        </code>
+    </pre>
+    <h3>6.  Заменить первое вхождение слова, состоящего только из латинских букв "a" (регистр не важен), на слово "argh"</h3>
+    <pre>
+        <code class="python">
+pattern = r"\ba+\b"
+
+for line in sys.stdin:
+    line = line.rstrip()
+    out = re.sub(pattern, "argh", line, count=1, flags=re.IGNORECASE)
+    print(out)
+        </code>
+    </pre>
+    <h3>7. В каждой строке поменять местами две первых буквы в каждом слове, состоящем хотя бы из двух букв</h3>
+    <pre>
+        <code class="python">
+pattern = r"\b(\w)(\w)"
+
+for line in sys.stdin:
+    line = line.rstrip()
+    outLine = re.sub(pattern, r"\2\1", line)
+    print(outLine)
+        </code>
+    </pre>
+    <h3>8. В каждой строке замените все вхождения нескольких одинаковых букв на одну букву</h3>
+    <pre>
+        <code class="python">
+pattern = r"(\w)\1+"
+
+for line in sys.stdin:
+    line = line.rstrip()
+    outLine = re.sub(pattern, r"\1", line)
+    print(outLine)
+        </code>
+    </pre>
+    <h3>9. Вывести стоки, содержащие слово, состоящее из двух одинаковых частей (тандемный повтор)</h3>
+    <pre>
+        <code class="python">
+pattern = r"\b(\w+)\1\b"
+
+for line in sys.stdin:
+    line = line.rstrip()
+    out = re.findall(pattern, line)
+    if len(out) > 0:
+        print(line)
+        </code>
+    </pre>
+</div>

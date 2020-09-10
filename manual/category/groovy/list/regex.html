@@ -1,0 +1,153 @@
+<div class="item" data-category="regex">
+    <a name="regex"></a>
+    <h2>Regular expression</h2>
+    <p>Синтаксис:</p>
+    <pre>
+        <code class="java">
+'Groovy' =~ 'Groovy'
+'Groovy' =~ 'oo'
+'Groovy' ==~ 'Groovy'
+'Groovy' ==~ 'oo'
+'Groovy' =~ '∧G'
+‘Groovy' =~ 'G$'
+‘Groovy' =~ 'Gro*vy'
+'Groovy' =~ 'Gro{2}vy'
+        </code>
+    </pre>
+    <h3>Pattern operator <span class="code">~string</span></h3>
+    <pre>
+        <code class="java">
+def pattern = ~"([Gg])roovy"
+assert pattern.class == Pattern
+        </code>
+    </pre>
+    <p>Разница между <span class="code">~"pattern"</span> и <span class="code">~/pattern/</span></p>
+    <pre>
+        <code class="java">
+assert (/Version \d+\.\d+\.\d+/) == 'Version \\d+\\.\\d+\\.\\d+'
+assert 'The price is $99' ==~ /The price is \$\d+/
+        </code>
+    </pre>
+    <h3>Оператор поиска <span class="code">=~</span></h3>
+    <pre>
+        <code class="java">
+def matcher = "My code is groovier and better when I use Groovy there" =~ /\S+er\b/
+
+assert matcher.find()
+assert matcher.size() == 2
+assert matcher[0..-1] == ["groovier", "better"]
+
+// Если в строке есть подстрока, соответствующая выражению /\S+er\b/
+if ("My code is groovier and better when I use Groovy there" =~ /\S+er\b/) {
+    println "At least one element matches the pattern..."
+}
+        </code>
+    </pre>
+    <h3>Оператор точного соответствия <span class="code">==~</span></h3>
+    <pre>
+        <code class="java">
+assert "v3.12.4" ==~ /v\d{1,3}\.\d{1,3}\.\d{1,3}/
+assert !("GROOVY-123: some change" ==~ /[A-Z]{3,6}-\d{1,4}/)
+assert "GROOVY-123: some change" ==~ /[A-Z]{3,6}-\d{1,4}.{1,100}/
+
+// Если строка в точности соответствует выражению /\d+/
+if ("Lorem ipsum dolor sit amet" ==~ /\d+/) {
+    println "This line is not executed..."
+}
+        </code>
+    </pre>
+    <h3>Пример 1. Найти все числа в строке</h3>
+    <pre>
+        <code class="java">
+def text = """
+This text contains some numbers like 1024
+or 256. Some of them are odd (like 3) or
+even (like 2).
+"""
+
+def result = (text =~ /\d+/).findAll()
+
+assert result == ["1024", "256", "3", "2"]
+        </code>
+    </pre>
+    <h3>Пример 2. Извлечение слов, начинающихся и заканчивающихся одной и той же буквой</h3>
+    <pre>
+        <code class="java">
+def result = ("This is test. Test is good, lol." =~ /(?i)\b([a-z])[a-z]*\1\b/).findAll()*.first()
+
+assert result == ["test", "Test", "lol"]
+        </code>
+    </pre>
+    <h3>Пример 3. Извлечение совпадающих элементов с использованием именованной группы</h3>
+    <pre>
+        <code class="java">
+def matcher = "JIRA-231 lorem ipsum dolor sit amet" =~ /^(?<jira>[A-Z]{2,4}-\d{1,3}).*$/
+
+assert matcher.matches()
+assert matcher.group("jira") == "JIRA-231"
+assert matcher.replaceAll('Found ${jira} ID') == 'Found JIRA-231 ID'
+        </code>
+    </pre>
+    <h3>Пример 4. Использование множественного присваивания для извлечения совпадающих элементов</h3>
+    <pre>
+        <code class="java">
+def (_,price,discount) = ('Some item name: $99.99 (-15%)' =~ /\$(\d{1,4}\.\d{2})\s?\(?(-\d+%)?\)?/)[0]
+
+assert _ == '$99.99 (-15%)'
+assert price == "99.99"
+assert discount == "-15%"
+
+def (_,price,discount) = ('Some item name: $49.99' =~ /\$(\d{1,4}\.\d{2})\s?\(?(-\d+%)?\)?/)[0]
+
+assert _ == '$49.99'
+assert price == "49.99"
+assert discount == null
+
+def (_,major,minor,patch) = ("v3.21.0" =~ /^v(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/)[0]
+
+assert _ == "v3.21.0"
+assert major == "3"
+assert minor == "21"
+assert patch == "0"
+        </code>
+    </pre>
+    <h3>Пример 5. Замена совпадающих элементов с помощью <span class="code">replaceFirst()</span></h3>
+    <pre>
+        <code class="java">
+def version = "v3.21.0"
+def expected = "v3.21.1"
+def pattern = ~/^v(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/
+
+def newVersion = version.replaceFirst(pattern) { _, major, minor, patch ->
+    "v${major}.${minor}.${(patch as int) + 1}"
+}
+
+assert newVersion == expected
+        </code>
+    </pre>
+    <h3>Пример 6. Использование регулярных выражений в <span class="code">switch</span></h3>
+    <pre>
+        <code class="java">
+def input = "test"
+
+switch (input) {
+    case ~/\d{3}/:
+        println "The number has 3 digits."
+        break
+
+    case ~/\w{4}/:
+        println "The word has 4 letters."
+        break
+
+    default:
+        println "Unrecognized..."
+}
+        </code>
+    </pre>
+    <p>Результат:</p>
+    <pre>
+        <code class="java">
+The word has 4 letters.
+        </code>
+    </pre>
+</div>

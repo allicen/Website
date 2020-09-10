@@ -1,0 +1,138 @@
+<div class="item" data-category="map">
+    <a name="map"></a>
+    <h2>Map</h2>
+    <p>Пустая карта</p>
+    <pre>
+        <code class="groovy">
+def emptyMap = [:]
+        </code>
+    </pre>
+    <p>Объявление карты с параметрами</p>
+    <pre>
+        <code class="groovy">
+def sampleMap = [color:'Blue', shape:'Circle']
+        </code>
+    </pre>
+    <h3>Добавление значений</h3>
+    <pre>
+        <code class="groovy">
+def sampleMap = [:]
+
+sampleMap.put('thickness', 10)
+sampleMap['color'] = 'Blue'
+sampleMap.weight = 500
+sampleMap.'shape' = 'Circle'
+sampleMap << [price:150]
+        </code>
+    </pre>
+    <h3>Замена значений</h3>
+    <pre>
+        <code class="groovy">
+def sampleMap = [color:'Blue', weight:500, shape:'Circle', thickness:10, price:150]
+
+sampleMap['color'] = 'Red'
+sampleMap.'shape' = 'Rectangle'
+sampleMap.weight = 200
+sampleMap.put('thickness', 5)
+sampleMap << [price:99]
+        </code>
+    </pre>
+    <h3>Удаление значений</h3>
+    <pre>
+        <code class="groovy">
+def sampleMap = [color:'Blue', weight:500, shape:'Circle', thickness:10, price:150]
+
+sampleMap.remove('color')
+sampleMap = sampleMap - ['shape':'Circle']
+sampleMap -= [weight:500]
+        </code>
+    </pre>
+    <h3>Получение значений</h3>
+    <pre>
+        <code class="groovy">
+def sampleMap = [color:'Blue', weight:500, shape:'Circle', thickness:10, price:150]
+
+println "The color is: ${sampleMap.get('color')}"
+println "The weight is: ${sampleMap['weight']}"
+println "The shape is: ${sampleMap.shape}"
+println "The thickness is: ${sampleMap.'thickness'}"
+        </code>
+    </pre>
+    <h3>Содержит ли эта карта этот ключ <span class="code">containsKey( )</span></h3>
+    <pre>
+        <code class="java">
+class Example {
+   static void main(String[] args) {
+      def mp = ["TopicName" : "Maps", "TopicDescription" : "Methods in Maps"]
+
+      mp.containsKey("TopicName") // true
+      mp.containsKey("Topic") // false
+   }
+}
+        </code>
+    </pre>
+    <h3>Найти значение по ключу <span class="code">get( )</span></h3>
+    <p>Если ключа нет, возвращает null.</p>
+    <pre>
+        <code class="java">
+class Example {
+   static void main(String[] args) {
+      def mp = ["TopicName" : "Maps", "TopicDescription" : "Methods in Maps"]
+
+      mp.get("TopicName") // Maps
+      mp.get("Topic")  // null
+   }
+}
+        </code>
+    </pre>
+    <h3>Набор ключей карты <span class="code">keySet( )</span></h3>
+    <pre>
+        <code class="java">
+class Example {
+   static void main(String[] args) {
+      def mp = ["TopicName" : "Maps", "TopicDescription" : "Methods in Maps"]
+      mp.keySet()  //  [TopicName, TopicDescription]
+   }
+}
+        </code>
+    </pre>
+    <h3>Добавление и замена значений <span class="code">put( )</span></h3>
+    <p>Связывает указанное значение с указанным ключом на этой карте. Если эта карта ранее содержала сопоставление для этого ключа, старое значение заменяется указанным значением.</p>
+    <pre>
+        <code class="java">
+class Example {
+   static void main(String[] args) {
+      def mp = ["TopicName" : "Maps", "TopicDescription" : "Methods in Maps"]
+      mp.put("TopicID","1")
+      println(mp) // [TopicName:Maps, TopicDescription:Methods in Maps, TopicID:1]
+   }
+}
+        </code>
+    </pre>
+    <h3>Размер карты <span class="code">size( )</span></h3>
+    <p>Возвращает количество элементов в карте.</p>
+    <pre>
+        <code class="java">
+class Example {
+   static void main(String[] args) {
+      def mp = ["TopicName" : "Maps", "TopicDescription" : "Methods in Maps"]
+      mp.size() // 2
+
+      mp.put("TopicID","1")
+      mp.size() // 3
+   }
+}
+        </code>
+    </pre>
+    <h3>Значения карты <span class="code">values( )</span></h3>
+    <pre>
+        <code class="java">
+class Example {
+   static void main(String[] args) {
+      def mp = ["TopicName" : "Maps", "TopicDescription" : "Methods in Maps"]
+      mp.values() // [Maps, Methods in Maps]
+   }
+}
+        </code>
+    </pre>
+</div>

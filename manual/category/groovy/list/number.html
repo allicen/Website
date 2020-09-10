@@ -1,0 +1,242 @@
+<div class="item" data-category="number">
+    <a name="number"></a>
+    <h2>Number</h2>
+    <p>Объявление переменных с числами:</p>
+    <pre>
+        <code class="groovy">
+Integer x = 5;
+Float y = 1.25;
+def i = 6
+def j = 7.5
+        </code>
+    </pre>
+    <h3>Получение значения числа другого типа <span class="code">*Value( )</span></h3>
+    <pre>
+        <code class="java">
+class Example {
+   static void main(String[] args) {
+      Integer x = 5
+
+      // Конвертирует в double
+      println(x.doubleValue()) // 5.0
+
+      // Конвертирует в byte
+      println(x.byteValue()) // 5
+
+      // Конвертирует в float
+      println(x.floatValue()) 5.0
+
+      // Конвертирует в long
+      println(x.longValue()) // 5
+
+      // Конвертирует в short
+      println(x.shortValue()) // 5
+
+      // Конвертирует в int
+      println(x.intValue()) // 5
+   }
+}
+        </code>
+    </pre>
+    <h3>Сравнение чисел <span class="code">compareTo( )</span></h3>
+    <pre>
+        <code class="java">
+class Example {
+   static void main(String[] args) {
+      Integer x = 5
+
+      // Первое число больше второго
+      x.compareTo(3) // 1
+
+      // Числа равны
+      x.compareTo(5) // 0
+
+      // Первое число меньще второго
+      x.compareTo(8) // -1
+   }
+}
+        </code>
+    </pre>
+    <h3>Проверка на равенство<span class="code">equals( )</span></h3>
+    <pre>
+        <code class="java">
+class Example {
+   static void main(String[] args) {
+      Integer x = 5
+      Integer y = 10
+      Integer z = 5
+
+      // Сравнение с другим числом
+      x.equals(y) // false
+
+      // Сравнение с таким же числом
+      x.equals(z) // true
+   }
+}
+        </code>
+    </pre>
+    <h3>Получить объект числа с указанным значением <span class="code">valueOf( )</span></h3>
+    <p>Синтаксис:</p>
+    <pre>
+        <code class="java">
+static Integer valueOf(int i)
+static Integer valueOf(String s)
+static Integer valueOf(String s, int radix) // radix - основание системы счисления
+        </code>
+    </pre>
+    <p>Пример:</p>
+    <pre>
+        <code class="java">
+class Example {
+   static void main(String[] args) {
+      int x = 5
+      Double z = 15.56
+
+      Integer xNew = Integer.valueOf(x)
+      println(xNew) // 5
+
+      Double zNew = Double.valueOf(z)
+      println(zNew) // 15.56
+   }
+}
+        </code>
+    </pre>
+    <h3>Приведение числа к строке <span class="code">toString( )</span></h3>
+    <pre>
+        <code class="java">
+Integer x = 5
+
+x.toString() // 5
+Integer.toString(12) // 12
+        </code>
+    </pre>
+    <h3>Приведение строки к числу <span class="code">parseInt( )</span>, <span class="code">parseDouble( )</span></h3>
+    <p>Синтаксис:</p>
+    <pre>
+        <code class="java">
+static int parseInt(String s)
+static int parseInt(String s, int radix)  // radix - основание системы счисления
+        </code>
+    </pre>
+    <p>Пример:</p>
+    <pre>
+        <code class="java">
+int x = Integer.parseInt("9") // 9
+double y = Double.parseDouble("5") // 5.0
+int z = Integer.parseInt("444",16) // 1092
+        </code>
+    </pre>
+    <h3>Модуль числа <span class="code">abs( )</span></h3>
+    <pre>
+        <code class="java">
+Integer a = -8
+double b = -100
+float c = -90
+
+Math.abs(a) // 8
+Math.abs(b) // 100.0
+Math.abs(c) // 90.0
+        </code>
+    </pre>
+    <h3>Округление чисел <span class="code">ceil( )</span>, <span class="code">floor( )</span>, <span class="code">rint( )</span>, <span class="code">round( )</span></h3>
+    <p>Возвращение double-значений:</p>
+    <pre>
+        <code class="java">
+double a = -100.675
+float b = -90
+
+// Округление в большую сторону
+Math.ceil(a) // -100.0
+Math.ceil(b) // -90.0
+
+// Округление в меньшую сторону
+Math.floor(a) // -101.0
+Math.floor(b) // -90.0
+
+// Округление к ближайшему целому
+double d = 100.675
+double e = 100.500
+double f = 100.200
+
+Math.rint(d) // 101.0
+Math.rint(e) // 100.0
+Math.rint(f) // 100.0
+        </code>
+    </pre>
+    <p>Возвращение int/long-значений:</p>
+    <pre>
+        <code class="java">
+// Округление по математическим правилам
+double d = 100.675
+double e = 100.500
+
+float f = 100
+float g = 90f
+
+Math.round(d) // 101
+Math.round(e) // 101
+Math.round(f) // 100
+Math.round(g) // 90
+        </code>
+    </pre>
+    <h3>Минимальное и максимальное значение <span class="code">min( )</span>, <span class="code">max( )</span></h3>
+    <pre>
+        <code class="java">
+// Минимальное из чисел
+Math.min(12.123, 12.456) // 12.123
+Math.min(23.12, 23.0) // 23.0
+
+// Максимальное из чисел
+Math.max(12.123, 12.456) // 12.456
+Math.max(23.12, 23.0) // 23.12
+        </code>
+    </pre>
+    <h3>Случайное число <span class="code">random( )</span></h3>
+    <pre>
+        <code class="java">
+Math.random()
+        </code>
+    </pre>
+    <p>Формат получаемого числа: 0.0543333676591804.</p>
+    <h3>Другие математические методы</h3>
+    <p>Возведение в степень:</p>
+    <pre>
+        <code class="java">
+double x = 11.635
+double y = 2.76
+
+System.out.printf("The value of e is %.4f%n", Math.E) // The value of e is 2.7183
+System.out.printf("pow(%.3f, %.3f) is %.3f%n", x, y, Math.pow(x, y)) // pow(11.635, 2.760) is 874.008
+        </code>
+    </pre>
+    <p>Извлечение квадратного корня:</p>
+    <pre>
+        <code class="java">
+double x = 11.635
+double y = 2.76
+
+System.out.printf("The value of e is %.4f%n", Math.E) // The value of e is 2.7183
+System.out.printf("sqrt(%.3f) is %.3f%n", x, Math.sqrt(x)) // sqrt(11.635) is 3.411
+        </code>
+    </pre>
+    <p>Получение натурального логарифма:</p>
+    <pre>
+        <code class="java">
+double x = 11.635
+double y = 2.76
+
+System.out.printf("The value of e is %.4f%n", Math.E) // The value of e is 2.7183
+System.out.printf("log(%.3f) is %.3f%n", x, Math.log(x)) // log(11.635) is 2.454
+        </code>
+    </pre>
+    <p>Получить основание натурального логарифма e в степени аргумента:</p>
+    <pre>
+        <code class="java">
+double x = 11.635
+double y = 2.76
+
+System.out.printf("The value of e is %.4f%n", Math.E) // The value of e is 2.7183
+System.out.printf("exp(%.3f) is %.3f%n", x, Math.exp(x)) // exp(11.635) is 112983.831
+        </code>
+    </pre>
+</div>

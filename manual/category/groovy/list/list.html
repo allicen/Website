@@ -1,0 +1,231 @@
+<div class="item" data-category="list">
+    <a name="list"></a>
+    <h2>List</h2>
+    <p>Примеры списков:</p>
+    <pre>
+        <code class="java">
+[11, 12, 13, 14] // Список с числами
+['Angular', 'Groovy', 'Java'] // Список со строками
+[1, 2, [3, 4], 5] // Вложенные списки
+['Groovy', 21, 2.11] // Неоднородные списки
+[ ] // Пустой список
+        </code>
+    </pre>
+    <h3>Добавление в список <span class="code">add( )</span></h3>
+    <p>1. Синтаксис:</p>
+    <pre>
+        <code class="groovy">
+boolean add(Object value)
+        </code>
+    </pre>
+    <p>Параметры:</p>
+    <ul>
+        <li><span class="code">value</span> - Значение, которое должно быть добавлено в список.</li>
+    </ul>
+    <p>Возвращаемое значение: true/false в завимости от того, был ли добавлен элемент.</p>
+    <p>2. Синтаксис:</p>
+    <pre>
+        <code class="groovy">
+void add(int index, Object value)
+        </code>
+    </pre>
+    <p>Параметры:</p>
+    <ul>
+        <li><span class="code">value</span> - Значение, которое должно быть добавлено в список.</li>
+        <li><span class="code">index</span> - Индекс, с которого нужно добавить элементы.</li>
+    </ul>
+    <p>Пример:</p>
+    <pre>
+        <code class="java">
+def lst = [11, 12, 13, 14]
+lst.add(15) // [11, 12, 13, 14, 15]
+lst.add(2,20) //[11, 12, 20, 13, 14, 15]
+        </code>
+    </pre>
+    <h3>Содержит ли список определенное значение <span class="code">contains( )</span></h3>
+    <p>Синтаксис:</p>
+    <pre>
+        <code class="groovy">
+boolean contains(Object value)
+        </code>
+    </pre>
+    <p>Параметры:</p>
+    <ul>
+        <li><span class="code">value</span> - Значение, которое нужно найти в списке.</li>
+    </ul>
+    <p>Возвращаемое значение: true/false в завимости от того, был ли найден элемент.</p>
+    <p>Пример:</p>
+    <pre>
+        <code class="java">
+def lst = [11, 12, 13, 14];
+lst.contains(12); // true
+lst.contains(18); // false
+        </code>
+    </pre>
+    <h3>Получить элемент <span class="code">get( )</span></h3>
+    <p>Синтаксис:</p>
+    <pre>
+        <code class="groovy">
+Object get(int index)
+        </code>
+    </pre>
+    <p>Параметры:</p>
+    <ul>
+        <li><span class="code">index</span> - Индекс элемента.</li>
+    </ul>
+    <p>Возвращаемое значение: объект в указанной позиции.</p>
+    <p>Пример:</p>
+    <pre>
+        <code class="java">
+def lst = [11, 12, 13, 14]
+lst.get(0) // 11
+lst.get(2) // 13
+        </code>
+    </pre>
+    <h3>Проверка списка на пустоту <span class="code">isEmpty( )</span></h3>
+    <p>Синтаксис:</p>
+    <pre>
+        <code class="groovy">
+boolean isEmpty()
+        </code>
+    </pre>
+    <p>Возвращаемое значение: true - если список пустой, false - если не пустой.</p>
+    <p>Пример:</p>
+    <pre>
+        <code class="java">
+def lst = [11, 12, 13, 14]
+def emptylst = []
+
+lst.isEmpty() // false
+emptylst.isEmpty() // true
+        </code>
+    </pre>
+    <h3>Разность списков <span class="code">minus( )</span></h3>
+    <p>Метод создает новый список, в котором не будет указанных элементов.</p>
+    <p>Синтаксис:</p>
+    <pre>
+        <code class="groovy">
+List minus(Collection collection)
+        </code>
+    </pre>
+    <p>Параметры:</p>
+    <ul>
+        <li><span class="code">collection</span> - Список со значениями.</li>
+    </ul>
+    <p>Возвращаемое значение: новый список.</p>
+    <p>Пример:</p>
+    <pre>
+        <code class="java">
+def lst = [11, 12, 13, 14]
+def newlst = []
+
+newlst = lst.minus([12,13]) // [11, 14]
+        </code>
+    </pre>
+    <h3>Объединение списков <span class="code">plus( )</span></h3>
+    <p>Метод создает новый список, в котором будут значения исходных списков.</p>
+    <p>Синтаксис:</p>
+    <pre>
+        <code class="groovy">
+List plus(Collection collection)
+        </code>
+    </pre>
+    <p>Параметры:</p>
+    <ul>
+        <li><span class="code">collection</span> - Список со значениями.</li>
+    </ul>
+    <p>Возвращаемое значение: новый список.</p>
+    <p>Пример:</p>
+    <pre>
+        <code class="java">
+def lst = [11, 12, 13, 14]
+def newlst = []
+
+newlst = lst.plus([15,16]) // [11, 12, 13, 14, 15, 16]
+        </code>
+    </pre>
+    <h3>Удаление последнего элемента из списка <span class="code">pop( )</span></h3>
+    <p>Синтаксис:</p>
+    <pre>
+        <code class="groovy">
+Object pop()
+        </code>
+    </pre>
+    <p>Возвращаемое значение: удаленный из списка элемент.</p>
+    <p>Пример:</p>
+    <pre>
+        <code class="java">
+def lst = [11, 12, 13, 14]
+
+lst.pop() // 14
+println(lst) // [11, 12, 13]
+        </code>
+    </pre>
+    <h3>Удаление элемента по индексу <span class="code">remove( )</span></h3>
+    <p>Синтаксис:</p>
+    <pre>
+        <code class="groovy">
+Object remove(int index)
+        </code>
+    </pre>
+    <p>Параметры:</p>
+    <ul>
+        <li><span class="code">index </span> - Позиция элемента.</li>
+    </ul>
+    <p>Возвращаемое значение: удаленный элемент.</p>
+    <p>Пример:</p>
+    <pre>
+        <code class="java">
+def lst = [11, 12, 13, 14]
+
+lst.remove(2) // 13
+println(lst) // [11, 12, 14]
+        </code>
+    </pre>
+    <h3>Разворот списка <span class="code">reverse( )</span></h3>
+    <p>Метод создает новый список, в котором все элементы исходного списка располагаются в обратном порядке.</p>
+    <p>Синтаксис:</p>
+    <pre>
+        <code class="groovy">
+List reverse()
+        </code>
+    </pre>
+    <p>Возвращаемое значение: новый список.</p>
+    <p>Пример:</p>
+    <pre>
+        <code class="java">
+def lst = [11, 12, 13, 14]
+def revlst = lst.reverse() // [14, 13, 12, 11]
+        </code>
+    </pre>
+    <h3>Размер списка <span class="code">size( )</span></h3>
+    <p>Синтаксис:</p>
+    <pre>
+        <code class="groovy">
+int size()
+        </code>
+    </pre>
+    <p>Возвращаемое значение: размер списка.</p>
+    <p>Пример:</p>
+    <pre>
+        <code class="java">
+def lst = [11, 12, 13, 14]
+println(lst.size) // 4
+        </code>
+    </pre>
+    <h3>Сортировка списка <span class="code">sort( )</span></h3>
+    <p>Синтаксис:</p>
+    <pre>
+        <code class="groovy">
+List sort()
+        </code>
+    </pre>
+    <p>Возвращаемое значение: отсортированный список.</p>
+    <p>Пример:</p>
+    <pre>
+        <code class="java">
+def lst = [13, 12, 15, 14]
+def newlst = lst.sort() // [12, 13, 14, 15]
+        </code>
+    </pre>
+</div>

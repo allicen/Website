@@ -1,0 +1,603 @@
+<div class="item" data-category="list">
+    <a name="createCriteria"></a>
+    <h2>createCriteria</h2>
+    <p>Примеры использования:</p>
+    <pre>
+        <code class="java">
+def c = Account.createCriteria()
+def results = c.list {
+    like("holderFirstName", "Fred%")
+    and {
+        between("balance", 500, 1000)
+        eq("branch", "London")
+    }
+    maxResults(10)
+    order("holderLastName", "desc")
+}
+        </code>
+    </pre>
+    <p>Вариант с разбивкой на страницы и смещением:</p>
+    <pre>
+        <code class="java">
+def c = Account.createCriteria()
+def results = c.list (max: 10, offset: 10) {
+    like("holderFirstName", "Fred%")
+    and {
+        between("balance", 500, 1000)
+        eq("branch", "London")
+    }
+    order("holderLastName", "desc")
+}
+        </code>
+    </pre>
+    <h3>Список объектов <span class="code">list( )</span></h3>
+    <p>Возвращает все найденные результаты.</p>
+    <pre>
+        <code class="java">
+def results = Person.createCriteria().list() {
+    eq("name", "Vasya")
+}
+println(results) // Account: 1, Account: 4, Account: 9
+        </code>
+    </pre>
+    <p>В <span class="code">results</span>попадут все объекты Account, у котороых поле <span class="code">name</span> соответствует "Vasya".</p>
+    <h3>Уникальный результат <span class="code">get( )</span></h3>
+    <p>Этот метод используется, если предполагается получить уникальный результат.</p>
+    <pre>
+        <code class="java">
+def results = Person.createCriteria().get {
+    eq("id", "123456")
+}
+println(results) // Account: 1, Account: 4, Account: 9
+        </code>
+    </pre>
+    <h3>Список с возможностью прокрутки <span class="code">scroll( )</span></h3>
+    <p>Используется при работе с большим набором данных. Данные передаются по необходимости.</p>
+    <p>Перебрать всех людей с фамилией Doe:</p>
+    <pre>
+        <code class="java">
+def criteria = Person.createCriteria()
+def result = criteria.scroll{
+    eq ('lastName', 'Doe')
+}
+while (result.next()) {
+    def person = result.get()[0]
+    println "Hello ${person.firstName} ${person.lastName}"
+}
+        </code>
+    </pre>
+    <h3>Список с уникальными результатами <span class="code">listDistinct( )</span></h3>
+    <pre>
+        <code class="java">
+def criteria = Person.createCriteria()
+def result = criteria.listDistinct {
+    projections {
+        property "hobby"
+    }
+}
+        </code>
+    </pre>
+    <p>Список будет содержать уникальные результаты поля "hobby".</p>
+    <h3>Методы критериев</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Метод</th>
+                <th>Описание</th>
+                <th>Пример использования</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>between</strong></td>
+                <td>Свойство находится в указанном интервале</td>
+                <td>
+                    <pre><code class="java">between("balance", 500, 1000)</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>eq</strong></td>
+                <td>Свойство равно указанному значению</td>
+                <td>
+                    <pre><code class="java">eq("branch", "London")
+eq("branch", "london", [ignoreCase: true]) // без учета регистра</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>eqProperty</strong></td>
+                <td>Одно свойство равно другому свойству</td>
+                <td>
+                    <pre><code class="java">eqProperty("lastTx", "firstTx")</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>gt</strong></td>
+                <td>Свойство больше указанного значения</td>
+                <td>
+                    <pre><code class="java">gt("balance",1000)</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>gtProperty</strong></td>
+                <td>Одно свойство больше другого</td>
+                <td>
+                    <pre><code class="java">gtProperty("balance", "overdraft")</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>ge</strong></td>
+                <td>Свойство больше или равно указанному значению</td>
+                <td>
+                    <pre><code class="java">ge("balance", 1000)</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>geProperty</strong></td>
+                <td>Первое свойство больше или равно другому</td>
+                <td>
+                    <pre><code class="java">geProperty("balance", "overdraft")</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>idEq</strong></td>
+                <td>ID объекта равен указанному значению</td>
+                <td>
+                    <pre><code class="java">idEq(1)</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>ilike</strong></td>
+                <td>Поиск соответствия без учета регистра</td>
+                <td>
+                    <pre><code class="java">ilike("holderFirstName", "Steph%")</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>in</strong></td>
+                <td>Свойство находится в числе указанных значений, not - отрицание</td>
+                <td>
+                    <pre><code class="java">'in'("age",[18..65]) or not {'in'("age",[18..65])}</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>isEmpty</strong></td>
+                <td>У свойства пустое значение</td>
+                <td>
+                    <pre><code class="java">isEmpty("transactions")</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>isNotEmpty</strong></td>
+                <td>Свойство должно иметь непустое значение</td>
+                <td>
+                    <pre><code class="java">isNotEmpty("transactions")</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>isNull</strong></td>
+                <td>Свойство null</td>
+                <td>
+                    <pre><code class="java">isNull("holderGender")</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>isNotNull</strong></td>
+                <td>Свойство не null</td>
+                <td>
+                    <pre><code class="java">isNotNull("holderGender")</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>lt</strong></td>
+                <td>Свойство меньше указанногго значения</td>
+                <td>
+                    <pre><code class="java">lt("balance", 1000)</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>ltProperty</strong></td>
+                <td>Первое свойство меньше второго</td>
+                <td>
+                    <pre><code class="java">ltProperty("balance", "overdraft")</code></pre>
+                </td>
+            </tr><tr>
+                <td><strong>le</strong></td>
+                <td>Свойство меньше или равно указанному значению</td>
+                <td>
+                    <pre><code class="java">le("balance", 1000)</code></pre>
+                </td>
+            </tr><tr>
+                <td><strong>leProperty</strong></td>
+                <td>Первое свойство меньше или равно второму</td>
+                <td><pre><code class="java">leProperty("balance", "overdraft")</code></pre></td>
+            </tr>
+            <tr>
+                <td><strong>like</strong></td>
+                <td>Поиск соответствия в строке, равнозначно SQL like</td>
+                <td>
+                    <pre><code class="java">like("holderFirstName", "Steph%")</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>ne</strong></td>
+                <td>Свойство не равно указанному значению</td>
+                <td>
+                    <pre><code class="java">ne("branch", "London")</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>neProperty</strong></td>
+                <td>Первое свойство не равно второму</td>
+                <td>
+                    <pre><code class="java">neProperty("lastTx", "firstTx")</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>order</strong></td>
+                <td>Сортировка результатов в указанном порядке</td>
+                <td>
+                    <pre><code class="java">order("holderLastName", "desc")</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>rlike</strong></td>
+                <td>Поиск сответствий с помощью регулярных выражений (Oracle и MySQL)</td>
+                <td>
+                    <pre><code class="java">rlike("holderFirstName", /Steph.+/)</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>sizeEq</strong></td>
+                <td>Размер свойства равен указанному значению</td>
+                <td>
+                    <pre><code class="java">sizeEq("transactions", 10)</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>sizeGt</strong></td>
+                <td>Размер свойства больше указанного значения</td>
+                <td>
+                    <pre><code class="java">sizeGt("transactions", 10)</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>sizeGe</strong></td>
+                <td>Свойства больше или равно указанному значению</td>
+                <td>
+                    <pre><code class="java">sizeGe("transactions", 10)</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>sizeLt</strong></td>
+                <td>Размер свойства меньше указанного значения</td>
+                <td>
+                    <pre><code class="java">sizeLt("transactions", 10)</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>sizeLe</strong></td>
+                <td>Размер свойства меньше или равно указанному значению</td>
+                <td>
+                    <pre><code class="java">sizeLe("transactions", 10)</code></pre>
+                </td>
+            </tr><tr>
+                <td><strong>sizeNe</strong></td>
+                <td>Размер свойства не равен указанному значению</td>
+                <td>
+                    <pre><code class="java">sizeNe("transactions", 10)</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>sqlRestriction</strong></td>
+                <td>Произвольный SQL</td>
+                <td>
+                    <pre><code class="java">sqlRestriction "char_length(first_name) = 4"</code></pre>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <h3>Свойства запросов</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Метод</th>
+            <th>Описание</th>
+            <th>Пример использования</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>order(String, String)</strong></td>
+                <td>Сортировка по возрастанию или убыванию ('asc' или 'desc')</td>
+                <td>
+                    <pre><code class="java">order "age", "desc"</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>firstResult(int)</strong></td>
+                <td>Задает смещение результатов. Значение 0 вернет все записи до указанного максимума.</td>
+                <td>
+                    <pre><code class="java">firstResult 20</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>maxResults(int)</strong></td>
+                <td>Максимальное количество записей</td>
+                <td>
+                    <pre><code class="java">maxResults 10</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>cache(boolean)</strong></td>
+                <td>Кешировать ли запрос</td>
+                <td>
+                    <pre><code class="java">cache true</code></pre>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <p>Пример:</p>
+    <pre>
+        <code class="java">
+def criteria = Person.createCriteria()
+def result = criteria.list {
+    eq ('firstName', 'John')
+    firstResult(0)
+    maxResults(10)
+}
+        </code>
+    </pre>
+    <pre>
+        <code class="java">
+def criteria = Person.createCriteria()
+def result = criteria.list {
+    eq ('firstName', 'John')
+    firstResult(10)
+    maxResults(10)
+}
+        </code>
+    </pre>
+    <pre>
+        <code class="java">
+def criteria = Person.createCriteria()
+def result = criteria.list {
+    eq ('firstName', 'John')
+    order('lastName', 'asc')
+    firstResult(0)
+    maxResults(10)
+}
+        </code>
+    </pre>
+    <h3>Проекции</h3>
+    <pre>
+        <code class="java">
+def c = Account.createCriteria()
+def branchCount = c.get {
+    projections {
+        countDistinct "branch" // Подсчет количества найденных результатов
+    }
+}
+        </code>
+    </pre>
+    <h3>Свойства запросов</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Метод</th>
+                <th>Описание</th>
+                <th>Пример использования</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>property</strong></td>
+                <td>Возвращает значение указанного свойства</td>
+                <td>
+                    <pre><code class="java">property("firstName")</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>distinct</strong></td>
+                <td>Возвращает результаты, используя одно или набор различных имен свойств.</td>
+                <td><pre><code class="java">distinct("fn") or distinct(['fn', 'ln'])</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>avg</strong></td>
+                <td>Возвращает среднее значение данного свойства.</td>
+                <td>
+                    <pre><code class="java">avg("age")</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>count</strong></td>
+                <td>Возвращает количество значений свойства</td>
+                <td>
+                    <pre><code class="java">count("branch")</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>countDistinct</strong></td>
+                <td>Возвращает количество уникальных значений свойства</td>
+                <td>
+                    <pre><code class="java">countDistinct("branch")</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>groupProperty</strong></td>
+                <td>Группирует результаты по заданному свойству</td>
+                <td>
+                    <pre><code class="java">groupProperty("lastName")</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>max</strong></td>
+                <td>Возвращает максимальное значение данного свойства</td>
+                <td>
+                    <pre><code class="java">max("age")</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>min</strong></td>
+                <td>Возвращает минимальное значение данного свойства</td>
+                <td>
+                    <pre><code class="java">min("age")</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>sum</strong></td>
+                <td>Возвращает сумму данного свойства</td>
+                <td>
+                    <pre><code class="java">sum("balance")</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>rowCount</strong></td>
+                <td>Возвращает количество возвращенных строк</td>
+                <td>
+                    <pre><code class="java">rowCount()</code></pre>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <h3>Примеры</h3>
+    <p>Получить результирующие столбцы запроса:</p>
+    <pre>
+        <code class="java">
+def criteria = Person.createCriteria()
+def result = criteria.list {
+    projections {
+        property('firstName')
+        property('lastName')
+    }
+}
+        </code>
+    </pre>
+    <p>Вместо списка экземпляров объектов он вернет двумерный список. Вот пример кода того, как использовать данные результата:</p>
+    <pre>
+        <code class="java">
+def firstPerson = result[0]
+def firstName = firstPerson[0]
+def lastName = firstPerson[1]
+println "First Name = ${firstName}"
+println "Last Name = ${lastName}"
+        </code>
+    </pre>
+    <p>Получить все уникальные фамилии в базе данных:</p>
+    <pre>
+        <code class="java">
+def criteria = Person.createCriteria()
+def result = criteria.list {
+    projections {
+        distinct('lastName')
+    }
+}
+println "Here are the list of unique last names"
+result.each { lastName ->
+    println "${lastName}"
+}
+        </code>
+    </pre>
+    <p>Получить средний возраст всех людей:</p>
+    <pre>
+        <code class="java">
+def criteria = Person.createCriteria()
+def result = criteria.list {
+    projections {
+        avg('age')
+    }
+}
+println "The average age is ${result[0]}"
+        </code>
+    </pre>
+    <p>Получить количество записей в таблице людей:</p>
+    <pre>
+        <code class="java">
+def criteria = Person.createCriteria()
+def result = criteria.list {
+    projections {
+        count()
+    }
+}
+println "The number of rows is ${result[0]}"
+        </code>
+    </pre>
+    <p>Сумма результатов:</p>
+    <pre>
+        <code class="java">
+def criteria = Purchase.createCriteria()
+def result = criteria.list {
+    projections {
+        sum('price')
+    }
+}
+println "The sum of all price ${result[0]}"
+        </code>
+    </pre>
+    <p>Получить максимальное и минимальное значение:</p>
+    <pre>
+        <code class="java">
+def criteria = Person.createCriteria()
+def result = criteria.list {
+    projections {
+        max('age')
+        min('age')
+    }
+}
+println "The maximum age is ${result[0][0]}"
+println "The minimum age is ${result[0][1]}"
+        </code>
+    </pre>
+    <h3>Пагинация</h3>
+    <p>Вывести 10 результатов на 1-й странице:</p>
+    <pre>
+        <code class="java">
+def criteria = Person.createCriteria()
+def result = criteria.list (max:10, offset:0) {
+    eq ('firstName', 'John')
+}
+        </code>
+    </pre>
+    <p>Вывести 10 результатов на 2-й странице:</p>
+    <pre>
+        <code class="java">
+def criteria = Person.createCriteria()
+def result = criteria.list (max:10, offset:0) {
+    eq ('firstName', 'John')
+}
+        </code>
+    </pre>
+    <p>Вывести результаты на 1-й и 2-й странице с использованием <span class="code">firstResult</span> и <span class="code">maxResults</span></p>
+    <pre>
+        <code class="java">
+def criteria = Person.createCriteria()
+def result = criteria.list {
+    eq ('firstName', 'John')
+    firstResult(0)
+    maxResults(10)
+}
+        </code>
+    </pre>
+    <pre>
+        <code class="java">
+def criteria = Person.createCriteria()
+def result = criteria.list {
+    eq ('firstName', 'John')
+    firstResult(10)
+    maxResults(10)
+}
+        </code>
+    </pre>
+    <p>Сортировка результатов:</p>
+    <pre>
+        <code class="java">
+def criteria = Person.createCriteria()
+def result = criteria.list {
+    eq ('firstName', 'John')
+    order('lastName', 'asc')
+    firstResult(0)
+    maxResults(10)
+}
+        </code>
+    </pre>
+</div>

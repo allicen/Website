@@ -1,0 +1,260 @@
+<div class="item" data-category="string">
+    <a name="string"></a>
+    <h2>String</h2>
+    <p>Объявление строки:</p>
+    <pre>
+        <code class="java">
+String a = 'Hello Single';
+String b = "Hello Double";
+String c = "'Hello Triple" + "Multiple lines'";
+def d = 'Sample'
+        </code>
+    </pre>
+    <h3>Получение символа строки или подстроки по индексу</h3>
+    <pre>
+        <code class="java">
+class Example {
+   static void main(String[] args) {
+      String sample = "Hello world"
+
+      // Получить символ по индексу
+      println(sample[4]) // o
+
+      // Получение последнего символа
+      println(sample[-1]) // d
+
+      // Получение подстроки
+      println(sample[1..2]) // el - с 1 по 2 символ слева направо
+      println(sample[4..2]);// oll - с 4 по 2 символ справа налево
+   }
+}
+        </code>
+    </pre>
+    <h3>Конкатенация строк</h3>
+    <pre>
+        <code class="java">
+println("Hello" + "World") // HelloWorld
+        </code>
+    </pre>
+    <h3>Повторение строки</h3>
+    <pre>
+        <code class="java">
+println("Hello"*3) // HelloHelloHello
+        </code>
+    </pre>
+    <h3>Длина строки <span class="code">length( )</span></h3>
+    <pre>
+        <code class="java">
+String a = "Hello"
+a.length() // 5
+        </code>
+    </pre>
+    <h3>Объединение строк <span class="code">concat( )</span>, <span class="code">plus( )</span></h3>
+    <pre>
+        <code class="java">
+String s = "Hello "
+s = s.concat("World") // Hello World
+
+String a = "Hello"
+
+a.plus("World") // HelloWorld
+a.plus("World Again") // HelloWorld Again
+        </code>
+    </pre>
+    <h3>Получение символа по индексу <span class="code">getAt( )</span></h3>
+    <pre>
+        <code class="java">
+String a = "Hello World"
+
+a.getAt(2) // l
+a.getAt(6) // W
+a.getAt(7) // o
+        </code>
+    </pre>
+    <h3>Присутствие символа в строке <span class="code">indexOf( )</span></h3>
+    <p>Возвращает индекс первого вхождения символа/подстроки. Если ничего не найдено, выводит -1.</p>
+    <p>Синтексис:</p>
+    <pre>
+        <code class="java">
+public int indexOf(int ch) // Поиск символа
+public int indexOf(int ch, int fromIndex) // fromIndex - поиск с индекса
+int indexOf(String str) // Поиск подстроки
+int indexOf(String str, int fromIndex) // fromIndex - поиск с индекса
+        </code>
+    </pre>
+    <p>Примеры:</p>
+    <pre>
+        <code class="java">
+String a = "Hello World"
+
+println(a.indexOf('e')) // 1
+println(a.indexOf('o')) // 4
+
+println(a.indexOf('l',1)) // 2
+println(a.indexOf('e',4)) // -1
+
+println(a.indexOf('el')) // 1
+println(a.indexOf('or')) // 7
+
+println(a.indexOf('el',1)) // 1
+println(a.indexOf('or',8)) // -1
+        </code>
+    </pre>
+    <h3>Разбить строку на подстроки по разделителю <span class="code">split( )</span></h3>
+    <pre>
+        <code class="java">
+String a = "Hello-World"
+String[] str;
+str = a.split('-') // ['Hello', 'World']
+        </code>
+    </pre>
+    <h3>Получение подстроки <span class="code">subString( )</span></h3>
+    <p>Синтексис:</p>
+    <pre>
+        <code class="java">
+String substring(int beginIndex) // Новая строка с beginIndex до конца строки
+String substring(int beginIndex, int endIndex) // Новая строка с beginIndex до endIndex
+        </code>
+    </pre>
+    <p>Пример:</p>
+    <pre>
+        <code class="java">
+String a = "HelloWorld"
+println(a.substring(4)) // oWorld
+println(a.substring(4,8)) // oWor
+        </code>
+    </pre>
+    <h3>Разворот строки <span class="code">reverse( )</span></h3>
+    <pre>
+        <code class="java">
+String a = "Hello World"
+a.reverse() // dlroW olleH
+        </code>
+    </pre>
+    <h3>Приведение к верхнему и нижнему регистру <span class="code">toUpperCase( )</span>, <span class="code">toLowerCase( )</span></h3>
+    <pre>
+        <code class="java">
+String a = "HelloWorld"
+a.toUpperCase() // HELLOWORLD
+a.toLowerCase() // helloworld
+        </code>
+    </pre>
+    <h3>Замена вхождений на символ/строку <span class="code">replaceAll( )</span>, <span class="code">replace( )</span></h3>
+    <pre>
+        <code class="java">
+String a = "Hello World Hello"
+a.replaceAll("Hello","Bye") // Bye World Bye
+a.replace(/World/,"Hello") // Hello Hello Hello
+        </code>
+    </pre>
+    <h3>Заполнение строки символами слева и справа до указанной длины <span class="code">padLeft( )</span>, <span class="code">padRight( )</span>, <span class="code">center( )</span></h3>
+    <p>Синтаксис:</p>
+    <pre>
+        <code class="java">
+String padLeft(Number numberOfCharacters) // Дополнитбь строку пробелами слева
+String padLeft(Number numberOfCharacters, String padding) // Дополнить строку указанными символами слева
+
+String padRight(Number numberOfCharacters) // Дополнитбь строку пробелами справа
+String padRight(Number numberOfCharacters, String padding) // Дополнить строку указанными символами справа
+
+String center(Number numberOfChars) // Расположение строки по центру, заполнение пробелами слева и справа
+        </code>
+    </pre>
+    <p>Примеры:</p>
+    <pre>
+        <code class="java">
+String a = "Hello World"
+
+println(a.padRight(16)) // Hello World
+println(a.padRight(16,'*')) // Hello World*****
+
+println(a.padLeft(16)) //         Hello World
+println(a.padLeft(16,'*')) // *****Hello World
+        </code>
+    </pre>
+    <h3>Инкремент для строки <span class="code">next( )</span></h3>
+    <pre>
+        <code class="java">
+String a = "Hello World"
+
+// Буква 'd' заменяется на следующую - 'e'
+println(a.next()) // Hello Worle
+        </code>
+    </pre>
+    <h3>Удаление части строки <span class="code">minus( )</span></h3>
+    <pre>
+        <code class="java">
+String a = "Hello World"
+
+println(a.minus("World")) // Hello
+println(a.minus("Hello")) // World
+        </code>
+    </pre>
+    <h3>Соответствие регулярному выражению <span class="code">matches( )</span></h3>
+    <pre>
+        <code class="java">
+String a = "Hello World";
+
+a.matches("Hello") // false
+a.matches("Hello(.*)")) // true
+        </code>
+    </pre>
+    <h3>Сравнение строк без учета регистра <span class="code">equalsIgnoreCase( )</span>, <span class="code">compareToIgnoreCase( )</span></h3>
+    <pre>
+        <code class="java">
+// Получение true/false
+
+String a = "Hello World"
+String b = "HELLO World"
+String c = "HELLO WORLD"
+
+a.equalsIgnoreCase(b) // true
+a.equalsIgnoreCase(c) // true
+b.equalsIgnoreCase(c) // true
+
+// Получение информации о том, какая строка длиннее и насколько
+
+String str1 = "Hello World"
+String str2 = "HELLO WORLD"
+String str3 = "HELLO World World"
+
+str1.compareToIgnoreCase( str2 ) // 0 - строки равны
+str2.compareToIgnoreCase( str3 ) // -6 - str2 короче str3 на 6 символов
+str3.compareToIgnoreCase( str1 ) // 6 - str3 длиннее str1 на 6 символов
+        </code>
+    </pre>
+    <h3>Оканчивается ли строка указанным суффиксом <span class="code">endsWith( )</span></h3>
+    <pre>
+        <code class="java">
+String s = "HelloWorld"
+
+s.endsWith("ld") // true
+s.endsWith("lo") // false
+"Hello".endsWith("lo") // true
+        </code>
+    </pre>
+    <h3>Обрабатывает группу регулярных выражений <span class="code">eachMatch( )</span></h3>
+    <pre>
+        <code class="java">
+class Example {
+   static void main(String[] args) {
+      String s = "HelloWorld";
+
+      s.eachMatch(".{2}") {
+         ch -> println ch
+      }
+   }
+}
+        </code>
+    </pre>
+    <p>Выведет:</p>
+    <pre>
+        <code class="java">
+He
+ll
+oW
+or
+ld
+        </code>
+    </pre>
+</div>
