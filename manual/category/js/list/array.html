@@ -1,0 +1,90 @@
+<div class="item" data-category="array">
+    <a name="array"></a>
+    <h2>Массивы</h2>
+    <p>1. Создание массива:</p>
+    <pre>
+        <code class="javascript">
+let arr = []
+        </code>
+    </pre>
+    <p>2. Длина массива:</p>
+    <pre>
+        <code class="javascript">
+arr.length
+        </code>
+    </pre>
+    <p>3. Обход массива:</p>
+    <pre>
+        <code class="javascript">
+// с помощью for
+for (let i = 0; i < arr.length; i++) {
+    if (arr[i] > 20) {
+        result.push(item);
+    }
+}
+
+// с поомщью forEach
+arr.forEach(f = (item) => {
+    if (item > 20) {
+        result.push(item);
+    }
+});
+
+// с помощью filter
+let result = arr.filter(f = (item) => { return item > 20; });
+
+// с помощью reduce
+// аккумулятором может быть любой тип данных
+let arr = tweets.reduce(hashtags, []); // hashtags - функция обратного вызова, [] - аккумулятор и начальное значение
+function hashtags (acc, item) {
+    return arr.concat(item.hashtags || []);
+}
+        </code>
+    </pre>
+    <p>4. Добавление элемента в конец массива:</p>
+    <pre>
+        <code class="javascript">
+arr.push(elem);
+        </code>
+    </pre>
+    <p>5. Выталкивание элемента из массива. Удаление последнео элемента массива:</p>
+    <pre>
+        <code class="javascript">
+arr.pop();
+        </code>
+    </pre>
+    <p>6. Объединение массивов:</p>
+    <pre>
+        <code class="javascript">
+arr.concat(arr2);
+        </code>
+    </pre>
+    <p>Начальные массивы остаются неизменными.</p>
+    <p>7. Срез массива. Получение части массива:</p>
+    <pre>
+        <code class="javascript">
+arr.slice(0, 5); // 0 - начальная позиция среза, 5 - конечный элемент среза
+arr.slice(); // получение копии массива
+        </code>
+    </pre>
+    <p>8. Удаление и замена элементов массива:</p>
+    <pre>
+        <code class="javascript">
+arr.splice(4, 1, 'строка'); // 4 - с какого элемента, 1 - количество элементоа для удаления, 'строка' - добавить в массив
+        </code>
+    </pre>
+    <p>9. Функции для массивов:</p>
+    <pre>
+        <code class="javascript">
+arr.sort() // сортировка массива в лексикографическом порядке
+arr.every() // удовлетворяют ли все элементы массива условию
+arr.some() // удовлетворяет ли хотя бы один элемент условию
+arr.shift() // выталкивает из массива первый элемент и возвращает его
+arr.unshift() // добавляет элемент в начало массива
+        </code>
+    </pre>
+    <p>Пример:</p>
+    <code class="javascript">
+[10, 20, 30].every(elem => elem >= 10);
+    </code>
+</div>
