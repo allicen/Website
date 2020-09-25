@@ -1,6 +1,7 @@
 <div class="item" data-category="string">
     <a name="string"></a>
     <h2>Строки</h2>
+    <h3>Основное</h3>
     <pre>
         <code class="javascript">
 // создание строки
@@ -21,6 +22,46 @@ str.slice(0, 139);
 
 // проверка наличия символа строки
 str.indexOf('o'); // если символа в строке нет, вернет -1, в противном случае вернет индекс первого вхождения
+        </code>
+    </pre>
+    <h3>Методы объекта</h3>
+    <pre>
+        <code class="javascript">
+// декларация объекта
+let obj = {}
+
+// декларация нескольких свйоств у объекта
+Object.defineProperty(obj, 'toString', { // toString - это имя свойства
+    value: function () {
+        return 123;
+    }
+    enumerable: false; // объект конфигурирования
+    configurable: true;
+});
+        </code>
+    </pre>
+    <p>Типы свойств:</p>
+    <ul>
+        <li><span class="code">writable</span> - редактируемое свойство или нет;</li>
+        <li><span class="code">numerable</span> - перечисляемое свойство или нет;</li>
+        <li><span class="code">configurable</span> - редактирование/удаление свойства (по умолчанию false).</li>
+    </ul>
+    <p>Вернуть данные конфигурирования для объекта и свойства объекта:</p>
+    <pre>
+        <code class="javascript">
+Object.getOwnPropertyDescriptor(obj,'text'); // obj - объект, 'text' - свойство
+        </code>
+    </pre>
+    <p><span class="code">Numerable</span> - скрывает свойство в списке свойств при вызове <span class="code">Object.keys</span>.</p>
+    <h3>Геттеры и сеттеры</h3>
+    <p>Это альтернативный метод декларации свойств и методов объекта.</p>
+    <p><span class="code">get:</span> обращение к свойству на чтение.</p>
+    <p><span class="code">get:</span> обращение к свойству на приравнивание (установить свойство).</p>
+    <h3>Заморозка</h3>
+    <pre>
+        <code class="javascript">
+Object.isFrozen(obj); // заморожен объект или нет
+Object.freeze(obj); // заморозить объект (меняет параметры writable и configurable в true)
         </code>
     </pre>
 </div>

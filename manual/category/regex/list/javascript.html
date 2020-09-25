@@ -1,6 +1,11 @@
 <div class="item" data-category="javascript">
     <a name="javascript"></a>
     <h2>Примеры на JavaScript</h2>
+    <ul>
+        <li>RCRE-синтаксис</li>
+        <li><span class="code">g</span> - глобальный поиск</li>
+        <li><span class="code">i</span> - регистронезависимость</li>
+    </ul>
     <h3>1. Проверка на буквы/цифры</h3>
     <pre>
         <code class="javascript">
@@ -16,4 +21,31 @@ if(elem.value.match(/^\d+$/iu) !== null){
 }
         </code>
     </pre>
+    <h3>2. Проверка строки на основе паттерна</h3>
+    <pre>
+        <code class="javascript">
+/..../gi.test('str');
+        </code>
+    </pre>
+    <h3>3. Замена строки на основе паттерна</h3>
+    <pre>
+        <code class="javascript">
+/..../gi.replace('str', 'newStr');
+        </code>
+    </pre>
+    <h3>4. Пример формирования ссылки</h3>
+    <pre>
+        <code class="javascript">
+function getLink() {
+    return this.text.replace(
+        /(#([a-z0-9а-я]+))/gi,
+        '<a href="$2">$1</a>'
+    );
+}
+        </code>
+    </pre>
+    <ul>
+        <li><span class="code">$1</span> - все значения с символом решетки</li>
+        <li><span class="code">$2</span> - символы без решетки</li>
+    </ul>
 </div>
