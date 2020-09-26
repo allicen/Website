@@ -1,4 +1,25 @@
 <div class="item" data-category="async">
     <a name="async"></a>
     <h2>Асинхронность</h2>
+    <ul>
+        <li>Стек вызовов</li>
+        <li>Очередь событий</li>
+    </ul>
+    <pre>
+        <code class="javascript">
+setTimeout // 1 вызов функции
+setInterval // постоянный выхов функции
+clearInterval // остановить таймер
+        </code>
+    </pre>
+    <h3>Промисы</h3>
+    <pre>
+        <code class="javascript">
+let promise = new Promise (function(resolve, reject) { // resolve - если удачно, reject - если ошибка
+    // TODO
+});
+
+promise.then();
+        </code>
+    </pre>
 </div>
