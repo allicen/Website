@@ -1,0 +1,123 @@
+<div class="item" data-category="collections">
+    <a name="collections"></a>
+    <h2>Коллекции</h2>
+    <p>Коллекции в Scala имеют общий интерфейс Iterable. В Iterable определены методы, обеспечивающие удобство работы с коллекциями (например, map). </p>
+    <h3>Контежи (tuples)</h3>
+    <p>Кортежи представлены посредством сущностей <span class="code">Tuple2, Tuple3 … Tuple22</span>.</p>
+    <p>Можно объявлять нужный Tuple{X} посредством синтаксиса <span class="code">(elem1, elem2, … elem{X})</span>.</p>
+    <p>Доступ к элементам: <span class="code">_1, _2, _3 … _{X}</span>.</p>
+    <p>Pattern matching</p>
+    <pre>
+        <code class="scala">
+val tup0 = Tuple2(0, "Zero")
+val tup1 = Tuple3(1.0F, 1, "One")
+val tup = (2.0F, 2, "Two", tup0, tup1)
+
+val square = ("Square", 2.0F, 4.0F)
+val cube = ("Cube", 1.0F, 2.0F, 3.0F)
+val area = square._2 * square._3
+val volume = cube._2 * cube._3 * cube._4
+
+List(square, cube).map{
+    case ("Square", _, _) => print(area)
+    case ("Cube", _, _) => print(volume)
+}
+        </code>
+    </pre>
+    <h3>Списки (lists)</h3>
+    <pre>
+        <code class="scala">
+val listInt = List(1, 2, 3)
+val listStr = List("One", "Two", "Three")
+
+// перебор как foreach
+for (el <- listStr) print(s"$el; ") // One; Two; Three;
+
+// перебор с iterable
+for (i <- 1 to 2) print(s"${listInt(i)}; ") // 2; 3
+
+// конкатенация списков
+val listStr1 = listStr ++ List("IV", "V")
+
+// конкатенация prepend
+val listStr2 = listStr1 :+ "VI"
+
+// конкатенация append
+val listStr3 = "0" + listStr2
+
+print(listStr3) // List("0", "One", "Two", "Three", "IV", "V")
+        </code>
+    </pre>
+    <h3>Map</h3>
+    <pre>
+        <code class="scala">
+            // создание map
+val diameters = Map("Mercury" -> 4878, "Mars" -> 6779, "Earth" -> 12742)
+
+for (d <- diameters) print(s"$d; ") // "Mercury" -> 4878, "Mars" -> 6779, "Earth" -> 12742
+
+// получение элемента
+val diameterOfMars = diameters("Mars")
+print(diameterOfMars) // 6779
+
+// обход map ключ-значение
+// печать значений
+for ((str, i) <- diameters) print(s"$i; ") // 4878; 6779; 12742;
+// печать ключей
+for ((str, i) <- diameters) print(s"$str; ") // Mercury; Mars; Earth;
+
+// конкатенация карт
+val moreDiameters = Map("Pluto" -> 2302) ++ diameters
+for ((str, i) <- diameters) print(s"$str; ") // Pluto; Mercury; Mars; Earth;
+        </code>
+    </pre>
+    <h3>Iterable</h3>
+    <pre>
+        <code class="scala">
+// создание map
+val diameters = Map("Mercury" -> 4878, "Mars" -> 6779, "Earth" -> 12742)
+
+val radii = diameters.map{ case (str, d) =>
+    str -> (d/2)
+}
+
+radii.foreach { r => print(s"$r; ") } // (Mercury, 2439); (Mars, 3389); (Earth, 6371)
+println(diameters.size) // 3
+
+val names = diameters.map (_._1).toSeq
+print(names.map(_.toUpperCase)) // List(MERCURY, MARS, EARTH)
+        </code>
+    </pre>
+    <h3>Изменяемые коллекции (mutable)</h3>
+    <p>Операторы изменения коллекции += ++= -=.</p>
+    <p>Для maps изменение значения по ключу.</p>
+    <p>Для списков изменение значения по индексу.</p>
+    <pre>
+        <code class="scala">
+// Списки
+val list = scala.collection.mutable.ListBuffer.empty[Int]
+list += 1
+list ++= List(2, 3)
+list.foreach(i => print(s"$i; ")) // 1; 2; 3
+
+// Map
+val diameters = scala.collection.mutable.Map(
+"Mars" -> 6779,
+"Earth" -> 12742
+)
+
+// добавление элемента
+diameters += "Uranus" -> 51118
+
+// установить значение
+diameters("Mars") = -100
+
+// конкатенация map
+diameters ++= Map("A-C" -> diameters("Earth"))
+
+// удаление значения
+diameters -= "Earth"
+print(diameters) // HashMap(Uranus->51118,Mars->-100,A-C->12742)
+        </code>
+    </pre>
+</div>
