@@ -1,0 +1,123 @@
+<div class="item" data-category="general">
+    <a name="general"></a>
+    <h2>Общее</h2>
+    <h3>Сумма цифр числа (Java):</h3>
+    <pre>
+        <code class="java">
+/**
+ * @param number Число
+ * @return Сумма цифр числа
+ * */
+private static int sumNumberSymbol(int number) {
+    int sum = 0;
+    while (number != 0) {
+        sum += (number % 10);
+        number /= 10;
+    }
+
+    return sum;
+}
+        </code>
+    </pre>
+    <h3>Проверка числа на простоту (Java):</h3>
+    <pre>
+        <code class="java">
+/**
+ * @param number Число
+ * @return true если число простое, false - иначе
+ * */
+private static boolean isSimple(int number) {
+    double sqrt = Math.sqrt(number);
+
+    if(number == 1 || number == 2) return true;
+    if(number % 2 == 0) return false;
+
+    for(int i = 3; i <= sqrt; i += 2){
+        if(number % i == 0) return false;
+    }
+    return true;
+}
+        </code>
+    </pre>
+    <h3>Список простых множителей числ (Java):</h3>
+    <pre>
+        <code class="java">
+/**
+ * @param number Число
+ * @return Список простых множителей числа
+ * */
+private static ArrayList&lt;Integer&gt; simpleMultipliers(int number) {
+    ArrayList&lt;Integer&gt; multipliers = new ArrayList<>();
+    for (int i = 2; i <= number;) {
+        if (isSimple(i) && number % i == 0) {
+            multipliers.add(i);
+            number /= i;
+        } else {
+            i++;
+        }
+    }
+
+    return multipliers;
+}
+        </code>
+    </pre>
+    <h3>Является ли год високосным (Java):</h3>
+    <pre>
+        <code class="java">
+/**
+ * @param number Число
+ * @return Високосный год или нет
+ * */
+private static boolean leap(int year) {
+    return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
+}
+        </code>
+    </pre>
+    <h3>Факториал числа (Java):</h3>
+    <pre>
+        <code class="java">
+/**
+ * @param number Число
+ * @return Факториал числа
+ * */
+private static int fact(int number) {
+    int count = 1;
+    for (int i = number; i > 1; i--) {
+        count *= i;
+    }
+    return count;
+}
+        </code>
+    </pre>
+    <h3>Перевод в другие системы счисления (Java):</h3>
+    <pre>
+        <code class="java">
+/**
+ * @param numberInput Число
+ * @param numberSystem Система счисления
+ * @return Число в заданной системе счисления
+ * */
+private static String translateNumeralSystems(long numberInput, int numberSystem) {
+    return Long.toString(numberInput, numberSystem);
+}
+        </code>
+    </pre>
+    <h3>НОК (Java):</h3>
+    <pre>
+        <code class="java">
+/**
+ * @param numberInput Число
+ * @param numberSystem Система счисления
+ * @return Число в заданной системе счисления
+ * */
+private static int nok (int a, int b) {
+    int c = a, d = b;
+    while (a != b){ // Используется алгоритм Евклида
+        if(a > b) a = a - b;
+        else b = b - a;
+    }
+    return c / a * d;
+}
+        </code>
+    </pre>
+</div>
