@@ -3,67 +3,113 @@
   <h2>Docker</h2>
   <p>Пример Docker-файла (Dockerfile), который задает правила упаковки приложения из файла app.py (приложение печатает строку "Hello, World!") </p>
   <pre>
-	FROM python 3.6
+    <code class="bash">
+FROM python 3.6
 
-	RUN mkdir -p /usr/src/app/
-	WORKDIR /usr/src/app/
+RUN mkdir -p /usr/src/app/
+WORKDIR /usr/src/app/
 
-	COPY . /usr/src/app/
+COPY . /usr/src/app/
 
-	CMD ["puthon", "app.py"]
+CMD ["puthon", "app.py"]
+    </code>
   </pre>
   <p>
-    <code>RUN</code> - что делаем (в данном случае создаем папку)<br />
-    <code>WORKDIR</code> - меняем рабочую директорию<br />
-    <code>COPY</code> - копируем файлы из текущей папки (.) в указанную папку внутри контейнера (/usr/src/app/)<br />
-    <code>CMD</code> - выполнение команды через shell. Можно вместо нее использовать команду ENTRYPOINT (запускает без шелла)
+    <span class="code">RUN</span> - что делаем (в данном случае создаем папку)<br />
+    <span class="code">WORKDIR</span> - меняем рабочую директорию<br />
+    <span class="code">COPY</span> - копируем файлы из текущей папки (.) в указанную папку внутри контейнера (/usr/src/app/)<br />
+    <span class="code">CMD</span> - выполнение команды через shell. Можно вместо нее использовать команду <span class="code">ENTRYPOINT</span> (запускает без шелла)
   </p>
 
   <h3>Собрать образ</h3>
-  <pre>docker build -t hello-world .</pre>
-  <p>hello-world - произвольное название нового образа</p>
+  <pre>
+    <code class="bash">
+docker build -t hello-world .
+    </code>
+  </pre>
+  <p><span class="code">hello-world</span> - произвольное название нового образа</p>
 
   <h3>Посмотреть образы</h3>
-  <pre>docker images</pre>
+  <pre>
+    <code class="bash">
+docker images
+    </code>
+  </pre>
 
   <h3>Запустить контейнер</h3>
-  <pre>docker run hello-world</pre>
-  <pre>docker run -d hello-world</pre>
-  <pre>docker run -d --rm hello-world</pre>
-  <pre>docker run -d --rm --name hello hello-world -p 8080:8080 -e TZ=Europe/Moscow</pre>
-  <pre>docker run -d --rm --name hello hello-world -p 8080:8080 -v /Users/e/python/hello /usr/src/app/</pre>
+  <pre>
+    <code class="bash">
+docker run hello-world
+docker run -d hello-world
+docker run -d --rm hello-world
+docker run -d --rm --name hello hello-world -p 8080:8080 -e TZ=Europe/Moscow
+docker run -d --rm --name hello hello-world -p 8080:8080 -v /Users/e/python/hello /usr/src/app/
+    </code>
+  </pre>
   <p>
-    <code>-d</code> - запустить фоном<br />
-    <code>--rm</code> - удалить контейнер после того, как он отработал<br />
-    <code>-p</code> - порт для внешней работы и контейнера<br />
-    <code>-e</code> - переменные окружения<br />
-    <code>-v</code> - примонтировать внушнюю папку ко внутренней папке контейнера (для сохранения данных и чтобы изменения вне сразу были видны без перезапуска контейнера)
+    <span class="code">-d</span> - запустить фоном<br />
+    <span class="code">--rm</span> - удалить контейнер после того, как он отработал<br />
+    <span class="code">-p</span> - порт для внешней работы и контейнера<br />
+    <span class="code">-e</span> - переменные окружения<br />
+    <span class="code">-v</span> - примонтировать внушнюю папку ко внутренней папке контейнера (для сохранения данных и чтобы изменения вне сразу были видны без перезапуска контейнера)
   </p>
 
   <h3>Посмотреть все работающие контейнеры</h3>
-  <pre>docker ps</pre>
+  <pre>
+    <code class="bash">
+docker ps
+    </code>
+  </pre>
 
   <h3>Посмотреть все контейнеры и их статусы</h3>
-  <pre>docker ps -a</pre>
+  <pre>
+    <code class="bash">
+docker ps -a
+    </code>
+  </pre>
 
   <h3>Задать имя работающему контейнеру</h3>
-  <pre>docker run --name hello hello-world</pre>
-  Задано имя hello
+  <pre>
+    <code class="bash">
+docker run --name hello hello-world
+    </code>
+  </pre>
+  <p>Задано имя <span class="code">hello</span></p>
 
   <h3>Удалить контейнеры</h3>
-  <pre>docker rm hello</pre>
-  hello - CONTAINER ID или NAME
+  <pre>
+    <code class="bash">
+docker rm hello
+    </code>
+  </pre>
+  <p><span class="code">hello</span> - CONTAINER ID или NAME</p>
 
   <h3>Вывести ID контейнера</h3>
-  <pre>docker ps -a -q</pre>
+  <pre>
+    <code class="bash">
+docker ps -a -q
+    </code>
+  </pre>
 
   <h3>Удалить все контейнеры</h3>
-  <pre>docker rm ${docker ps -qa}</pre>
+  <pre>
+    <code class="bash">
+docker rm ${docker ps -qa}
+    </code>
+  </pre>
 
   <h3>Остальновить контейнер</h3>
-  <pre>docker stop hello</pre>
-  hello - имя или ID контейнера
+  <pre>
+    <code class="bash">
+docker stop hello
+    </code>
+  </pre>
+  <p><span class="code">hello</span> - имя или ID контейнера</p>
 
   <h3>Посмотреть VOLUME</h3>
-  <pre>docker volume ls</pre>
+  <pre>
+    <code class="bash">
+docker volume ls
+    </code>
+  </pre>
 </div>
