@@ -1,0 +1,69 @@
+<div class="item" data-category="general">
+  <a name="general"></a>
+  <h2>Docker</h2>
+  <p>Пример Docker-файла (Dockerfile), который задает правила упаковки приложения из файла app.py (приложение печатает строку "Hello, World!") </p>
+  <pre>
+	FROM python 3.6
+
+	RUN mkdir -p /usr/src/app/
+	WORKDIR /usr/src/app/
+
+	COPY . /usr/src/app/
+
+	CMD ["puthon", "app.py"]
+  </pre>
+  <p>
+    <code>RUN</code> - что делаем (в данном случае создаем папку)<br />
+    <code>WORKDIR</code> - меняем рабочую директорию<br />
+    <code>COPY</code> - копируем файлы из текущей папки (.) в указанную папку внутри контейнера (/usr/src/app/)<br />
+    <code>CMD</code> - выполнение команды через shell. Можно вместо нее использовать команду ENTRYPOINT (запускает без шелла)
+  </p>
+
+  <h3>Собрать образ</h3>
+  <pre>docker build -t hello-world .</pre>
+  <p>hello-world - произвольное название нового образа</p>
+
+  <h3>Посмотреть образы</h3>
+  <pre>docker images</pre>
+
+  <h3>Запустить контейнер</h3>
+  <pre>docker run hello-world</pre>
+  <pre>docker run -d hello-world</pre>
+  <pre>docker run -d --rm hello-world</pre>
+  <pre>docker run -d --rm --name hello hello-world -p 8080:8080 -e TZ=Europe/Moscow</pre>
+  <pre>docker run -d --rm --name hello hello-world -p 8080:8080 -v /Users/e/python/hello /usr/src/app/</pre>
+  <p>
+    <code>-d</code> - запустить фоном<br />
+    <code>--rm</code> - удалить контейнер после того, как он отработал<br />
+    <code>-p</code> - порт для внешней работы и контейнера<br />
+    <code>-e</code> - переменные окружения<br />
+    <code>-v</code> - примонтировать внушнюю папку ко внутренней папке контейнера (для сохранения данных и чтобы изменения вне сразу были видны без перезапуска контейнера)
+  </p>
+
+  <h3>Посмотреть все работающие контейнеры</h3>
+  <pre>docker ps</pre>
+
+  <h3>Посмотреть все контейнеры и их статусы</h3>
+  <pre>docker ps -a</pre>
+
+  <h3>Задать имя работающему контейнеру</h3>
+  <pre>docker run --name hello hello-world</pre>
+  Задано имя hello
+
+  <h3>Удалить контейнеры</h3>
+  <pre>docker rm hello</pre>
+  hello - CONTAINER ID или NAME
+
+  <h3>Вывести ID контейнера</h3>
+  <pre>docker ps -a -q</pre>
+
+  <h3>Удалить все контейнеры</h3>
+  <pre>docker rm ${docker ps -qa}</pre>
+
+  <h3>Остальновить контейнер</h3>
+  <pre>docker stop hello</pre>
+  hello - имя или ID контейнера
+
+  <h3>Посмотреть VOLUME</h3>
+  <pre>docker volume ls</pre>
+</div>
