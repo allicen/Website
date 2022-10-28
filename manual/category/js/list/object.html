@@ -1,0 +1,33 @@
+<div class="item" data-category="object">
+    <a name="object"></a>
+    <h2>Объекты</h2>
+    <pre>
+        <code class="javascript">
+// создание объекта
+let obj = {};
+
+// создание нового свойства
+obj.name = 'Имя';
+
+// удаление свойства
+delete obj.name;
+
+// обращение к свойству
+obj.name;
+obj[name];
+
+// получить все свойства
+Object.keys(obj); // возвращает массив со всеми ключами
+
+// проверка наличия свойства
+obj.hasOwnProperty('text');
+
+// функция в качестве значения
+let object = { getLikes: function () {}}; // функция в данном случае - метод объекта, this нужен для получения ссылки на объект, у которого вызывает метод
+
+// преобразование объекта к строке
+String(obj);
+obj + '';
+        </code>
+    </pre>
+</div>

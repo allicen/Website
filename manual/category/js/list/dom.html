@@ -1,0 +1,125 @@
+<div class="item" data-category="dom">
+    <a name="dom"></a>
+    <h2>DOM</h2>
+    <h3>1. Поиск элемента по ID <span class="code">getElementById( )</span></h3>
+    <pre>
+        <code class="javascript">
+document.getElementById('auth')
+        </code>
+    </pre>
+    <h3>2. Поиск элемента по ID <span class="code">getElementByTagName( )</span></h3>
+    <p>* Устаревший метод</p>
+    <pre>
+        <code class="javascript">
+document.getElementByTagName('input')
+        </code>
+    </pre>
+    <h3>3. Поиск элемента по селектору <span class="code">querySelector( )</span></h3>
+    <pre>
+        <code class="javascript">
+// возвращает первый найденный элемент
+document.querySelector('#auth')
+document.querySelector('.auth')
+
+// возвращает коллекцию элементов
+document.querySelectorAll('.auth')
+document.querySelectorAll('input, button')
+        </code>
+    </pre>
+    <h3>4. Итерирование по коллекции</h3>
+    <p>Коллекция != массив.</p>
+    <pre>
+        <code class="javascript">
+// в цикле for
+let collection = document.querySelectorAll('div');
+for (let i = 0; i < collection.length; i++) {
+    let elem = collection[i];
+}
+
+// сделать массив из коллекции и использовать методы массивов
+let collection = document.querySelectorAll('div');
+let collectionList = Array.from(collection); // 1 способ получить массив
+let collectionList2 = Array.prototype.slice.call(collection); // 2 способ получить массив
+collectionList.forEach(function(elem) {
+    //TODO
+});
+        </code>
+    </pre>
+    <h3>5. Получение значений атрибутов</h3>
+    <pre>
+        <code class="javascript">
+form.getAttribute('action'); // значение атрибута action
+form.hasAttribute('method'); // наличие атрибута method true/false
+form.setAttribute('method', 'POST'); // наличие атрибута method true/false
+form.removeAttribute('method'); // удаление атрибута по имени
+        </code>
+    </pre>
+    <h3>6. Дата-атрибуты</h3>
+    <p>Пример:</p>
+    <pre>
+        <code class="html">
+&lt;div data-form-value="123"&gt;&lt;/div&gt;
+        </code>
+    </pre>
+    <p>Методы:</p>
+    <pre>
+        <code class="javascript">
+form.dataset.formValue; // получение значения атрибута data-form-value
+form.dataset.hasOwnProperty('formValue'); // проверка наличия атрибута data-form-value, true/false
+form.dataset.formValue = '321'; // установить значение атрибута
+form.hasAttribute('formValue'); // наличие дата-атрибута method true/false
+        </code>
+    </pre>
+    <h3>7. Классы <span class="code">classList</span></h3>
+    <pre>
+        <code class="javascript">
+            form.classList.add('login'); // добавить класс
+            form.classList.item(1); // получение класса по индексу из списка классов
+            form.classList.contains('login'); // проверка наличия класса, true/false
+            form.classList.remove('login'); // удаление класса
+        </code>
+    </pre>
+    <h3>8. Создание DOM-элемента</h3>
+    <pre>
+        <code class="javascript">
+// создаем элемент
+let elem = document.createElement('span');
+
+// наделяем свойствами
+elem.classList.add('error');
+elem.textContent = 'Введен неверный логин';
+
+// добавляем элемент в структуру DOM как вложенный дочерний элемент body
+document.body.appendChild(elem);
+        </code>
+    </pre>
+    <h3>9. Копирование DOM-элемента</h3>
+    <pre>
+        <code class="javascript">
+let clone = elem.cloneNode(true); // true - копирует все дочерние элементы, false - не копирует
+        </code>
+    </pre>
+    <h3>10. События</h3>
+    <pre>
+        <code class="javascript">
+form.addEventListener('submit', submitHandler); // добавляем на submit слушателя submitHandler*
+        </code>
+    </pre>
+    <p>* 1 событие = 1 обработчик.</p>
+    <p>Список обработки событий:</p>
+    <pre>
+        <code class="javascript">
+button.addEventListener('submit', function (event) {
+    console.log(this, event);
+});
+button.addEventListener('submit', clickHandler);
+button.addEventListener('submit', twoClick);
+        </code>
+    </pre>
+    <p>Отмена события по умолчанию:</p>
+    <pre>
+        <code class="javascript">
+event.preventDefault();
+        </code>
+    </pre>
+</div>

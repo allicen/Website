@@ -1,0 +1,29 @@
+<div class="item" data-category="chess">
+    <a name="chess"></a>
+    <h2>Шахматы</h2>
+    <h3>За сколько ходов слон доберется до клетки:</h3>
+    <pre>
+        <code class="java">
+private static int stepCount() {
+    if (Math.abs(x2-x1) == Math.abs(y2-y1)) {
+        return 1;
+    } else if ((x1+y1) % 2 == (x2+y2) % 2) {
+        return 2;
+    }
+    else  {
+        return 0;
+    }
+}
+        </code>
+    </pre>
+    <h3>Буквы шахматной доски:</h3>
+    <pre>
+        <code class="java">
+Map&lt;Character, Integer&gt; field = IntStream.rangeClosed('A', 'H') // Буквы шахматной доски
+        .boxed()
+        .collect(Collectors.toMap(
+                x -> (char) x.intValue(),
+                x -> x + (1 - 'A')));
+        </code>
+    </pre>
+</div>

@@ -1,0 +1,38 @@
+<div class="item" data-category="sort">
+    <a name="sort"></a>
+    <h2>Сортировки</h2>
+    <h3>Сортировка подсчетом (Java):</h3>
+    <pre>
+        <code class="java">
+private static ArrayList&lt;Integer&gt; sort(ArrayList&lt;Integer&gt; inputArray) {
+    ArrayList&lt;Integer&gt; outputArray = new ArrayList<>();
+
+    // Формирукем вспомогательный массив с кол-вом возможных значений
+    int[] helpArray = new int[201];
+
+    // Записываем данные на определенное место
+    for (int value : inputArray) {
+        helpArray[value + 100] = helpArray[value + 100] + 1;
+    }
+
+    // Считываем данные, вычисляем место в массиве
+    int number = -100;
+    for (int value : helpArray) {
+        for (int k = 0; k < value; k++) {
+            outputArray.add(number);
+        }
+        number++;
+    }
+    return inputArray;
+}
+        </code>
+    </pre>
+    <h3>Сортировка Map по значению (Java):</h3>
+    <pre>
+        <code class="java">
+List&lt;Map.Entry&lt;Integer, Integer&gt;&gt; dividerSortValue = dividers.entrySet().stream()
+        .sorted((v1, v2) -> v1.getValue().compareTo(v2.getValue()))
+        .collect(Collectors.toList());
+        </code>
+    </pre>
+</div>

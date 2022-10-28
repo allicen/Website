@@ -1,0 +1,144 @@
+<div class="item" data-category="this">
+    <a name="this"></a>
+    <h2>Контекст исполнения</h2>
+    <ul>
+        <li><span class="code">this</span> - не перезаписываемое</li>
+        <li><span class="code">this</span> - указывает на текущий объект</li>
+        <li><span class="code">this</span> - можно использовать за пределами объекта</li>
+    </ul>
+    <h3>Глобальный участок кода</h3>
+    <p><span class="code">this</span> в глобальной области видимости:</p>
+    <pre>
+        <code class="javascript">
+this.innerWidth;
+this.process.version;
+        </code>
+    </pre>
+    <p><strong>Контекст исполнения</strong>:</p>
+    <ul>
+        <li>Содержит область видимости;</li>
+        <li>Содержит <span class="code">this</span>.</li>
+    </ul>
+    <p><span class="code">this</span> определяется в момент интерпритации кода.</p>
+    <h3>Node.js модуль</h3>
+    <pre>
+        <code class="javascript">
+module.exports.days = 366 // одно и то же, что и this.days = 366
+this.days = 366 // одно и то же, что и module.exports.days = 366
+        </code>
+    </pre>
+    <p>Подключение модуля:</p>
+    <pre>
+        <code class="javascript">
+let module = require('./filename.js');
+module.year;
+        </code>
+    </pre>
+    <h3>Заимствование метода <span class="code">Call( )</span></h3>
+    <p>Подмена контекста исполнения.</p>
+    <p>Синтаксис:</p>
+    <pre>
+        <code class="javascript">
+func.call(thisArg, arg1, arg2...); // thisArg - контекст, далее - аргументы через запятую
+        </code>
+    </pre>
+    <p>Пример:</p>
+    <pre>
+        <code class="javascript">
+let mike = {
+    age: 24,
+    getAge: function() {
+        return this.age;
+    }
+}
+
+let anna = {
+    age: 21
+}
+
+// вызываем метод getAge у объекта anna
+// this = anna.age, т.е. 21
+mike.getAge.call(anna);
+        </code>
+    </pre>
+    <h3>Заимствование метода <span class="code">Apply( )</span></h3>
+    <p>Синтаксис:</p>
+    <pre>
+        <code class="javascript">
+func.apply(thisArg, [arg1, arg2...]); // thisArg - контекст, остальное - массив аргументов
+        </code>
+    </pre>
+    <p>Пример:</p>
+    <pre>
+        <code class="javascript">
+let arr = [4, 7, 2, 9];
+
+Math.min.apply(Math, arr); // вернет минимальное число
+Math.min.apply(null, arr); // вернет минимальное число, контекст можно не передавать для этой функции
+        </code>
+    </pre>
+    <h3><span class="code">Callback( )</span></h3>
+    <p>Контекст исполнения можно сложить в переменную:</p>
+    <pre>
+        <code class="javascript">
+let person = {
+    name: 'Anna',
+    items: ['keys', 'phone', 'banana'],
+
+    showItems: function() {
+        let _this = this;
+        this.items.map(function (item) {
+            return _this.name + ' has ' + item;
+        });
+    }
+}
+
+person.showItems();
+        </code>
+    </pre>
+    <p>Контекст исполнения можно передать вторым аргументом:</p>
+    <pre>
+        <code class="javascript">
+let person = {
+    name: 'Anna',
+    items: ['keys', 'phone', 'banana'],
+
+    showItems: function() {
+        this.items.map(function (item) {
+            return this.name + ' has ' + item;
+        }, this);
+    }
+}
+
+person.showItems();
+        </code>
+    </pre>
+    <h3>Создать новую функцию <span class="code">Bind( )</span></h3>
+    <p>Не вызывает функцию, а создает новую.</p>
+    <p>Синтаксис:</p>
+    <pre>
+        <code class="javascript">
+func.bind(thisArg, arg1, arg2, ...); // thisArg - контекст исполнения, далее - аргументы через запятую
+        </code>
+    </pre>
+    <p>Пример:</p>
+    <pre>
+        <code class="javascript">
+let person = {
+    name: 'Anna',
+    items: ['keys', 'phone', 'banana'],
+
+    showItems: function() {
+        this.items.map(function (item) {
+            return this.name + ' has ' + item;
+        }.bind(this));
+    }
+}
+
+person.showItems();
+        </code>
+    </pre>
+    <h3>Код в виде строки <span class="code">Eval( )</span></h3>
+    <p>Используется для интерпритации кода, который написан в виде строки.</p>
+    <p>Если положить <span class="code">eval</span> в переменную, то <span class="code">this</span> всегда будет равен глобальному объекту.</p>
+</div>

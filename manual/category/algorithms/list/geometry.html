@@ -1,0 +1,31 @@
+<div class="item" data-category="geometry">
+    <a name="geometry"></a>
+    <h2>Геометрия</h2>
+    <!--    <h3>1. Поиск в глубину</h3>-->
+    <h3>Расстояние между двумя точками (Java):</h3>
+    <pre>
+        <code class="java">
+/**
+ * @param x1, y1, x2, y2 Координаты точек
+ * @return Расстояние между двумя точками
+ * */
+private static double distance(int x1, int y1, int x2, int y2) {
+    return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+}
+        </code>
+    </pre>
+    <h3>Лежат ли три точки на одной прямой (Java):</h3>
+    <pre>
+        <code class="java">
+/**
+ * @param onePoint Первая точка
+ * @param twoPoint Вторая точка
+ * @param threePoint Третья точка
+ * @return Точки лежат на одной прямой включая начало координат, false - иначе
+ * */
+private static boolean onOneStraightLine(int[] onePoint, int[] twoPoint, int[] threePoint) {
+    return (onePoint[0] - threePoint[0]) * (twoPoint[1] - threePoint[1]) - (twoPoint[0] - threePoint[0]) * (onePoint[1] - threePoint[1]) == 0;
+}
+        </code>
+    </pre>
+</div>

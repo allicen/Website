@@ -1,0 +1,31 @@
+<div class="item" data-category="exception">
+    <a name="exception"></a>
+    <h2>Исключения</h2>
+    <p>Выбросить исключение:</p>
+    <pre>
+        <code class="javascript">
+if (isNaN(likes) || likes < 0) {
+    throw new TypeError('Неверное значение');
+}
+        </code>
+    </pre>
+    <p>Обработка исключений:</p>
+    <pre>
+        <code class="javascript">
+try {
+    // TODO
+} catch (e) {
+    if (e instanceof TypeError) {
+        // TODO
+    }
+}
+        </code>
+    </pre>
+    <p>TypeError:</p>
+    <ul>
+        <li><span class="code">e.name</span> - имя исключения</li>
+        <li><span class="code">e.message</span> - сообщение ошибки</li>
+        <li><span class="code">e.stack</span> - стек вызовов до исключения</li>
+    </ul>
+    <p><span class="code">console.error('ошибка')</span> - вывод в консоль ошибки</p>
+</div>

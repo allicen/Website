@@ -1,0 +1,93 @@
+<div class="item" data-category="function">
+    <a name="function"></a>
+    <h2>Функции</h2>
+    <p>Функции могут быть объявлены внутри сущностей class, trait, object,  а также внутри других функций.</p>
+    <p>Функции могут содержать параметры по умолчанию.</p>
+    <p>Функции могут быть анонимными.</p>
+    <pre>
+        <code class="scala">
+object Foo {
+    def say(number: Int): Unit = {
+        def sum(i0: Int, i1: Int = 10) = {
+            i0 + i1
+        }
+
+        val sayAnonymous = (str: String) => print("Anonymous-" + str)
+
+        // анонимная функция
+        sayAnonymous(sum(number).toString)
+    }
+}
+
+Foo.say(1) // Anonymous-11
+        </code>
+    </pre>
+    <h3>Именованные аргументы</h3>
+    <pre>
+        <code class="scala">
+def foundWords(w0: String = "zero", w1: String = "one", w2: String = "two", w3: String = "three"): String = s"$w0 $w1 $w2 $w3"
+
+print(foundWords(w3 = "THIRD", w1 = "FIRST")) // zero FIRST two THIRD
+        </code>
+    </pre>
+    <h3>Каррирование</h3>
+    <p>Можно определять более одного списка аогументов.</p>
+    <pre>
+        <code class="scala">
+def sum2(x: Int) = (y: Int) => x + y
+def sum2_currying(x: Int)(y: Int) = x + y
+def sum3_currying(x: Int)(y: Int)(z: Int) = x + y + z
+
+print(sum(1)(2)) // 3
+print(sum2_currying(1)(2)) // 3
+print(sum3_currying(1)(2)(3)) // 6
+        </code>
+    </pre>
+    <h3>Функции высшего порядка</h3>
+    <p>Функции могут выступать в качестве параметра других функций.</p>
+    <p>Функции могут возвращать другие функции.</p>
+    <pre>
+        <code class="scala">
+def getNumbers(): Seq[Int] = Seq(11, 22)
+def oddOrEven(generator: () => Seq[Int], index: Int): (String) => String = {
+    def sayOdd(str: String) = s"$str is odd; "
+    def sayEven(str: String) = s"$str is even; "
+    val numbers = generator()
+    val num = numbers(index)
+    if (num % 2 == 0) sayEven else sayOdd
+}
+
+print(oddOrEven(getNumbers, 0)("That number")) // That number is odd;
+print(oddOrEven(getNumbers, 1)("And that")) // And that is even;
+        </code>
+    </pre>
+    <h3>Вызов по имени и значению</h3>
+    <p>call-by-value передаваемый аргумент известен перед выполнением функции</p>
+    <p>call-by-name вычисляет передаваемое выражение каждый раз при разыменовывании аргумента</p>
+    <p>call-by-name синтаксис отличается объявлением параметра функции: <span class="code">def foo(expr: => Type)</span></p>
+    <pre>
+        <code class="scala">
+def callByValue(i: Int) = {
+    print(s"i => $i; ")
+    print(s"ii => $i; ")
+}
+
+def callByName(i: => Int) = {
+    print(s"i => $i; ")
+    print(s"ii => $i; ")
+}
+
+var someInt = 2
+
+callByValue {
+    someInt += 1
+    someInt * someInt
+} // i => 9; ii => 9;
+
+callByName {
+    someInt += 1
+    someInt * someInt
+} // i => 16; ii => 25
+        </code>
+    </pre>
+</div>

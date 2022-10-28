@@ -1,0 +1,127 @@
+<div class="item" data-category="prototype">
+    <a name="prototype"></a>
+    <h2>Прототипы и конструкторы</h2>
+    <p>Синтаксис:</p>
+    <pre>
+        <code class="javascript">
+let student = {
+    name: 'Billy',
+    [[Prototype]]: &lt;person&gt;
+}
+        </code>
+    </pre>
+    <p>Поиск прототипов идет до глобального пмрототипа.</p>
+    <ul>
+        <li>до того как найдет прототип</li>
+        <li>до значения <span class="code">null</span></li>
+    </ul>
+    <h3>Пример установки прототипа</h3>
+    <p>Исходные данные:</p>
+    <pre>
+        <code class="javascript">
+let student = { name: 'Billy' };
+
+let person = { getName: function() {
+    return this.name;
+}};
+        </code>
+    </pre>
+    <p>1 вариант - неявное поведение:</p>
+    <pre>
+        <code class="javascript">
+student.__proto__ = person;
+student.getName(); // Billy
+        </code>
+    </pre>
+    <p>2 вариант:</p>
+    <p>Метод не может менять прототип существующих объектов. Создает новые объекты.</p>
+    <pre>
+        <code class="javascript">
+let student = Object.create(person);
+        </code>
+    </pre>
+    <p>3 вариант - явное поведение:</p>
+    <pre>
+        <code class="javascript">
+Object.setPrototypeOf(student, person); // student - исходный объект, person - прототип
+student.getName();
+        </code>
+    </pre>
+    <h3>Проверка прототипа</h3>
+    <pre>
+        <code class="javascript">
+// вернуть ссылку на прототип
+Object.getPrototypeOf();
+
+// проверить соотношение с прототипом
+Object.getPrototypeOf(student) === person; // true
+        </code>
+    </pre>
+    <h3>Затенение свойств</h3>
+    <p>Затенение свойств - создание копии поля прототипа на стороне объекта.</p>
+    <p>Используется для переопределения методов.</p>
+    <p>Затенение не работает, если поле в прототипе определено с помощью setter/getter.</p>
+    <p><strong>Перечисляемые поля</strong> можно перечислить с помощью обхода объекта <span class="code">for in</span>.</p>
+    <h3>Конструкторы</h3>
+    <ul>
+        <li>Используется <span class="code">new</span></li>
+        <li>Название с заглавной буквы</li>
+    </ul>
+    <p>Пример:</p>
+    <pre>
+        <code class="javascript">
+function Student(name) {
+    this.name = name;
+}
+
+let billy = new Student('Billy');
+        </code>
+    </pre>
+    <p>Если пропустить <span class="code">new</span>, то переменная <span class="code">name</span> появится в глобальной области видимости.</p>
+    <p>Примитив нельзя вернуть из контекста.</p>
+    <h3>Поле <span class="code">.constructor</span></h3>
+    <pre>
+        <code class="javascript">
+function Student (name) {
+    this.name = name;
+}
+
+Student.prototype.constructor === Student;
+
+let billy = new Student('Billy');
+billy.constructor.name; // Student
+        </code>
+    </pre>
+    <p>Привязать прототип к создаваемым конструктором объектам:</p>
+    <pre>
+        <code class="javascript">
+Cat.prototype.sleep = function () {}
+        </code>
+    </pre>
+    <h3>Создание чистого объекта <span class="code">Object.create( )</span></h3>
+    <p>Чистый объект - объект с короткой цепочкой прототипов.</p>
+    <pre>
+        <code class="javascript">
+let obj = Object.create(null);
+obj.hasOwnProperty; // undefined
+        </code>
+    </pre>
+    <h3>Связи между объектами/прототипами/конструкторами</h3>
+    <pre>
+        <code class="javascript">
+//1
+Object.getPrototype(***); // *** - объект, выход - объект прототипа
+
+//2
+Object.prototype.isPrototypeOf();
+// Пример:
+Student.prototype.isPrototypeOf(billy);
+
+//3
+instanceof
+// Пример:
+billy instanceof Student; // является ли Билли объектом этого конструктора
+// идет по цепочке прототипов
+        </code>
+    </pre>
+</div>
